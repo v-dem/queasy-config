@@ -58,7 +58,12 @@ class Config
             throw new ConfigException(sprintf('Configuration file "%s" is corrupted.', $path));
         }
 
-        $this->configs = $config;
+        $configs = array();
+        foreach ($config as $sectionName => $sectionConfig) {
+            $configs[$sectionName] = new ConfigSection($sectionConfig);
+        }
+
+        $this->configs = $configs;
     }
 
 }
