@@ -2,68 +2,104 @@
 
 namespace queasy\config;
 
-class Config
+class Config implements Iterator, ArrayAccess, Countable
 {
 
-    const DEFAULT_PATH = 'queasy-config.php';
+    private $data;
 
-    private static $instance = null;
-
-    public static function getInstance()
+    public function __construct($data = array())
     {
-        if (is_null(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
+        $this->data = $data;
     }
 
-    private $configs = null;
-
-    private function __construct()
+    public function __get($key)
     {
-        if (defined('QUEASY_CONFIG_PATH')) {
-            $this->load(QUEASY_CONFIG_PATH);
-        } else {
-            $this->load(self::DEFAULT_PATH);
-        }
+        return $this[$key];
     }
 
-    public function __get($section)
+    public function get($key, $default = null)
     {
-        return $this->get($section);
+        return isset($this[$key])? $this[$key]: $default;
     }
 
-    public function get($section)
+    public function need($key)
     {
-        if (!$this->configs) {
-            throw new ConfigException('Configuration was not loaded.');
+        if (!isset($this[$key])) {
+            throw new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
         }
 
-        if (!isset($this->configs[$section])) {
-            throw new ConfigException(sprintf('Configuration section "%s" is missing.', $section));
-        }
-
-        return $this->configs[$section];
+        return $this->$key;
     }
 
-    private function load($path)
+    public function rewind()
     {
-        if (!@file_exists($path)) {
-            throw new ConfigException('Cannot find configuration file.');
+        reset($this->data);
+    }
+
+    public function current()
+    {
+        return $this->checkForLoader(current($this->data));
+    }
+
+    public function next()
+    {
+        return $this->checkForLoader(next($this->data));
+    }
+
+    public function key()
+    {
+        return key($this->data);
+    }
+
+    public function valid()
+    {
+        $key = key($this->data);
+
+        return ($key !== null) && ($key !== false);
+    }
+
+    public function count()
+    {
+        return count($this->data);
+    }
+
+    public function offsetExists($key)
+    {
+        return isset($this->data[$key]);
+    }
+
+    public function offsetGet($key)
+    {
+        return $this->offsetExists($key)
+            ? $this->checkForLoader($this->data[$key])
+            : null;
+    }
+
+    public function offsetSet($key, $value)
+    {
+        throw new ConfigException('Cannot change config at runtime.');
+    }
+
+    public function offsetUnset($key)
+    {
+        throw new ConfigException('Cannot change config at runtime.');
+    }
+
+    private function checkForLoader($item)
+    {
+        if (is_object($item)
+                && ('Loader' === get_class($item))) {
+            $item = $item();
+        } else if (is_array($item)) {
+            $item = new Config($item);
         }
 
-        $config = @include_once($path);
-        if (false === $config) {
-            throw new ConfigException(sprintf('Configuration file "%s" is corrupted.', $path));
-        }
+        return $item;
+    }
 
-        $configs = array();
-        foreach ($config as $sectionName => $sectionConfig) {
-            $configs[$sectionName] = new ConfigSection($sectionConfig);
-        }
-
-        $this->configs = $configs;
+    public function toArray()
+    {
+        return $this->data;
     }
 
 }
