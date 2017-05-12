@@ -2,7 +2,7 @@
 
 namespace queasy\config;
 
-class Config implements Iterator, ArrayAccess, Countable
+class Config implements \Iterator, \ArrayAccess, \Countable
 {
 
     private $data;
