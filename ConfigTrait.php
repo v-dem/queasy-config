@@ -9,7 +9,7 @@ trait ConfigTrait
     {
         $className = __CLASS__;
 
-        return Config::getInstance()->$className;
+        return Provider::getInstance()->$className;
     }
 
 }
