@@ -88,7 +88,7 @@ class Config implements \Iterator, \ArrayAccess, \Countable
     private function checkForLoader($item)
     {
         if (is_object($item)
-                && ('Loader' === get_class($item))) {
+                && ('queasy\\config\\Loader' === get_class($item))) {
             $item = $item();
         } else if (is_array($item)) {
             $item = new Config($item);
