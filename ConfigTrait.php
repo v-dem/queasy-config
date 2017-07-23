@@ -5,7 +5,7 @@ namespace queasy\config;
 trait ConfigTrait
 {
 
-    private static function config()
+    protected static function config()
     {
         $className = __CLASS__;
 

@@ -85,6 +85,11 @@ class Config implements \Iterator, \ArrayAccess, \Countable
         throw new ConfigException('Cannot change config at runtime.');
     }
 
+    public function toArray()
+    {
+        return $this->data;
+    }
+
     private function checkForLoader($item)
     {
         if (is_object($item)
@@ -95,11 +100,6 @@ class Config implements \Iterator, \ArrayAccess, \Countable
         }
 
         return $item;
-    }
-
-    public function toArray()
-    {
-        return $this->data;
     }
 
 }
