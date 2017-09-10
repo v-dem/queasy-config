@@ -7,7 +7,7 @@ trait ConfigTrait
 
     protected static function config()
     {
-        $className = __CLASS__;
+        $className = self::class;
 
         return Provider::getInstance()->$className;
     }
