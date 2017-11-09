@@ -25,38 +25,6 @@ class Config implements ConfigInterface
         $this->data = $data;
     }
 
-    protected function createLoader($path)
-    {
-        return new Loader($path);
-    }
-
-    protected function &data($key = null)
-    {
-        if (is_string($this->data)) {
-            $loader = $this->createLoader($this->data);
-
-            $this->data = $loader();
-        }
-
-        if (is_null($key)) {
-            return $this->data;
-        } else {
-            return $this->data[$key];
-        }
-    }
-
-    protected function item($item)
-    {
-        if (is_object($item)
-                && ('queasy\config\Config' === get_class($item))) {
-            return $item;
-        } else if (is_array($item)) {
-            return new Config($item);
-        }
-
-        return $item;
-    }
-
     public function __get($key)
     {
         return $this->data($key);
@@ -82,7 +50,6 @@ class Config implements ConfigInterface
 
     public function rewind()
     {
-        // $data = 
         reset($this->data());
     }
 
@@ -138,6 +105,38 @@ class Config implements ConfigInterface
     public function toArray()
     {
         return $this->data();
+    }
+
+    protected function createLoader($path)
+    {
+        return new Loader($path);
+    }
+
+    protected function &data($key = null)
+    {
+        if (is_string($this->data)) {
+            $loader = $this->createLoader($this->data);
+
+            $this->data = $loader();
+        }
+
+        if (is_null($key)) {
+            return $this->data;
+        } else {
+            return $this->data[$key];
+        }
+    }
+
+    protected function item($item)
+    {
+        if (is_object($item)
+                && ('queasy\config\Config' === get_class($item))) {
+            return $item;
+        } else if (is_array($item)) {
+            return new Config($item);
+        }
+
+        return $item;
     }
 
 }
