@@ -32,7 +32,6 @@ class Config implements ConfigInterface
 
     protected function &data($key = null)
     {
-        // Lazy loading
         if (is_string($this->data)) {
             $loader = $this->createLoader($this->data);
 
@@ -44,6 +43,18 @@ class Config implements ConfigInterface
         } else {
             return $this->data[$key];
         }
+    }
+
+    protected function item($item)
+    {
+        if (is_object($item)
+                && ('queasy\config\Config' === get_class($item))) {
+            return $item;
+        } else if (is_array($item)) {
+            return new Config($item);
+        }
+
+        return $item;
     }
 
     public function __get($key)
@@ -77,12 +88,12 @@ class Config implements ConfigInterface
 
     public function current()
     {
-        return $this->checkItem(current($this->data()));
+        return $this->item(current($this->data()));
     }
 
     public function next()
     {
-        return $this->checkItem(next($this->data()));
+        return $this->item(next($this->data()));
     }
 
     public function key()
@@ -110,7 +121,7 @@ class Config implements ConfigInterface
     public function offsetGet($key)
     {
         return $this->offsetExists($key)
-            ? $this->checkItem($this->$key)
+            ? $this->item($this->$key)
             : null;
     }
 
@@ -127,18 +138,6 @@ class Config implements ConfigInterface
     public function toArray()
     {
         return $this->data();
-    }
-
-    private function checkItem($item)
-    {
-        if (is_object($item)
-                && ('queasy\config\Config' === get_class($item))) {
-            return $item;
-        } else if (is_array($item)) {
-            return new Config($item);
-        }
-
-        return $item;
     }
 
 }
