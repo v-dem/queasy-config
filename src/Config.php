@@ -30,7 +30,7 @@ class Config implements ConfigInterface
         return new Loader($path);
     }
 
-    protected function data($key = null)
+    protected function &data($key = null)
     {
         // Lazy loading
         if (is_string($this->data)) {
@@ -71,17 +71,18 @@ class Config implements ConfigInterface
 
     public function rewind()
     {
+        // $data = 
         reset($this->data());
     }
 
     public function current()
     {
-        return $this->checkForLoader(current($this->data()));
+        return $this->checkItem(current($this->data()));
     }
 
     public function next()
     {
-        return $this->checkForLoader(next($this->data()));
+        return $this->checkItem(next($this->data()));
     }
 
     public function key()

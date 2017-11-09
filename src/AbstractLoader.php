@@ -2,7 +2,7 @@
 
 namespace queasy\config;
 
-class AbstractLoader implements LoaderInterface
+abstract class AbstractLoader implements LoaderInterface
 {
 
     abstract public function load();
