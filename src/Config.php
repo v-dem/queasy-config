@@ -19,7 +19,7 @@ class Config implements ConfigInterface
             }
         } else if (!is_string($data)
                 && !is_array($data)) {
-            throw new ConfigException('Invalid argument type.');
+            throw new \InvalidArgumentException('Invalid argument type. Only NULL, String or Array allowed.');
         }
 
         $this->data = $data;
@@ -94,12 +94,12 @@ class Config implements ConfigInterface
 
     public function offsetSet($key, $value)
     {
-        throw new ConfigException('Cannot change config at runtime.');
+        throw new \BadMethodCallException('Not implemented. Config is read-only.');
     }
 
     public function offsetUnset($key)
     {
-        throw new ConfigException('Cannot change config at runtime.');
+        throw new \BadMethodCallException('Not implemented. Config is read-only.');
     }
 
     public function toArray()
