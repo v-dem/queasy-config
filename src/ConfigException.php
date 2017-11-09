@@ -2,9 +2,7 @@
 
 namespace queasy\config;
 
-use queasy\SystemException;
-
-class ConfigException extends SystemException
+class ConfigException extends \Exception
 {
 
 }

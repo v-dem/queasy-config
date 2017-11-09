@@ -2,29 +2,67 @@
 
 namespace queasy\config;
 
-class Config implements \Iterator, \ArrayAccess, \Countable
+class Config implements ConfigInterface
 {
+
+    const DEFAULT_PATH = 'queasy-config.php';
 
     private $data;
 
-    public function __construct($data = array())
+    public function __construct($data = null)
     {
+        if (is_null($data)) {
+            if (defined('QUEASY_CONFIG_PATH')) {
+                $data = QUEASY_CONFIG_PATH;
+            } else {
+                $data = self::DEFAULT_PATH;
+            }
+        } else if (!is_string($data)
+                && !is_array($data)) {
+            throw new ConfigException('Invalid argument type.');
+        }
+
         $this->data = $data;
+    }
+
+    protected function createLoader($path)
+    {
+        return new Loader($path);
+    }
+
+    protected function data($key = null)
+    {
+        // Lazy loading
+        if (is_string($this->data)) {
+            $loader = $this->createLoader($this->data);
+
+            $this->data = $loader();
+        }
+
+        if (is_null($key)) {
+            return $this->data;
+        } else {
+            return $this->data[$key];
+        }
     }
 
     public function __get($key)
     {
-        return $this[$key];
+        return $this->data($key);
     }
 
     public function get($key, $default = null)
     {
-        return isset($this[$key])? $this[$key]: $default;
+        $data = $this->data();
+
+        return isset($data[$key])? $this->$key: $default;
     }
 
     public function need($key)
     {
-        if (!isset($this[$key])) {
+        $data = $this->data();
+
+        if (!isset($data[$key])) {
             throw new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
         }
 
@@ -33,45 +71,45 @@ class Config implements \Iterator, \ArrayAccess, \Countable
 
     public function rewind()
     {
-        reset($this->data);
+        reset($this->data());
     }
 
     public function current()
     {
-        return $this->checkForLoader(current($this->data));
+        return $this->checkForLoader(current($this->data()));
     }
 
     public function next()
     {
-        return $this->checkForLoader(next($this->data));
+        return $this->checkForLoader(next($this->data()));
     }
 
     public function key()
     {
-        return key($this->data);
+        return key($this->data());
     }
 
     public function valid()
     {
-        $key = key($this->data);
+        $key = key($this->data());
 
         return ($key !== null) && ($key !== false);
     }
 
     public function count()
     {
-        return count($this->data);
+        return count($this->data());
     }
 
     public function offsetExists($key)
     {
-        return isset($this->data[$key]);
+        return isset($this->data()[$key]);
     }
 
     public function offsetGet($key)
     {
         return $this->offsetExists($key)
-            ? $this->checkForLoader($this->data[$key])
+            ? $this->checkItem($this->$key)
             : null;
     }
 
@@ -87,16 +125,16 @@ class Config implements \Iterator, \ArrayAccess, \Countable
 
     public function toArray()
     {
-        return $this->data;
+        return $this->data();
     }
 
-    private function checkForLoader($item)
+    private function checkItem($item)
     {
         if (is_object($item)
-                && ('queasy\\config\\Loader' === get_class($item))) {
-            $item = $item();
+                && ('queasy\config\Config' === get_class($item))) {
+            return $item;
         } else if (is_array($item)) {
-            $item = new Config($item);
+            return new Config($item);
         }
 
         return $item;
