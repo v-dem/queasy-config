@@ -43,11 +43,11 @@ with regular arrays and use `foreach` with them. See example:
 
 Reasons why I decided to use `PHP` code for configurations (instead of `INI`, `YAML`, `XML`, `JSON` etc):
 
-1. It is native to `PHP` and doesn't require any additional parsing.
-2. It can be compiled once and cached by `PHP` virtual machine.
-3. It's possible to use PHP constants, or any other expressions which may be helpful.
-4. It's possible to easily split configuration between different files and access any data just like a regular array as shown above.
-5. If there is any syntax error, you'll see it immediately, and you'll see a file and a line number.
+* It is native to `PHP` and doesn't require any additional parsing.
+* It can be compiled once and cached by `PHP` virtual machine.
+* It's possible to use PHP constants, or any other expressions which may be helpful.
+* It's possible to easily split configuration between different files and access any data just like a regular array as shown above.
+* If there is any syntax error, you'll see it immediately, and you'll see a file and a line number.
 
 ### Classes
 
