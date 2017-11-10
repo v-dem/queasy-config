@@ -49,6 +49,8 @@ Reasons why I decided to use `PHP` code for configurations (instead of `INI`, `Y
 * It's possible to easily split configuration between different files and access any data just like a regular array as shown above.
 * If there is any syntax error, you'll see it immediately, and you'll see a file and a line number.
 
+Anyway you can extend this class to support any other configuration format.
+
 ### Classes
 
 #### `queasy\config\Config`
@@ -60,4 +62,20 @@ and also `is_array()` function will return `false`, and also it will not work wi
 If you do need to use it as a real array, just call a `toArray()` method (but it will load all configurations if configuration file is splitted
 by parts as shown in example above).
 
+#### `queasy\config\ConfigInterface`
+
+Interface implemented by `queasy\config\Config`. Can be useful to write a replacement to `Config`.
+
+#### `queasy\config\ConfigException`
+
+Exception that will be thrown on any configuration errors, like missing or invalid configuration file (for example when it doesn't return `array`).
+
+#### `queasy\config\Loader`
+
+Just loads a configuration file from a given path. Used by `queasy\config\Config`.
+
+#### `queasy\config\LoaderInterface` and `queasy\config\AbstractLoader`
+
+They can be used to replace `Loader` (which loads configuration from a file system) with another source. Just need to extend `AbstractLoader`
+with own `Loader` implementation, extend `Config` and override `createLoader()` method there.
 
