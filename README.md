@@ -1,59 +1,42 @@
-# Welcome to the queasy-core wiki!
+# [Queasy PHP Framework](https://github.com/v-dem/queasy-app/)
 
-Queasy PHP framework was developed to help with small projects whose don't require a lot of features implemented in other big, great and nice frameworks like Laravel.
+## Package `queasy\config`
 
-1. [Intro](https://github.com/v-dem/queasy-core/wiki/Intro)
-2. [Configs](https://github.com/v-dem/queasy-core/wiki/Configs)
-3. [Logs](https://github.com/v-dem/queasy-core/wiki/Logs)
-4. [Routes and Controllers](https://github.com/v-dem/queasy-core/wiki/Routes)
-5. [Database and Models](https://github.com/v-dem/queasy-core/wiki/Database-and-Models)
-6. [Forms and Validation](https://github.com/v-dem/queasy-core/wiki/Forms)
-7. [Internationalization](https://github.com/v-dem/queasy-core/wiki/Internationalization)
-8. [Events and Listeners](https://github.com/v-dem/queasy-core/wiki/Events)
+This package contains a set of the classes intended for reading configuration files.
 
-## Requirements
-* PHP 5.3 - Newer PHP versions surely can be used too. This framework doesn't use any things came in newer versions, so it is useful even within PHP 5.3 hostings.
-* PDO - for database access.
-* Apache Httpd - to serve .htaccess for human-readable URLs.
+### Configuration format and usage
 
-## Installation
-* Install [Composer](http://getcomposer.org/download/)
-* Run `composer create-project --stability=dev --prefer-dist v-dem/queasy-app YOUR_PROJECT_NAME`
-* Copy `queasy-config.php.sample` to `queasy-config.php` and modify its settings due to your system configuration.
+Just a simple PHP files containing a return statement which returns an array of key-value pairs, where value can be an array too (nested arrays).
+Also it is possible to split configuration into many files as you wish. See example:
 
-## Features
+    <?php
+    return array(
+        'database' => array(
+            'connection' => array(
+                'driver' => 'mysql',
+                'host' => 'localhost',
+                'name' => 'test',
+                'user' => 'test_user',
+                'password' => 'test_password',
+            ),
+            'tables' => new queasy\config\Config('tables.php'),
+            'queries' => new queasy\config\Config('queries.php')
+        ),
+        'logger' => array(
+            'path' => 'logs/debug.log',
+            'mode' => 'debug'
+        )
+    );
 
-### Quick
-* Much faster than other micro frameworks.
+Of course you can use any PHP expressions there, for example use constants etc. As you can see, there are two objects of class `queasy\config\Config`
+created. They will be just instantiated, related configuration file become loaded at the first request. You can access values in the same way as
+with regular arrays and use `foreach` with them. See example:
 
-### Easy
-* No complex things like DI or IoC used. Just a standard OOP. So debugging is very easy and source code is clean to understand.
+    <?php
+    $config = new queasy\config\Config('config.php'); // At this point config.php is not loaded yet
+    $databaseName = $config['database']['name']; // Now it is loaded, $databaseName contains 'test'
+    $usersTable = $config['database']['tables']['users']; // At this point tables.php is loaded too
 
-### Small
-* Just a several tens of files. And they are loaded only when needed.
+### Classes
 
-### Functional
-* Supports complex configurations with ability to load from different files.
-* Supports internationalization from a box.
-* Forms validation from a box too.
-* Built-in logger, it has to be PSR-compatible in future.
-* Database access is very easy for easy queries (like INSERT, DELETE, UPDATE or SELECT by a single field), more complex queries can be configured in config files.
-* REST support. Every Controller should respond to HTTP methods like GET, POST, PUT, DELETE etc - no routes required.
-
-### MVC
-
-## Folders structure
-* **`/app`** Default folder for custom application files
-* * **`/app/controllers`** Controllers
-* * **`/app/models`** Models
-* * **`/app/forms`** Forms
-* * **`/app/events`** Events
-* * **`/app/listeners`** Event listeners
-* * **`/app/App.php`** Main application class
-* **`/public`** Default folder for public resources like CSS, JS, images etc.
-* **`/public/index.php`** Queasy loader
-* **`/i18n`** Default folder for translations
-* **`/logs`** Default folder for log files
-* **`/views`** Default folder for views
-* **`/vendor`** Contains Composer classes, including Queasy core files
 

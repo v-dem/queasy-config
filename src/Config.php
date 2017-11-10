@@ -27,21 +27,17 @@ class Config implements ConfigInterface
 
     public function __get($key)
     {
-        return $this->data($key);
+        return $this->item($key);
     }
 
     public function get($key, $default = null)
     {
-        $data = $this->data();
-
-        return isset($data[$key])? $this->$key: $default;
+        return $this->offsetExists($key)? $this->$key: $default;
     }
 
     public function need($key)
     {
-        $data = $this->data();
-
-        if (!isset($data[$key])) {
+        if (!$this->offsetExists($key)) {
             throw new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
         }
 
@@ -82,7 +78,9 @@ class Config implements ConfigInterface
 
     public function offsetExists($key)
     {
-        return isset($this->data()[$key]);
+        $data = $this->data();
+
+        return isset($data[$key]);
     }
 
     public function offsetGet($key)
@@ -102,9 +100,20 @@ class Config implements ConfigInterface
         throw new \BadMethodCallException('Not implemented. Config is read-only.');
     }
 
-    public function toArray()
+    public function toArray($arr = null)
     {
-        return $this->data();
+        $result = array();
+        foreach ($this->data() as $key => $item) {
+            $item = $this->item($item);
+            if (is_object($item)
+                    && (get_class($this) === get_class($item))) {
+                $result[$key] = $item->toArray();
+            } else {
+                $result[$key] = $item;
+            }
+        }
+
+        return $result;
     }
 
     protected function createLoader($path)
@@ -112,25 +121,21 @@ class Config implements ConfigInterface
         return new Loader($path);
     }
 
-    protected function &data($key = null)
+    protected function &data()
     {
-        if (is_string($this->data)) {
+        if (!is_array($this->data)) {
             $loader = $this->createLoader($this->data);
 
             $this->data = $loader();
         }
 
-        if (is_null($key)) {
-            return $this->data;
-        } else {
-            return $this->data[$key];
-        }
+        return $this->data;
     }
 
     protected function item($item)
     {
         if (is_object($item)
-                && ('queasy\config\Config' === get_class($item))) {
+                && (get_class($this) === get_class($item))) {
             return $item;
         } else if (is_array($item)) {
             return new Config($item);
