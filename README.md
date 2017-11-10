@@ -1,8 +1,12 @@
 # [Queasy PHP Framework](https://github.com/v-dem/queasy-app/)
 
-## Package `queasy\config`
+## Package `v-dem/queasy-config` (namespace `queasy\config`)
 
 This package contains a set of the classes intended for reading configuration files.
+
+## Dependencies
+
+* PHP version 5.3 and higher
 
 ### Configuration format and usage
 
@@ -38,5 +42,13 @@ with regular arrays and use `foreach` with them. See example:
     $usersTable = $config['database']['tables']['users']; // At this point tables.php is loaded too
 
 ### Classes
+
+#### `queasy\config\Config`
+
+The main class, in most cases remaining will not be necessary. It implements `queasy\config\ConfigInterface` which extends standard PHP
+interfaces `Iterator`, `ArrayAccess` and `Countable` so `Config` can act as an array (but note that most of array functions will not work with it,
+and also `is_array()` function will return `false`, and also it will not work with `array` typehint). So, you can access items by keys, use
+`isset()`, `foreach()`, `count()`. More information about those interfaces above is available in official PHP documentation.
+If you do need to use it as a real array, just call a `toArray()` method (but it will load all configurations if it is splitted).
 
 
