@@ -45,7 +45,7 @@ Reasons why I decided to use `PHP` code for configurations (instead of `INI`, `Y
 
 * It is native to `PHP` and doesn't require any additional parsing.
 * It can be compiled once and cached by `PHP` virtual machine.
-* It's possible to use PHP constants, or any other expressions which may be helpful.
+* It's possible to use `PHP` constants, or any other expressions which may be helpful.
 * It's possible to easily split configuration between different files and access any data just like a regular array as shown above.
 * If there is any syntax error, you'll see it immediately, and you'll see a file and a line number.
 
