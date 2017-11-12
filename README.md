@@ -10,8 +10,8 @@ This package contains a set of the classes intended for reading configuration fi
 
 ### Configuration format and usage
 
-Just a simple `PHP` files containing a return statement which returns an array of key-value pairs, where value can be an array too (nested arrays).
-Also it is possible to split configuration into many files as you wish. See example:
+Just a simple `PHP` files containing a return statement which returns an array (with or without key-value pairs), where value can be an
+array too (nested arrays). Also it is possible to split configuration into many files as you wish. See example:
 
     <?php
     return array(
