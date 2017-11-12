@@ -11,25 +11,10 @@
 namespace queasy\config;
 
 /**
- * Configuration loader class
+ * INI file configuration loader class
  */
-class Loader extends AbstractLoader
+class IniLoader extends FileSystemLoader
 {
-
-    /**
-     * @var string Path to config file
-     */
-    private $path;
-
-    /**
-     * Constructor.
-     *
-     * @param string Path to config file
-     */
-    public function __construct($path)
-    {
-        $this->path = $path;
-    }
 
     /**
      * Loads and returns an array containing configuration.
@@ -38,11 +23,7 @@ class Loader extends AbstractLoader
      */
     public function load()
     {
-        if (!file_exists($this->path)) {
-            throw new ConfigException(sprintf('Config path "%s" not found.', $this->path));
-        }
-
-        $data = include($this->path);
+        $data = parse_ini_file($this->path(), true, INI_SCANNER_TYPED);
         if (!is_array($data)) {
             throw new ConfigException(sprintf('Config file "%s" is corrupted.', $this->path));
         }

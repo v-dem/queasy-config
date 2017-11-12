@@ -24,7 +24,7 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
      *
      * @return mixed Value or $default if $key is missing in config
      */
-    public function get($key, $default = null);
+    function get($key, $default = null);
 
     /**
      * Gets a value from configuration by key provided or throws ConfigException if key is missing
@@ -33,14 +33,14 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
      *
      * @return mixed Value
      */
-    public function need($key);
+    function need($key);
 
     /**
      * Converts all configuration structure into a regular array
      *
      * @return array Configuration represented as a regular array
      */
-    public function toArray();
+    function toArray();
 
 }
 

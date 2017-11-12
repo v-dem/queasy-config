@@ -11,9 +11,9 @@
 namespace queasy\config;
 
 /**
- * Configuration loader interface
+ * Standard (PHP-based) configuration loader class
  */
-interface LoaderInterface
+class PhpLoader extends FileSystemLoader
 {
 
     /**
@@ -21,16 +21,17 @@ interface LoaderInterface
      *
      * @return array Loaded configuration
      */
-    function load();
+    public function load()
+    {
+        $path = $this->path();
 
-    // function default();
+        $data = include($path);
+        if (!is_array($data)) {
+            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
+        }
 
-    /**
-     * Class invokation method representing load().
-     *
-     * @return array Loaded configuration
-     */
-    function __invoke();
+        return $data;
+    }
 
 }
 

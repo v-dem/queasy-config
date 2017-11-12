@@ -224,7 +224,7 @@ class Config implements ConfigInterface
      */
     protected function createLoader($path)
     {
-        return new Loader($path);
+        return new PhpLoader($path);
     }
 
     /**

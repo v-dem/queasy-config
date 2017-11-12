@@ -10,10 +10,11 @@ This package contains a set of the classes intended for reading configuration fi
 
 ### Configuration format and usage
 
-Just a simple `PHP` files containing a return statement which returns an array (with or without key-value pairs), where value can be an
-array too (nested arrays). Also it is possible to split configuration into many files as you wish. See example:
+Configuration files are just a simple `PHP` files containing a return statement which returns an array (with or without key-value pairs),
+where values can be arrays too (nested arrays). Also it is possible to split configuration into many files as you wish. See example:
 
     <?php
+    use queasy\config\Config;
     return array(
         'database' => array(
             'connection' => array(
@@ -23,8 +24,8 @@ array too (nested arrays). Also it is possible to split configuration into many 
                 'user' => 'test_user',
                 'password' => 'test_password'
             ),
-            'tables' => new queasy\config\Config('tables.php'),
-            'queries' => new queasy\config\Config('queries.php')
+            'tables' => new Config('tables.php'),
+            'queries' => new Config('queries.php')
         ),
         'logger' => array(
             'path' => 'logs/debug.log',
