@@ -10,13 +10,16 @@
 
 namespace queasy\config;
 
+use BadMethodCallException;
+use InvalidArgumentException;
+
 /**
- * Main configuration class
+ * Base configuration class
  */
-class Config implements ConfigInterface
+abstract class Config implements ConfigInterface
 {
 
-    const DEFAULT_PATH = 'queasy-config.php';
+    const DEFAULT_PATH = null;
 
     /**
      * @var string|array|null Config data or path to data
@@ -31,7 +34,7 @@ class Config implements ConfigInterface
      *
      * @return mixed Value or $default if $key is missing in config
      *
-     * @throws \InvalidArgumentException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws InvalidArgumentException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function __construct($data = null)
     {
@@ -39,11 +42,11 @@ class Config implements ConfigInterface
             if (defined('QUEASY_CONFIG_PATH')) {
                 $data = QUEASY_CONFIG_PATH;
             } else {
-                $data = self::DEFAULT_PATH;
+                $data = static::DEFAULT_PATH;
             }
         } else if (!is_string($data)
                 && !is_array($data)) {
-            throw new \InvalidArgumentException('Invalid argument type. Only NULL, String or Array allowed.');
+            throw new InvalidArgumentException('Invalid argument type. Only NULL, String or Array allowed.');
         }
 
         $this->data = $data;
@@ -60,7 +63,9 @@ class Config implements ConfigInterface
      */
     public function __get($key)
     {
-        return $this->item($key);
+        $data = $this->data();
+
+        return $this->item($data[$key]);
     }
 
     /**
@@ -173,21 +178,21 @@ class Config implements ConfigInterface
     /**
      * Not implemented.
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function offsetSet($key, $value)
     {
-        throw new \BadMethodCallException('Not implemented. Config is read-only.');
+        throw new BadMethodCallException('Not implemented. Config is read-only.');
     }
 
     /**
      * Not implemented.
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function offsetUnset($key)
     {
-        throw new \BadMethodCallException('Not implemented. Config is read-only.');
+        throw new BadMethodCallException('Not implemented. Config is read-only.');
     }
 
     /**
@@ -197,13 +202,13 @@ class Config implements ConfigInterface
      *
      * @throws ConfigException When any of included configuration files are missing or corrupted (doesn't return an array)
      */
-    public function toArray($arr = null)
+    public function toArray()
     {
         $result = array();
         foreach ($this->data() as $key => $item) {
             $item = $this->item($item);
             if (is_object($item)
-                    && (get_class($this) === get_class($item))) {
+                    && ($item instanceof ConfigInterface)) {
                 $result[$key] = $item->toArray();
             } else {
                 $result[$key] = $item;
@@ -211,20 +216,6 @@ class Config implements ConfigInterface
         }
 
         return $result;
-    }
-
-    /**
-     * Creates a config loader instance.
-     *
-     * @param string $path Path to config file
-     *
-     * @return Loader Loader instance
-     *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
-     */
-    protected function createLoader($path)
-    {
-        return new PhpLoader($path);
     }
 
     /**
@@ -236,11 +227,13 @@ class Config implements ConfigInterface
      */
     protected function &data()
     {
+        /*
         if (!is_array($this->data)) {
             $loader = $this->createLoader($this->data);
 
             $this->data = $loader();
         }
+        */
 
         return $this->data;
     }
@@ -255,7 +248,9 @@ class Config implements ConfigInterface
     protected function item($item)
     {
         if (is_array($item)) {
-            return new Config($item);
+            $className = get_class($this);
+
+            return new $className($item);
         }
 
         return $item;

@@ -8,7 +8,9 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config;
+namespace queasy\config\loader;
+
+use queasy\config\ConfigException;
 
 /**
  * File system configuration loader class
@@ -40,6 +42,10 @@ abstract class FileSystemLoader extends AbstractLoader
     {
         if (!file_exists($this->path())) {
             throw new ConfigException(sprintf('Config path "%s" not found.', $this->path()));
+        }
+
+        if (!is_readable($this->path())) {
+            throw new ConfigException(sprintf('Config path "%s" cannot be read.', $this->path()));
         }
     }
 

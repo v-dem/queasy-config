@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config;
+namespace queasy\config\loader;
 
 /**
- * INI file configuration loader class
+ * Configuration loader interface
  */
-class IniLoader extends FileSystemLoader
+interface LoaderInterface
 {
 
     /**
@@ -21,15 +21,16 @@ class IniLoader extends FileSystemLoader
      *
      * @return array Loaded configuration
      */
-    public function load()
-    {
-        $data = parse_ini_file($this->path(), true, INI_SCANNER_TYPED);
-        if (!is_array($data)) {
-            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $this->path));
-        }
+    function load();
 
-        return $data;
-    }
+    // function default();
+
+    /**
+     * Class invokation method representing load().
+     *
+     * @return array Loaded configuration
+     */
+    function __invoke();
 
 }
 

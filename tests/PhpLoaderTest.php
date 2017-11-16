@@ -13,7 +13,7 @@ namespace queasy\config\tests;
 // use PHPUnit\Framework\Error;
 use PHPUnit\Framework\TestCase;
 
-use queasy\config\PhpLoader;
+use queasy\config\loader\PhpLoader;
 use queasy\config\ConfigException;
 
 class PhpLoaderTest extends TestCase

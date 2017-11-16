@@ -8,12 +8,14 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config;
+namespace queasy\config\loader;
+
+use queasy\config\ConfigException;
 
 /**
- * Standard (PHP-based) configuration loader class
+ * INI file configuration loader class
  */
-class PhpLoader extends FileSystemLoader
+class IniLoader extends FileSystemLoader
 {
 
     /**
@@ -23,13 +25,10 @@ class PhpLoader extends FileSystemLoader
      */
     public function load()
     {
-        $path = $this->path();
-
-        $data = include($path);
+        $data = parse_ini_file($this->path(), true, INI_SCANNER_TYPED);
         if (!is_array($data)) {
-            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
+            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $this->path));
         }
-
         return $data;
     }
 

@@ -9,26 +9,26 @@
 
 namespace queasy\config;
 
-use queasy\config\loader\IniLoader;
+use queasy\config\loader\PhpLoader;
 
 /**
- * INI configuration class
+ * PHP configuration class
  */
-class IniConfig extends Config
+class PhpConfig extends Config
 {
 
-    const DEFAULT_PATH = 'queasy-config.ini';
+    const DEFAULT_PATH = 'queasy-config.php';
 
     /**
      * Creates a config loader instance.
      *
      * @param string $path Path to config file
      *
-     * @return IniLoader IniLoader instance
+     * @return PhpLoader PhpLoader instance
      */
     protected function createLoader($path)
     {
-        return new IniLoader($path);
+        return new PhpLoader($path);
     }
 
 }
