@@ -13,15 +13,15 @@ namespace queasy\config\tests;
 // use PHPUnit\Framework\Error;
 use PHPUnit\Framework\TestCase;
 
-use queasy\config\loader\IniLoader;
+use queasy\config\loader\JsonLoader;
 use queasy\config\ConfigException;
 
-class IniLoaderTest extends TestCase
+class JsonLoaderTest extends TestCase
 {
 
     public function testCorrect()
     {
-        $loader = new IniLoader('tests/resources/correct.ini');
+        $loader = new JsonLoader('tests/resources/correct.json');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -49,7 +49,7 @@ class IniLoaderTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $loader = new IniLoader('tests/resources/correct-empty.ini');
+        $loader = new JsonLoader('tests/resources/correct-empty.json');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -59,7 +59,7 @@ class IniLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new IniLoader('tests/resources/missing-file.ini');
+        $loader = new JsonLoader('tests/resources/missing-file.json');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -68,7 +68,7 @@ class IniLoaderTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new IniLoader('tests/resources/incorrect-not-empty.ini');
+        $loader = new JsonLoader('tests/resources/incorrect-not-empty.json');
 
         $this->setExpectedException(ConfigException::class);
 

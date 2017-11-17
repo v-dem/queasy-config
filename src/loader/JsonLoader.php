@@ -13,9 +13,9 @@ namespace queasy\config\loader;
 use queasy\config\ConfigException;
 
 /**
- * INI file configuration loader class
+ * JSON configuration loader class
  */
-class IniLoader extends FileSystemLoader
+class JsonLoader extends FileSystemLoader
 {
 
     /**
@@ -25,10 +25,13 @@ class IniLoader extends FileSystemLoader
      */
     public function load()
     {
-        $data = @parse_ini_file($this->path(), true);
+        $path = $this->path();
+
+        $data = json_decode(file_get_contents($path), true);
         if (!is_array($data)) {
-            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $this->path()));
+            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
         }
+
         return $data;
     }
 

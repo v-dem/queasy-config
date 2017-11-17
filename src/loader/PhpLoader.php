@@ -27,7 +27,12 @@ class PhpLoader extends FileSystemLoader
     {
         $path = $this->path();
 
-        $data = include($path);
+        try {
+            $data = include($path);
+        } catch (\Throwable $e) {
+            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
+        }
+
         if (!is_array($data)) {
             throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
         }
