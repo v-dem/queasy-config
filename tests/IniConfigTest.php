@@ -19,7 +19,7 @@ class IniConfigTest extends TestCase
 {
     public function testCorrect()
     {
-        $config = new Config('tests/resources/correct.ini');
+        $config = new Config(__DIR__ . '/resources/correct.ini');
 
         $this->assertGreaterThan(0, count($config));
         $this->assertCount(2, $config);
@@ -43,7 +43,7 @@ class IniConfigTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $config = new Config('tests/resources/correct-empty.ini');
+        $config = new Config(__DIR__ . '/resources/correct-empty.ini');
 
         $this->assertCount(0, $config);
         $this->assertEmpty($config);
@@ -51,7 +51,7 @@ class IniConfigTest extends TestCase
 
     public function testMissingFile()
     {
-        $config = new Config('tests/resources/missing-file.ini');
+        $config = new Config(__DIR__ . '/resources/missing-file.ini');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -60,7 +60,7 @@ class IniConfigTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $config = new Config('tests/resources/incorrect-not-empty.ini');
+        $config = new Config(__DIR__ . '/resources/incorrect-not-empty.ini');
 
         $this->setExpectedException(ConfigException::class);
 

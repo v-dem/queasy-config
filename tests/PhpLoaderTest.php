@@ -19,7 +19,7 @@ class PhpLoaderTest extends TestCase
 {
     public function testCorrect()
     {
-        $loader = new PhpLoader('tests/resources/correct.php');
+        $loader = new PhpLoader(__DIR__ . '/resources/correct.php');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -47,7 +47,7 @@ class PhpLoaderTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $loader = new PhpLoader('tests/resources/correct-empty.php');
+        $loader = new PhpLoader(__DIR__ . '/resources/correct-empty.php');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -56,7 +56,7 @@ class PhpLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new PhpLoader('tests/resources/missing-file.php');
+        $loader = new PhpLoader(__DIR__ . '/resources/missing-file.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -65,7 +65,7 @@ class PhpLoaderTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new PhpLoader('tests/resources/incorrect-not-empty.php');
+        $loader = new PhpLoader(__DIR__ . '/resources/incorrect-not-empty.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -74,7 +74,7 @@ class PhpLoaderTest extends TestCase
 
     public function testWrongReturnInt()
     {
-        $loader = new PhpLoader('tests/resources/wrong-return-int.php');
+        $loader = new PhpLoader(__DIR__ . '/resources/wrong-return-int.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -83,7 +83,7 @@ class PhpLoaderTest extends TestCase
 
     public function testWrongReturnString()
     {
-        $loader = new PhpLoader('tests/resources/wrong-return-string.php');
+        $loader = new PhpLoader(__DIR__ . '/resources/wrong-return-string.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -92,7 +92,7 @@ class PhpLoaderTest extends TestCase
 
     public function testWrongReturnNothing()
     {
-        $loader = new PhpLoader('tests/resources/wrong-return-nothing.php');
+        $loader = new PhpLoader(__DIR__ . '/resources/wrong-return-nothing.php');
 
         $this->setExpectedException(ConfigException::class);
 

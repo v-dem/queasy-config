@@ -19,7 +19,7 @@ class JsonConfigTest extends TestCase
 {
     public function testCorrect()
     {
-        $config = new Config('tests/resources/correct.json');
+        $config = new Config(__DIR__ . '/resources/correct.json');
 
         $this->assertGreaterThan(0, count($config));
         $this->assertCount(2, $config);
@@ -43,7 +43,7 @@ class JsonConfigTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $config = new Config('tests/resources/correct-empty.json');
+        $config = new Config(__DIR__ . '/resources/correct-empty.json');
 
         $this->assertCount(0, $config);
         $this->assertEmpty($config);
@@ -51,7 +51,7 @@ class JsonConfigTest extends TestCase
 
     public function testMissingFile()
     {
-        $config = new Config('tests/resources/missing-file.json');
+        $config = new Config(__DIR__ . '/resources/missing-file.json');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -60,7 +60,7 @@ class JsonConfigTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $config = new Config('tests/resources/incorrect-not-empty.json');
+        $config = new Config(__DIR__ . '/resources/incorrect-not-empty.json');
 
         $this->setExpectedException(ConfigException::class);
 

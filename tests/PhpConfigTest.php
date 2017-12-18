@@ -21,7 +21,7 @@ class PhpConfigTest extends TestCase
 {
     public function testCorrect()
     {
-        $config = new Config('tests/resources/correct.php');
+        $config = new Config(__DIR__ . '/resources/correct.php');
 
         $this->assertGreaterThan(0, count($config));
         $this->assertCount(2, $config);
@@ -45,14 +45,14 @@ class PhpConfigTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $config = new Config('tests/resources/correct-empty.php');
+        $config = new Config(__DIR__ . '/resources/correct-empty.php');
 
         $this->assertCount(0, $config);
     }
 
     public function testMissingFile()
     {
-        $config = new Config('tests/resources/missing-file.php');
+        $config = new Config(__DIR__ . '/resources/missing-file.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -61,7 +61,7 @@ class PhpConfigTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $config = new Config('tests/resources/incorrect-not-empty.php');
+        $config = new Config(__DIR__ . '/resources/incorrect-not-empty.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -70,7 +70,7 @@ class PhpConfigTest extends TestCase
 
     public function testWrongReturnInt()
     {
-        $config = new Config('tests/resources/wrong-return-int.php');
+        $config = new Config(__DIR__ . '/resources/wrong-return-int.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -79,7 +79,7 @@ class PhpConfigTest extends TestCase
 
     public function testWrongReturnString()
     {
-        $config = new Config('tests/resources/wrong-return-string.php');
+        $config = new Config(__DIR__ . '/resources/wrong-return-string.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -88,7 +88,7 @@ class PhpConfigTest extends TestCase
 
     public function testWrongReturnNothing()
     {
-        $config = new Config('tests/resources/wrong-return-nothing.php');
+        $config = new Config(__DIR__ . '/resources/wrong-return-nothing.php');
 
         $this->setExpectedException(ConfigException::class);
 
