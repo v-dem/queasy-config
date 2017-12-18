@@ -10,7 +10,6 @@
 
 namespace queasy\config\tests;
 
-// use PHPUnit\Framework\Error;
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\PhpLoader;
@@ -18,7 +17,6 @@ use queasy\config\ConfigException;
 
 class PhpLoaderTest extends TestCase
 {
-
     public function testCorrect()
     {
         $loader = new PhpLoader('tests/resources/correct.php');
@@ -53,6 +51,7 @@ class PhpLoaderTest extends TestCase
         $result = $loader();
 
         $this->assertTrue(is_array($result));
+        $this->assertCount(0, $result);
     }
 
     public function testMissingFile()
@@ -115,6 +114,5 @@ class PhpLoaderTest extends TestCase
 
         $result = $loader();
     }
-
 }
 

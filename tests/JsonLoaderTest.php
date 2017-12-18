@@ -10,7 +10,6 @@
 
 namespace queasy\config\tests;
 
-// use PHPUnit\Framework\Error;
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\JsonLoader;
@@ -18,7 +17,6 @@ use queasy\config\ConfigException;
 
 class JsonLoaderTest extends TestCase
 {
-
     public function testCorrect()
     {
         $loader = new JsonLoader('tests/resources/correct.json');
@@ -74,6 +72,5 @@ class JsonLoaderTest extends TestCase
 
         $result = $loader();
     }
-
 }
 

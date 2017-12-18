@@ -15,7 +15,6 @@ namespace queasy\config\loader;
  */
 abstract class AbstractLoader implements LoaderInterface
 {
-
     /**
      * Loads and returns an array containing configuration
      *
@@ -41,6 +40,5 @@ abstract class AbstractLoader implements LoaderInterface
 
         return $this->load();
     }
-
 }
 

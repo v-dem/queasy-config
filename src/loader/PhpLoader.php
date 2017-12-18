@@ -17,7 +17,6 @@ use queasy\config\ConfigException;
  */
 class PhpLoader extends FileSystemLoader
 {
-
     /**
      * Loads and returns an array containing configuration.
      *
@@ -39,6 +38,5 @@ class PhpLoader extends FileSystemLoader
 
         return $data;
     }
-
 }
 

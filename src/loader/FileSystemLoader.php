@@ -17,7 +17,6 @@ use queasy\config\ConfigException;
  */
 abstract class FileSystemLoader extends AbstractLoader
 {
-
     /**
      * @var string Path to config file
      */
@@ -48,6 +47,5 @@ abstract class FileSystemLoader extends AbstractLoader
             throw new ConfigException(sprintf('Config path "%s" cannot be read.', $this->path()));
         }
     }
-
 }
 

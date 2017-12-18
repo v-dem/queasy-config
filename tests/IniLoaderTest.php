@@ -10,7 +10,6 @@
 
 namespace queasy\config\tests;
 
-// use PHPUnit\Framework\Error;
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\IniLoader;
@@ -18,7 +17,6 @@ use queasy\config\ConfigException;
 
 class IniLoaderTest extends TestCase
 {
-
     public function testCorrect()
     {
         $loader = new IniLoader('tests/resources/correct.ini');
@@ -74,6 +72,5 @@ class IniLoaderTest extends TestCase
 
         $result = $loader();
     }
-
 }
 

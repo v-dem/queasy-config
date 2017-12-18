@@ -17,7 +17,6 @@ use queasy\config\ConfigException;
  */
 class IniLoader extends FileSystemLoader
 {
-
     /**
      * Loads and returns an array containing configuration.
      *
@@ -31,6 +30,5 @@ class IniLoader extends FileSystemLoader
         }
         return $data;
     }
-
 }
 

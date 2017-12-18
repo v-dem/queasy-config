@@ -13,13 +13,14 @@ namespace queasy\config;
 use BadMethodCallException;
 use InvalidArgumentException;
 
-/**
- * Base configuration class
- */
-abstract class Config implements ConfigInterface
-{
+use queasy\config\loader\LoaderFactory;
 
-    const DEFAULT_PATH = null;
+/**
+ * Main configuration class
+ */
+class Config implements ConfigInterface
+{
+    const DEFAULT_PATH = 'queasy-config.php';
 
     /**
      * @var string|array|null Config data or path to data
@@ -227,13 +228,11 @@ abstract class Config implements ConfigInterface
      */
     protected function &data()
     {
-        /*
-        if (!is_array($this->data)) {
-            $loader = $this->createLoader($this->data);
+        if (is_string($this->data)) {
+            $loader = LoaderFactory::create($this->data);
 
             $this->data = $loader();
         }
-        */
 
         return $this->data;
     }
@@ -255,6 +254,5 @@ abstract class Config implements ConfigInterface
 
         return $item;
     }
-
 }
 

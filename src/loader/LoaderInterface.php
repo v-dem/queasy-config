@@ -15,7 +15,6 @@ namespace queasy\config\loader;
  */
 interface LoaderInterface
 {
-
     /**
      * Loads and returns an array containing configuration.
      *
@@ -31,6 +30,5 @@ interface LoaderInterface
      * @return array Loaded configuration
      */
     function __invoke();
-
 }
 

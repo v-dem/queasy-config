@@ -15,9 +15,6 @@ namespace queasy\config;
  */
 interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
 {
-
-    function createLoader();
-
     /**
      * Gets a value from configuration by key provided
      *
@@ -43,6 +40,5 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
      * @return array Configuration represented as a regular array
      */
     function toArray();
-
 }
 
