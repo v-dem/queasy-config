@@ -1,4 +1,8 @@
 #! /bin/sh
 
-vendor/bin/phpunit tests
+if [ -d vendor ]; then
+    vendor/bin/phpunit tests
+else
+    ../../bin/phpunit tests
+fi
 
