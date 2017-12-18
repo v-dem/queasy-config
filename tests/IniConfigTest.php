@@ -10,18 +10,16 @@
 
 namespace queasy\config\tests;
 
-use InvalidArgumentException;
-
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\Config;
 use queasy\config\ConfigException;
 
-class PhpConfigTest extends TestCase
+class IniConfigTest extends TestCase
 {
     public function testCorrect()
     {
-        $config = new Config('tests/resources/correct.php');
+        $config = new Config('tests/resources/correct.ini');
 
         $this->assertGreaterThan(0, count($config));
         $this->assertCount(2, $config);
@@ -45,14 +43,15 @@ class PhpConfigTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $config = new Config('tests/resources/correct-empty.php');
+        $config = new Config('tests/resources/correct-empty.ini');
 
         $this->assertCount(0, $config);
+        $this->assertEmpty($config);
     }
 
     public function testMissingFile()
     {
-        $config = new Config('tests/resources/missing-file.php');
+        $config = new Config('tests/resources/missing-file.ini');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -61,45 +60,11 @@ class PhpConfigTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $config = new Config('tests/resources/incorrect-not-empty.php');
+        $config = new Config('tests/resources/incorrect-not-empty.ini');
 
         $this->setExpectedException(ConfigException::class);
 
         $test = $config['a'];
-    }
-
-    public function testWrongReturnInt()
-    {
-        $config = new Config('tests/resources/wrong-return-int.php');
-
-        $this->setExpectedException(ConfigException::class);
-
-        $test = $config['a'];
-    }
-
-    public function testWrongReturnString()
-    {
-        $config = new Config('tests/resources/wrong-return-string.php');
-
-        $this->setExpectedException(ConfigException::class);
-
-        $test = $config['a'];
-    }
-
-    public function testWrongReturnNothing()
-    {
-        $config = new Config('tests/resources/wrong-return-nothing.php');
-
-        $this->setExpectedException(ConfigException::class);
-
-        $test = $config['a'];
-    }
-
-    public function testNotAStringOrArrayAsParameter()
-    {
-        $this->setExpectedException(InvalidArgumentException::class);
-
-        new Config(true);
     }
 }
 
