@@ -50,6 +50,19 @@ class PhpConfigTest extends TestCase
         $this->assertCount(0, $config);
     }
 
+    public function testCorrectCompound()
+    {
+        $config = new Config(__DIR__ . '/resources/correct-compound.php');
+
+        $this->assertCount(1, $config);
+        $this->assertArrayHasKey('include-section', $config);
+        $this->assertCount(1, $config['include-section']);
+        $this->assertArrayHasKey('section', $config['include-section']);
+        $this->assertCount(1, $config['include-section']['section']);
+        $this->assertArrayHasKey('key', $config['include-section']['section']);
+        $this->assertEquals('value', $config['include-section']['section']['key']);
+    }
+
     public function testMissingFile()
     {
         $config = new Config(__DIR__ . '/resources/missing-file.php');
@@ -70,7 +83,7 @@ class PhpConfigTest extends TestCase
 
     public function testWrongReturnInt()
     {
-        $config = new Config(__DIR__ . '/resources/wrong-return-int.php');
+        $config = new Config(__DIR__ . '/resources/incorrect-return-int.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -79,7 +92,7 @@ class PhpConfigTest extends TestCase
 
     public function testWrongReturnString()
     {
-        $config = new Config(__DIR__ . '/resources/wrong-return-string.php');
+        $config = new Config(__DIR__ . '/resources/incorrect-return-string.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -88,7 +101,7 @@ class PhpConfigTest extends TestCase
 
     public function testWrongReturnNothing()
     {
-        $config = new Config(__DIR__ . '/resources/wrong-return-nothing.php');
+        $config = new Config(__DIR__ . '/resources/incorrect-return-nothing.php');
 
         $this->setExpectedException(ConfigException::class);
 
