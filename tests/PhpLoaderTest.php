@@ -72,6 +72,15 @@ class PhpLoaderTest extends TestCase
         $result = $loader();
     }
 
+    public function testIncorrectNotEmpty2()
+    {
+        $loader = new PhpLoader(__DIR__ . '/resources/incorrect-not-empty2.php');
+
+        $this->setExpectedException(ConfigException::class);
+
+        $result = $loader();
+    }
+
     public function testWrongReturnInt()
     {
         $loader = new PhpLoader(__DIR__ . '/resources/wrong-return-int.php');

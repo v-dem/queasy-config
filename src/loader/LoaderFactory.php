@@ -10,6 +10,8 @@
 
 namespace queasy\config\loader;
 
+use InvalidArgumentException;
+
 use queasy\config\ConfigException;
 
 /**
@@ -39,6 +41,7 @@ class LoaderFactory
      * @param bool $ignoreIfRegistered If true, do not throw exception if $pattern is already registered in custom loaders
      *
      * @throws ConfigException When $pattern is already registered and $ignoreIfRegistered is false
+     * @throws InvalidArgumentException When $className does not implement LoaderInterface
      */
     public static function register($pattern, $className, $ignoreIfRegistered = false)
     {
@@ -47,7 +50,30 @@ class LoaderFactory
             throw new ConfigException(sprintf('Custom loader for pattern "%s" already registered.', $pattern));
         }
 
+        $interfaces = class_implements($className);
+        if (!$interfaces || !in_array('LoaderInterface', $interfaces)) {
+            throw new InvalidArgumentException(sprintf('Custom config loader "%s" does not implement queasy\config\loader\LoaderInterface.', $className));
+        }
+
         self::$loaders[$pattern] = $className;
+    }
+
+    /**
+     * Checks if loader for specified path is registered.
+     *
+     * @param string $path Path
+     *
+     * @returns bool|string Loader class name or false if not found
+     */
+    public static function registered($path)
+    {
+        $className = self::find(self::$loaders, $path);
+
+        if ($className) {
+            return $className;
+        } else {
+            return self::find(self::$defaultLoaders, $path);
+        }
     }
 
     /**
@@ -61,14 +87,9 @@ class LoaderFactory
      */
     public static function create($path)
     {
-        $className = self::find(self::$loaders, $path);
-
+        $className = self::registered($path);
         if (!$className) {
-            $className = self::find(self::$defaultLoaders, $path);
-
-            if (!$className) {
-                throw new ConfigException(sprintf('No loader found for path "%s".', $path));
-            }
+            throw new ConfigException(sprintf('No loader found for path "%s".', $path));
         }
 
         return new $className($path);
@@ -89,6 +110,8 @@ class LoaderFactory
                 return $className;
             }
         }
+
+        return false;
     }
 }
 

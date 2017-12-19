@@ -27,8 +27,14 @@ class PhpLoader extends FileSystemLoader
         $path = $this->path();
 
         try {
+            ob_start();
+
             $data = include($path);
+
+            ob_end_clean();
         } catch (\Throwable $e) {
+            ob_end_clean();
+
             throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
         }
 
