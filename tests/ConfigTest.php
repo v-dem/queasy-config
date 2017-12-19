@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use queasy\config\Config;
 use queasy\config\ConfigException;
 
-class PhpConfigTest extends TestCase
+class ConfigTest extends TestCase
 {
     public function testCorrect()
     {
