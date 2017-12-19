@@ -99,27 +99,37 @@ class Config extends AbstractConfig
 
     public function rewind()
     {
-        reset($this->data());
+        $data = $this->data();
+
+        reset($data);
     }
 
     public function current()
     {
-        return $this->item(current($this->data()));
+        $data = $this->data();
+
+        return $this->item(current($data));
     }
 
     public function next()
     {
-        return $this->item(next($this->data()));
+        $data = $this->data();
+
+        return $this->item(next($data));
     }
 
     public function key()
     {
-        return key($this->data());
+        $data = $this->data();
+
+        return key($data);
     }
 
     public function valid()
     {
-        $key = key($this->data());
+        $data = $this->data();
+
+        $key = key($data);
 
         return ($key !== null)
                 && ($key !== false);
@@ -231,11 +241,11 @@ class Config extends AbstractConfig
     /**
      * Checks if data is loaded, and tries to load it using loader if not.
      *
-     * @return array An array containing config
+     * @return &array An array containing config
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    protected function data()
+    protected function &data()
     {
         $data = parent::data();
         if (is_string($data)) {
