@@ -22,8 +22,6 @@ interface LoaderInterface
      */
     function load();
 
-    // function default();
-
     /**
      * Class invokation method representing load().
      *

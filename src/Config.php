@@ -90,12 +90,11 @@ class Config extends AbstractConfig
      */
     public function need($key)
     {
-        $value = $this[$key];
-        if (is_null($value)) {
+        if (!isset($this[$key])) {
             throw new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
         }
 
-        return $value;
+        return $this[$key];
     }
 
     public function rewind()
@@ -152,7 +151,7 @@ class Config extends AbstractConfig
         $data = $this->data();
         $parent = $this->parent();
 
-        if (isset($data[$key])) {
+        if (array_key_exists($key, $data)) {
             return true;
         } elseif (is_null($parent)) {
             return false;
@@ -174,7 +173,7 @@ class Config extends AbstractConfig
     {
         if ($this->offsetExists($key)) {
             $data = $this->data();
-            if (isset($data[$key])) {
+            if (array_key_exists($key, $data)) {
                 return $this->item($data[$key]);
             } else {
                 $parent = $this->parent();

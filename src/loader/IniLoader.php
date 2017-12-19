@@ -28,6 +28,7 @@ class IniLoader extends FileSystemLoader
         if (!is_array($data)) {
             throw new ConfigException(sprintf('Config file "%s" is corrupted.', $this->path()));
         }
+
         return $data;
     }
 }

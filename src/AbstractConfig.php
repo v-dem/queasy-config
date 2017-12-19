@@ -10,11 +10,6 @@
 
 namespace queasy\config;
 
-use BadMethodCallException;
-use InvalidArgumentException;
-
-use queasy\config\loader\LoaderFactory;
-
 /**
  * Abstract configuration class
  */

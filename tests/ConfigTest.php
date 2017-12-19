@@ -24,7 +24,7 @@ class ConfigTest extends TestCase
         $config = new Config(__DIR__ . '/resources/correct.php');
 
         $this->assertGreaterThan(0, count($config));
-        $this->assertCount(3, $config);
+        $this->assertCount(4, $config);
 
         $this->assertArrayHasKey('section1', $config);
         $this->assertGreaterThan(0, count($config['section1']));
@@ -126,6 +126,14 @@ class ConfigTest extends TestCase
         $this->setExpectedException(ConfigException::class);
 
         $value = $config->need('unknown');
+    }
+
+    public function testNeedNullExisting()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertArrayHasKey('nullkey', $config);
+        $this->assertNull($config->need('nullkey'));
     }
 
     public function testMissingFile()
