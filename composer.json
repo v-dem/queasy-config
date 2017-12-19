@@ -18,6 +18,11 @@
         "psr-4":{
             "queasy\\config\\": "src/"
         }
+    },
+    "autoload-dev":{
+        "psr-4":{
+            "queasy\\config\\tests\\": "tests/"
+        }
     }
 }
 

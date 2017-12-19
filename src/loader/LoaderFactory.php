@@ -51,7 +51,7 @@ class LoaderFactory
         }
 
         $interfaces = class_implements($className);
-        if (!$interfaces || !in_array('LoaderInterface', $interfaces)) {
+        if (!$interfaces || !isset($interfaces['queasy\config\loader\LoaderInterface'])) {
             throw new InvalidArgumentException(sprintf('Custom config loader "%s" does not implement queasy\config\loader\LoaderInterface.', $className));
         }
 
