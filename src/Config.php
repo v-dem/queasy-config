@@ -99,35 +99,35 @@ class Config extends AbstractConfig
 
     public function rewind()
     {
-        $data = $this->data();
+        $data = &$this->data();
 
         reset($data);
     }
 
     public function current()
     {
-        $data = $this->data();
+        $data = &$this->data();
 
         return $this->item(current($data));
     }
 
     public function next()
     {
-        $data = $this->data();
+        $data = &$this->data();
 
         return $this->item(next($data));
     }
 
     public function key()
     {
-        $data = $this->data();
+        $data = &$this->data();
 
         return key($data);
     }
 
     public function valid()
     {
-        $data = $this->data();
+        $data = &$this->data();
 
         $key = key($data);
 
@@ -158,7 +158,7 @@ class Config extends AbstractConfig
      */
     public function offsetExists($key)
     {
-        $data = $this->data();
+        $data = &$this->data();
         $parent = $this->parent();
 
         if (array_key_exists($key, $data)) {
@@ -182,7 +182,7 @@ class Config extends AbstractConfig
     public function offsetGet($key)
     {
         if ($this->offsetExists($key)) {
-            $data = $this->data();
+            $data = &$this->data();
             if (array_key_exists($key, $data)) {
                 return $this->item($data[$key]);
             } else {
@@ -247,7 +247,7 @@ class Config extends AbstractConfig
      */
     protected function &data()
     {
-        $data = parent::data();
+        $data = &parent::data();
         if (is_string($data)) {
             $loader = LoaderFactory::create($data);
 

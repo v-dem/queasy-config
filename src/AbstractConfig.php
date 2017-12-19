@@ -55,7 +55,7 @@ abstract class AbstractConfig implements ConfigInterface
      *
      * @param mixed $data Config data
      */
-    protected function setData($data)
+    protected function setData(&$data)
     {
         $this->data = $data;
     }
