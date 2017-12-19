@@ -63,9 +63,9 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * Returns config data
      *
-     * @return mixed Config data
+     * @return &mixed Config data
      */
-    protected function data()
+    protected function &data()
     {
         return $this->data;
     }
