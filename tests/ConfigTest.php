@@ -112,6 +112,13 @@ class ConfigTest extends TestCase
         $this->assertEquals('parent-value', $config['include-section']['section']['parent-key']);
     }
 
+    public function testCompoundGetInheritedWithDefault()
+    {
+        $config = new Config(__DIR__ . '/resources/correct-compound.php');
+
+        $this->assertEquals('parent-value', $config['include-section']['section']->get('parent-key', 'wrong-value'));
+    }
+
     public function testNeed()
     {
         $config = new Config(__DIR__ . '/resources/correct.php');
