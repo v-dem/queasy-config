@@ -54,7 +54,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/resources/correct-compound.php');
 
-        $this->assertCount(1, $config);
+        $this->assertCount(2, $config);
         $this->assertArrayHasKey('include-section', $config);
         $this->assertCount(1, $config['include-section']);
         $this->assertArrayHasKey('section', $config['include-section']);
@@ -103,6 +103,13 @@ class ConfigTest extends TestCase
         $config = new Config(__DIR__ . '/resources/correct.php');
 
         $this->assertEquals('value', $config->get('key', 'default'));
+    }
+
+    public function testCompoundGetInherited()
+    {
+        $config = new Config(__DIR__ . '/resources/correct-compound.php');
+
+        $this->assertEquals('parent-value', $config['include-section']['section']['parent-key']);
     }
 
     public function testNeed()

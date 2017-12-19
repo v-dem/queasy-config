@@ -18,14 +18,9 @@ use queasy\config\loader\LoaderFactory;
 /**
  * Main configuration class
  */
-class Config implements ConfigInterface
+class Config extends AbstractConfig
 {
     const DEFAULT_PATH = 'queasy-config.php';
-
-    /**
-     * @var string|array|null Config data or path to data
-     */
-    private $data;
 
     /**
      * Constructor.
@@ -37,7 +32,7 @@ class Config implements ConfigInterface
      *
      * @throws InvalidArgumentException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    public function __construct($data = null)
+    public function __construct($data = null, ConfigInterface $parent = null)
     {
         if (is_null($data)) {
             if (defined('QUEASY_CONFIG_PATH')) {
@@ -50,7 +45,7 @@ class Config implements ConfigInterface
             throw new InvalidArgumentException('Invalid argument type. Only NULL, String or Array allowed.');
         }
 
-        $this->data = $data;
+        parent::__construct($data, $parent);
     }
 
     /**
@@ -155,8 +150,15 @@ class Config implements ConfigInterface
     public function offsetExists($key)
     {
         $data = $this->data();
+        $parent = $this->parent();
 
-        return isset($data[$key]);
+        if (isset($data[$key])) {
+            return true;
+        } elseif (is_null($parent)) {
+            return false;
+        } else {
+            return $parent->offsetExists($key);
+        }
     }
 
     /**
@@ -170,11 +172,18 @@ class Config implements ConfigInterface
      */
     public function offsetGet($key)
     {
-        $data = $this->data();
+        if ($this->offsetExists($key)) {
+            $data = $this->data();
+            if (isset($data[$key])) {
+                return $this->item($data[$key]);
+            } else {
+                $parent = $this->parent();
 
-        return $this->offsetExists($key)
-            ? $this->item($data[$key])
-            : null;
+                return is_null($parent)? null: $parent[$key];
+            }
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -223,34 +232,39 @@ class Config implements ConfigInterface
     /**
      * Checks if data is loaded, and tries to load it using loader if not.
      *
-     * @return &array A reference to array containing config
+     * @return array An array containing config
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    protected function &data()
+    protected function data()
     {
-        if (is_string($this->data)) {
-            $loader = LoaderFactory::create($this->data);
+        $data = parent::data();
+        if (is_string($data)) {
+            $loader = LoaderFactory::create($data);
 
-            $this->data = $loader();
+            $data = $loader();
+
+            $this->setData($data);
         }
 
-        return $this->data;
+        return $data;
     }
 
     /**
      * Checks if $item is an array and if yes returns Config object that encapsulates this array, in other way returns $item as is.
      *
-     * @param mixed An item to check
+     * @param mixed $item An item to check
      *
-     * @return Config|mixed Config instance if $item was an array or $item as is
+     * @return ConfigInterface|mixed Config instance if $item was an array or $item as is
      */
     protected function item($item)
     {
         if (is_array($item)) {
             $className = get_class($this);
 
-            return new $className($item);
+            return new $className($item, $this);
+        } elseif ($item instanceof AbstractConfig) {
+            $item->setParent($this);
         }
 
         return $item;
