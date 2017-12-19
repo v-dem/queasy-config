@@ -64,9 +64,7 @@ class Config implements ConfigInterface
      */
     public function __get($key)
     {
-        $data = $this->data();
-
-        return $this->item($data[$key]);
+        return $this->get($key);
     }
 
     /**
@@ -81,9 +79,9 @@ class Config implements ConfigInterface
      */
     public function get($key, $default = null)
     {
-        return $this->offsetExists($key)
-            ? $this->$key
-            : $default;
+        $value = $this[$key];
+
+        return is_null($value)? $default: $value;
     }
 
     /**
@@ -97,11 +95,12 @@ class Config implements ConfigInterface
      */
     public function need($key)
     {
-        if (!$this->offsetExists($key)) {
+        $value = $this[$key];
+        if (is_null($value)) {
             throw new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
         }
 
-        return $this->$key;
+        return $value;
     }
 
     public function rewind()
@@ -171,8 +170,10 @@ class Config implements ConfigInterface
      */
     public function offsetGet($key)
     {
+        $data = $this->data();
+
         return $this->offsetExists($key)
-            ? $this->item($this->$key)
+            ? $this->item($data[$key])
             : null;
     }
 

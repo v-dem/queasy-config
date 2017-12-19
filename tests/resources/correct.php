@@ -9,5 +9,6 @@ return array(
         'key21' => 'value21',
         'key22' => 'value22'
     ),
+    'key' => 'value'
 );
 

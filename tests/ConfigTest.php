@@ -24,7 +24,7 @@ class ConfigTest extends TestCase
         $config = new Config(__DIR__ . '/resources/correct.php');
 
         $this->assertGreaterThan(0, count($config));
-        $this->assertCount(2, $config);
+        $this->assertCount(3, $config);
 
         $this->assertArrayHasKey('section1', $config);
         $this->assertGreaterThan(0, count($config['section1']));
@@ -61,6 +61,64 @@ class ConfigTest extends TestCase
         $this->assertCount(1, $config['include-section']['section']);
         $this->assertArrayHasKey('key', $config['include-section']['section']);
         $this->assertEquals('value', $config['include-section']['section']['key']);
+    }
+
+    public function testGet()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertEquals('value', $config->get('key'));
+    }
+
+    public function testGetAsField()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertEquals('value', $config->key);
+    }
+
+    public function testGetMissing()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertNull($config->get('unknown'));
+    }
+
+    public function testGetMissingAsField()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertNull($config->unknown);
+    }
+
+    public function testGetDefault()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertEquals('default', $config->get('unknown', 'default'));
+    }
+
+    public function testGetDefaultForExistingKey()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertEquals('value', $config->get('key', 'default'));
+    }
+
+    public function testNeed()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertEquals('value', $config->need('key'));
+    }
+
+    public function testNeedMissing()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->setExpectedException(ConfigException::class);
+
+        $value = $config->need('unknown');
     }
 
     public function testMissingFile()

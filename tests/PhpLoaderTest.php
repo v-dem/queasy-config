@@ -24,7 +24,7 @@ class PhpLoaderTest extends TestCase
 
         $this->assertTrue(is_array($result));
         $this->assertGreaterThan(0, count($result));
-        $this->assertCount(2, $result);
+        $this->assertCount(3, $result);
 
         $this->assertArrayHasKey('section1', $result);
         $this->assertTrue(is_array($result['section1']));
