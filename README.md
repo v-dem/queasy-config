@@ -18,7 +18,35 @@ This package contains a set of the classes intended for reading configuration fi
 
 ### Installation
 
-    composer require v-dem/queasy-config
+    composer require v-dem/queasy-config:master-dev
+
+### Usage
+
+Counting that Composer autoloader is already included:
+
+    $config = new queasy\config\Config('config.php');
+
+Now you can address config sections and options these ways:
+
+    $databaseName = $config->database->name;
+
+Or
+
+    $databaseName = $config['database']['name'];
+
+If you need an option to be present anyway, you can
+
+    $databaseName = $config['database']->need('driver');
+
+And if this option is missing, `queasy\config\ConfigException` will be thrown.
+
+If you want to get a default value when an option is missing, try:
+
+    $databaseName = $config['database']->get('fetchMode', PDO::FETCH_ASSOC);
+
+So, second argument will be used as a value when an option is missing.
+
+> By the way, it will look for a missing option in a parent(s) config first.
 
 ### Configuration formats and usage
 
@@ -29,9 +57,7 @@ It's possible to register custom config formats (or override existing).
 
 In this case configuration files are just simple `PHP` files containing a return statement (returning an array of single values
 or key-value pairs, depending on what is required by config destination), where values can be arrays too (nested arrays). Also
-it is possible to split configuration into many files as you wish. See example:
-
-    use queasy\config\Config;
+it is possible to split configuration into many files as you wish. See example (let's say it is `config.php`):
 
     return array(
         'database' => array(
@@ -40,8 +66,8 @@ it is possible to split configuration into many files as you wish. See example:
             'name' => 'test',
             'user' => 'test_user',
             'password' => 'test_password',
-            'tables' => new Config('tables.php'),
-            'queries' => new Config('queries.php')
+            'tables' => new queasy\config\Config('tables.php'),
+            'queries' => new queasy\config\Config('queries.php')
         ),
         'logger' => array(
             'path' => 'debug.log',
