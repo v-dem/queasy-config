@@ -105,6 +105,13 @@ class ConfigTest extends TestCase
         $this->assertEquals('value', $config->get('key', 'default'));
     }
 
+    public function testGetForMissingSection()
+    {
+        $config = new Config(__DIR__ . '/resources/correct.php');
+
+        $this->assertNull($config['section3']['key31']);
+    }
+
     public function testCompoundGetInherited()
     {
         $config = new Config(__DIR__ . '/resources/correct-compound.php');

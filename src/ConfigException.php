@@ -10,10 +10,12 @@
 
 namespace queasy\config;
 
+use Exception;
+
 /**
  * Configuration exception class
  */
-class ConfigException extends \Exception
+class ConfigException extends Exception
 {
 }
 
