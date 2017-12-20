@@ -28,8 +28,6 @@ class Config extends AbstractConfig
      * @param string|array|null $data Array with configuration data, or path to a config file, or null to load config from path
      *                                specified by QUEASY_CONFIG_PATH constant if present, or from default path
      *
-     * @return mixed Value or $default if $key is missing in config
-     *
      * @throws InvalidArgumentException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function __construct($data = null, ConfigInterface $parent = null)

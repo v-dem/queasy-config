@@ -1,5 +1,8 @@
 {
     "name": "v-dem/queasy-config",
+    "description": "Configuration classes, part of Queasy PHP framework",
+    "keywords": ["php config", "ini config", "json config"],
+    "license": "LGPL-3",
     "minimum-stability": "dev",
     "authors": [
         {
