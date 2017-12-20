@@ -31,7 +31,6 @@ In this case configuration files are just simple `PHP` files containing a return
 or key-value pairs, depending on what is required by config destination), where values can be arrays too (nested arrays). Also
 it is possible to split configuration into many files as you wish. See example:
 
-    ```php
     use queasy\config\Config;
 
     return array(
@@ -53,7 +52,6 @@ it is possible to split configuration into many files as you wish. See example:
             )
         )
     );
-    ```
 
 Of course you can use any `PHP` expressions here, for example use constants etc. As you can see, there are two objects of class
 `queasy\config\Config` created. They aren't going to load their config files at this moment. When you try to access any config key
