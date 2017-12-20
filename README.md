@@ -16,6 +16,10 @@ This package contains a set of the classes intended for reading configuration fi
 * PHP version 5.6 and higher
 * PHPUnit 5.7
 
+### Installation
+
+    composer require v-dem/queasy-config
+
 ### Configuration formats and usage
 
 Configuration factory detects config file format and tries to find a loader. When it is found, it is to be created and initialized.
