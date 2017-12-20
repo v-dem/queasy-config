@@ -2,7 +2,10 @@
 
 ## Package `v-dem/queasy-config`
 
-This package contains a set of the classes intended for reading configuration files.
+This package contains a set of the classes intended for reading configuration files. Formats currently supported are:
+* PHP (recommended, see below)
+* INI
+* JSON
 
 ### Dependencies
 
