@@ -61,6 +61,30 @@ class Config extends AbstractConfig
     }
 
     /**
+     * Checks if $key is present.
+     *
+     * @param string $key Config key
+     *
+     * @return boolean True if present, false if not
+     *
+     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     */
+    public function __isset($key)
+    {
+        return $this->offsetExists($key);
+    }
+
+    /**
+     * Not implemented.
+     *
+     * @throws BadMethodCallException
+     */
+    public function __unset($key)
+    {
+        throw new BadMethodCallException('Not implemented. Config is read-only.');
+    }
+
+    /**
      * Gets a value from configuration by key provided.
      *
      * @param string $key Configuration key
