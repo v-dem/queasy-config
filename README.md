@@ -1,12 +1,17 @@
 # [Queasy PHP Framework](https://github.com/v-dem/queasy-app/)
 
-## Package `v-dem/queasy-config` (namespace `queasy\config`)
+## Package `v-dem/queasy-config`
 
 This package contains a set of the classes intended for reading configuration files.
 
 ### Dependencies
 
+Production
 * PHP version 5.3 and higher
+
+Development
+* PHP version 5.6 and higher
+* PHPUnit 5.7
 
 ### Configuration format and usage
 
