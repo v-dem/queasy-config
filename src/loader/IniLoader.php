@@ -26,7 +26,7 @@ class IniLoader extends FileSystemLoader
     {
         $data = @parse_ini_file($this->path(), true);
         if (!is_array($data)) {
-            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $this->path()));
+            throw ConfigException::fileIsCorrupted($this->path());
         }
 
         return $data;

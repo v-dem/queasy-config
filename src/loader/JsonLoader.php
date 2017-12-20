@@ -28,7 +28,7 @@ class JsonLoader extends FileSystemLoader
 
         $data = json_decode(file_get_contents($path), true);
         if (!is_array($data)) {
-            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
+            throw ConfigException::fileIsCorrupted($this->path());
         }
 
         return $data;

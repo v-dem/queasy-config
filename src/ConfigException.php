@@ -17,5 +17,34 @@ use Exception;
  */
 class ConfigException extends Exception
 {
+    public static function fileNotFound($path)
+    {
+        return new ConfigException(sprintf('Config file "%s" not found.', $path));
+    }
+
+    public static function fileNotReadable($path)
+    {
+        return new ConfigException(sprintf('Config file "%s" cannot be read.', $path));
+    }
+
+    public static function fileIsCorrupted($path)
+    {
+        return new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
+    }
+
+    public static function loaderAlreadyRegistered($pattern)
+    {
+        return new ConfigException(sprintf('Custom loader for pattern "%s" already registered.', $pattern));
+    }
+
+    public static function loaderNotFound($path)
+    {
+        return new ConfigException(sprintf('No loader found for path "%s".', $path));
+    }
+
+    public static function missingMandatoryKey($key)
+    {
+        return new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
+    }
 }
 

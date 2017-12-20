@@ -35,11 +35,11 @@ class PhpLoader extends FileSystemLoader
         } catch (\Throwable $e) {
             ob_end_clean();
 
-            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
+            throw ConfigException::fileIsCorrupted($path);
         }
 
         if (!is_array($data)) {
-            throw new ConfigException(sprintf('Config file "%s" is corrupted.', $path));
+            throw ConfigException::fileIsCorrupted($path);
         }
 
         return $data;

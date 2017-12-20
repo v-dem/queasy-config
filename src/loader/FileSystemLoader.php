@@ -40,11 +40,11 @@ abstract class FileSystemLoader extends AbstractLoader
     protected function check()
     {
         if (!file_exists($this->path())) {
-            throw new ConfigException(sprintf('Config path "%s" not found.', $this->path()));
+            throw ConfigException::fileNotFound($this->path());
         }
 
         if (!is_readable($this->path())) {
-            throw new ConfigException(sprintf('Config path "%s" cannot be read.', $this->path()));
+            throw ConfigException::fileNotReadable($this->path());
         }
     }
 }

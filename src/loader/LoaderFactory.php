@@ -10,9 +10,8 @@
 
 namespace queasy\config\loader;
 
-use InvalidArgumentException;
-
 use queasy\config\ConfigException;
+use queasy\config\InvalidArgumentException;
 
 /**
  * Loader factory
@@ -47,12 +46,13 @@ class LoaderFactory
     {
         if (isset(self::$loaders[$pattern])
                 && !$ignoreIfRegistered) {
-            throw new ConfigException(sprintf('Custom loader for pattern "%s" already registered.', $pattern));
+            throw ConfigException::loaderAlreadyRegistered($pattern);
         }
 
+        $interfaceName = 'queasy\config\loader\LoaderInterface';
         $interfaces = class_implements($className);
-        if (!$interfaces || !isset($interfaces['queasy\config\loader\LoaderInterface'])) {
-            throw new InvalidArgumentException(sprintf('Custom config loader "%s" does not implement queasy\config\loader\LoaderInterface.', $className));
+        if (!$interfaces || !isset($interfaces[$interfaceName])) {
+            throw InvalidArgumentException::notImplementsInterface($className, $interfaceName);
         }
 
         self::$loaders[$pattern] = $className;
@@ -89,7 +89,7 @@ class LoaderFactory
     {
         $className = self::registered($path);
         if (!$className) {
-            throw new ConfigException(sprintf('No loader found for path "%s".', $path));
+            throw ConfigException::loaderNotFound($path);
         }
 
         return new $className($path);

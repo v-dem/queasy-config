@@ -16,6 +16,18 @@ namespace queasy\config\loader;
 abstract class AbstractLoader implements LoaderInterface
 {
     /**
+     * Class invokation method representing load()
+     *
+     * @return array Loaded configuration
+     */
+    public function __invoke()
+    {
+        $this->check();
+
+        return $this->load();
+    }
+
+    /**
      * Loads and returns an array containing configuration
      *
      * @return array Loaded configuration
@@ -28,17 +40,5 @@ abstract class AbstractLoader implements LoaderInterface
      * @return boolean True or false or throw exception
      */
     abstract protected function check();
-
-    /**
-     * Class invokation method representing load()
-     *
-     * @return array Loaded configuration
-     */
-    public function __invoke()
-    {
-        $this->check();
-
-        return $this->load();
-    }
 }
 

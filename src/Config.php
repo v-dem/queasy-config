@@ -11,7 +11,6 @@
 namespace queasy\config;
 
 use BadMethodCallException;
-use InvalidArgumentException;
 
 use queasy\config\loader\LoaderFactory;
 
@@ -26,7 +25,7 @@ class Config extends AbstractConfig
      * Constructor.
      *
      * @param string|array|null $data Array with configuration data, or path to a config file, or null to load config from path
-     *                                specified by QUEASY_CONFIG_PATH constant if present, or from default path
+     *      specified by QUEASY_CONFIG_PATH constant if present, or from default path
      *
      * @throws InvalidArgumentException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
@@ -40,7 +39,7 @@ class Config extends AbstractConfig
             }
         } else if (!is_string($data)
                 && !is_array($data)) {
-            throw new InvalidArgumentException('Invalid argument type. Only NULL, String or Array allowed.');
+            throw InvalidArgumentException::invalidArgumentType();
         }
 
         parent::__construct($data, $parent);
@@ -81,7 +80,7 @@ class Config extends AbstractConfig
      */
     public function __unset($key)
     {
-        throw new BadMethodCallException('Not implemented. Config is read-only.');
+        throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
@@ -113,7 +112,7 @@ class Config extends AbstractConfig
     public function need($key)
     {
         if (!isset($this[$key])) {
-            throw new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
+            throw ConfigException::missingMandatoryKey($key);
         }
 
         return $this[$key];
@@ -224,7 +223,7 @@ class Config extends AbstractConfig
      */
     public function offsetSet($key, $value)
     {
-        throw new BadMethodCallException('Not implemented. Config is read-only.');
+        throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
@@ -234,7 +233,7 @@ class Config extends AbstractConfig
      */
     public function offsetUnset($key)
     {
-        throw new BadMethodCallException('Not implemented. Config is read-only.');
+        throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
