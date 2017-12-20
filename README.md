@@ -6,10 +6,10 @@ This package contains a set of the classes intended for reading configuration fi
 
 ### Dependencies
 
-Production
+#### Production
 * PHP version 5.3 and higher
 
-Development
+#### Development
 * PHP version 5.6 and higher
 * PHPUnit 5.7
 
