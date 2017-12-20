@@ -1,7 +1,8 @@
 {
     "name": "v-dem/queasy-config",
-    "description": "Configuration classes, part of Queasy PHP framework",
-    "keywords": ["php config", "ini config", "json config"],
+    "description": "Configuration classes (currently supports PHP, INI and JSON configs), part of Queasy PHP framework",
+    "homepage": "https://github.com/v-dem/queasy-config/",
+    "keywords": ["config", "ini", "json"],
     "license": "LGPL-3",
     "minimum-stability": "dev",
     "authors": [
