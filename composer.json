@@ -6,6 +6,9 @@
     "license": "LGPL-3",
     "minimum-stability": "dev",
     "version": "1.0.1",
+    "platform": {
+        "php": "5.3.0"
+    },
     "authors": [
         {
             "name": "Vitaly Demyanenko",
