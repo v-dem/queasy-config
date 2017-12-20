@@ -5,7 +5,7 @@
     "keywords": ["config", "ini", "json"],
     "license": "LGPL-3",
     "minimum-stability": "dev",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "Vitaly Demyanenko",
