@@ -19,7 +19,7 @@ This package contains a set of the classes intended for reading configuration fi
 ### Configuration formats and usage
 
 Configuration factory detects config file format and tries to find a loader. When it is found, it is to be created and initialized.
-It's possible to register custom config formats.
+It's possible to register custom config formats (or override existing).
 
 #### PHP
 
@@ -49,7 +49,7 @@ it is possible to split configuration into many files as you wish. See example:
         )
     );
 
-Of course you can use any PHP expressions here, for example use constants etc. As you can see, there are two objects of class
+Of course you can use any `PHP` expressions here, for example use constants etc. As you can see, there are two objects of class
 `queasy\config\Config` created. They aren't going to load their config files at this moment. When you try to access any config key
 they will load respective config files. You can access its values in almost the same way as you use regular arrays, for example
 when you are using `foreach` with arrays, or trying to get a value by a key etc. See example:
@@ -129,32 +129,4 @@ Accessing config options is the same:
 > By the way, you can use object-like access to Config instances (no matter which config format you use):
 
     $usersTable = $config->database->tables->users;
-
-### Classes
-
-#### `queasy\config\Config`
-
-The main class, in most cases remaining will not be necessary. It implements `queasy\config\ConfigInterface` which extends standard PHP
-interfaces `Iterator`, `ArrayAccess` and `Countable` so `Config` can act as an array (but note that most of array functions will not work with it,
-and also `is_array()` function will return `false`, and also it will not work with `array` typehint). So, you can access items by keys, use
-`isset()`, `foreach()`, `count()`. More information about those interfaces above is available in official `PHP` documentation.
-If you do need to use it as a real array, just call a `toArray()` method (but it will load all configurations if configuration file is splitted
-by parts as shown in example above).
-
-#### `queasy\config\ConfigInterface`
-
-Interface implemented by `queasy\config\Config`. Can be useful to write a replacement to `Config`.
-
-#### `queasy\config\ConfigException`
-
-Exception that will be thrown on any configuration errors, like missing or invalid configuration file (for example when it doesn't return `array`).
-
-#### `queasy\config\Loader`
-
-Just loads a configuration file from a given path. Used by `queasy\config\Config`.
-
-#### `queasy\config\LoaderInterface` and `queasy\config\AbstractLoader`
-
-They can be used to replace `Loader` (which loads configuration from a file system) with another source. Just need to extend `AbstractLoader`
-with own `Loader` implementation, extend `Config` and override `createLoader()` method there.
 
