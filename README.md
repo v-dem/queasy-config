@@ -126,6 +126,10 @@ Accessing config options is the same:
 
     $usersTable = $config['database']['tables']['users'];
 
+> By the way, you can use object-like access to Config instances (no matter which config format you use):
+
+    $usersTable = $config->database->tables->users;
+
 ### Classes
 
 #### `queasy\config\Config`
