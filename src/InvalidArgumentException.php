@@ -17,14 +17,14 @@ use InvalidArgumentException as StandardInvalidArgumentException;
  */
 class InvalidArgumentException extends StandardInvalidArgumentException
 {
-    public static function notImplementsInterface($className, $interfaceName)
+    public static function interfaceNotImplemented($className, $interfaceName)
     {
-        throw new InvalidArgumentException(sprintf('Custom config loader "%s" does not implement "%s".', $className, $interfaceName));
+        return new InvalidArgumentException(sprintf('Custom config loader "%s" does not implement "%s".', $className, $interfaceName));
     }
 
     public static function invalidArgumentType()
     {
-        throw new InvalidArgumentException('Invalid argument type. Only null, string or array allowed.');
+        return new InvalidArgumentException('Invalid argument type. Only null, string or array allowed.');
     }
 }
 

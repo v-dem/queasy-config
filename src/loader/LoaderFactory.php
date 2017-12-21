@@ -52,7 +52,7 @@ class LoaderFactory
         $interfaceName = 'queasy\config\loader\LoaderInterface';
         $interfaces = class_implements($className);
         if (!$interfaces || !isset($interfaces[$interfaceName])) {
-            throw InvalidArgumentException::notImplementsInterface($className, $interfaceName);
+            throw InvalidArgumentException::interfaceNotImplemented($className, $interfaceName);
         }
 
         self::$loaders[$pattern] = $className;
