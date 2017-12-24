@@ -49,7 +49,7 @@ See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 Include Composer autoloader:
 
 ```php
-    require_once('vendor/autoload.php');
+require_once('vendor/autoload.php');
 ```
 
 Create config instance (config file type will be detected by file name extension):
