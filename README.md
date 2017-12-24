@@ -14,6 +14,7 @@ This package contains a set of the classes intended for reading configuration fi
 * Support for default option values.
 * Support for multi-file configurations. You can split your config into many files as you wish without changing program code (PHP configs only).
 * Options inheritance. If an option is missing at current config level, it will look for this option on upper levels.
+* Unified config interface. You can switch to another config format without changing your code.
 * Easy to extend with other config formats.
 
 ### Dependencies
