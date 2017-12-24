@@ -103,7 +103,7 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Move array pointer to the beginning.
+     * Move config array pointer to the beginning.
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
@@ -114,6 +114,11 @@ class Config extends AbstractConfig
         reset($data);
     }
 
+    /**
+     * Get current config array item.
+     *
+     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     */
     public function current()
     {
         $data = &$this->data();
@@ -121,6 +126,11 @@ class Config extends AbstractConfig
         return $this->item(current($data));
     }
 
+    /**
+     * Move to the next config array item and return it.
+     *
+     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     */
     public function next()
     {
         $data = &$this->data();
@@ -128,6 +138,11 @@ class Config extends AbstractConfig
         return $this->item(next($data));
     }
 
+    /**
+     * Return current config array key.
+     *
+     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     */
     public function key()
     {
         $data = &$this->data();
@@ -135,6 +150,11 @@ class Config extends AbstractConfig
         return key($data);
     }
 
+    /**
+     * Validate current config array key.
+     *
+     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     */
     public function valid()
     {
         $data = &$this->data();
@@ -142,11 +162,11 @@ class Config extends AbstractConfig
         $key = key($data);
 
         return ($key !== null)
-                && ($key !== false);
+            && ($key !== false);
     }
 
     /**
-     * Returns number of items in a current configuration level.
+     * Return number of items in a current configuration level.
      *
      * @return int Number of items
      *
@@ -227,7 +247,7 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Converts all configuration structure into a regular array.
+     * Convert all configuration structure into a regular array.
      *
      * @return array Configuration represented as a regular array
      *
@@ -250,7 +270,7 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Checks if data is loaded, and tries to load it using loader if not.
+     * Check if data is loaded, and try to load it using loader if not.
      *
      * @return &array An array containing config
      *
@@ -271,7 +291,7 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Checks if $item is an array and if yes returns Config object that encapsulates this array, in other way returns $item as is.
+     * Check if $item is an array and if yes returns Config object that encapsulates this array, in other way returns $item as is.
      *
      * @param mixed $item An item to check
      *

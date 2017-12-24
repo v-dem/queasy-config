@@ -24,7 +24,7 @@ class IniLoader extends FileSystemLoader
      */
     public function load()
     {
-        $data = parse_ini_file($this->path(), true);
+        $data = @parse_ini_file($this->path(), true);
         if (!is_array($data)) {
             throw ConfigException::fileIsCorrupted($this->path());
         }

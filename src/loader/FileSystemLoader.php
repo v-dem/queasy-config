@@ -46,6 +46,8 @@ abstract class FileSystemLoader extends AbstractLoader
         if (!is_readable($this->path())) {
             throw ConfigException::fileNotReadable($this->path());
         }
+
+        return true;
     }
 
     /**
