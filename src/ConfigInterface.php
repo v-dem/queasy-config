@@ -26,15 +26,6 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     function get($key, $default = null);
 
     /**
-     * Gets a value from configuration by key provided or throws ConfigException if key is missing
-     *
-     * @param string $key Configuration key
-     *
-     * @return mixed Value
-     */
-    // function need($key);
-
-    /**
      * Converts all configuration structure into a regular array
      *
      * @return array Configuration represented as a regular array

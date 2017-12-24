@@ -102,26 +102,6 @@ class Config extends AbstractConfig
         return $default;
     }
 
-    /**
-     * Gets a value from configuration by key provided or throws ConfigException if key is missing.
-     *
-     * @param string $key Configuration key
-     *
-     * @return mixed Value
-     *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
-     */
-    /*
-    public function need($key)
-    {
-        if (!isset($this[$key])) {
-            throw ConfigException::missingKey($key);
-        }
-
-        return $this[$key];
-    }
-    */
-
     public function rewind()
     {
         $data = &$this->data();
