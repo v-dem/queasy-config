@@ -3,7 +3,7 @@
     "description": "Configuration classes (currently supports PHP, INI and JSON configs), part of Queasy PHP framework",
     "homepage": "https://github.com/v-dem/queasy-config/",
     "keywords": ["config", "ini", "json"],
-    "license": "LGPL-3",
+    "license": "LGPL-3.0",
     "minimum-stability": "dev",
     "version": "1.0.1",
     "authors": [

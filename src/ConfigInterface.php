@@ -16,7 +16,7 @@ namespace queasy\config;
 interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
 {
     /**
-     * Gets a value from configuration by key provided
+     * Get a value from configuration by key provided or return $default value or null if $default not set
      *
      * @param string $key Configuration key
      * @param mixed $default Value to be returned if $key is missing
@@ -32,7 +32,7 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
      *
      * @return mixed Value
      */
-    function need($key);
+    // function need($key);
 
     /**
      * Converts all configuration structure into a regular array

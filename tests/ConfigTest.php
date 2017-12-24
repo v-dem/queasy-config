@@ -109,6 +109,8 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/resources/correct.php');
 
+        $this->setExpectedException(ConfigException::class);
+
         $this->assertNull($config['section3']['key31']);
     }
 
@@ -126,28 +128,28 @@ class ConfigTest extends TestCase
         $this->assertEquals('parent-value', $config['include-section']['section']->get('parent-key', 'wrong-value'));
     }
 
-    public function testNeed()
+    public function testRequired()
     {
         $config = new Config(__DIR__ . '/resources/correct.php');
 
-        $this->assertEquals('value', $config->need('key'));
+        $this->assertEquals('value', $config['key']);
     }
 
-    public function testNeedMissing()
+    public function testRequiredMissing()
     {
         $config = new Config(__DIR__ . '/resources/correct.php');
 
         $this->setExpectedException(ConfigException::class);
 
-        $value = $config->need('unknown');
+        $value = $config['unknown'];
     }
 
-    public function testNeedNullExisting()
+    public function testRequiredNullExisting()
     {
         $config = new Config(__DIR__ . '/resources/correct.php');
 
         $this->assertArrayHasKey('nullkey', $config);
-        $this->assertNull($config->need('nullkey'));
+        $this->assertNull($config['nullkey']);
     }
 
     public function testMissingFile()

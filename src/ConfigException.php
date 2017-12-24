@@ -42,9 +42,9 @@ class ConfigException extends Exception
         return new ConfigException(sprintf('No loader found for path "%s".', $path));
     }
 
-    public static function missingMandatoryKey($key)
+    public static function missingKey($key)
     {
-        return new ConfigException(sprintf('Mandatory config key "%s" is missing.', $key));
+        return new ConfigException(sprintf('Missing config key "%s".', $key));
     }
 }
 

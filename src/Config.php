@@ -95,9 +95,11 @@ class Config extends AbstractConfig
      */
     public function get($key, $default = null)
     {
-        $value = $this[$key];
+        if (isset($this[$key])) {
+            return $this[$key];
+        }
 
-        return is_null($value)? $default: $value;
+        return $default;
     }
 
     /**
@@ -109,14 +111,16 @@ class Config extends AbstractConfig
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    /*
     public function need($key)
     {
         if (!isset($this[$key])) {
-            throw ConfigException::missingMandatoryKey($key);
+            throw ConfigException::missingKey($key);
         }
 
         return $this[$key];
     }
+    */
 
     public function rewind()
     {
@@ -169,7 +173,7 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Checks if $key is present.
+     * Check if $key is present.
      *
      * @param string $key Config key
      *
@@ -192,13 +196,14 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Gets a value from config by $key.
+     * Get a value from config by $key or throw ConfigException if key is missing.
      *
      * @param string $key Config key
      *
      * @return mixed|null Config value or null if $key is missing
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     *                          or when $key is missing in config (and in its parent configs)
      */
     public function offsetGet($key)
     {
@@ -212,7 +217,7 @@ class Config extends AbstractConfig
                 return is_null($parent)? null: $parent[$key];
             }
         } else {
-            return null;
+            throw ConfigException::missingKey($key);
         }
     }
 
