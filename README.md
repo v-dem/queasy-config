@@ -38,6 +38,8 @@ See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 
 ### Usage
 
+#### Creating config object
+
 Include Composer autoloader:
 
     require_once('vendor/autoload.php');
@@ -49,6 +51,8 @@ Create config instance (config file type will be detected by file name extension
 Or:
 
     $config = new queasy\config\Config('config.ini');
+
+#### Accessing config options
 
 Now you can address config sections and options these ways:
 
