@@ -44,7 +44,7 @@ See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 
 ### Usage
 
-#### Creating config object
+#### Creating config instance
 
 Include Composer autoloader:
 
@@ -64,7 +64,7 @@ Or:
 $config = new queasy\config\Config('config.ini');
 ```
 
-#### Accessing config options
+#### Accessing config instance
 
 Now you can address config sections and options these ways:
 
