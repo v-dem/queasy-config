@@ -39,7 +39,7 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * Gets a value from configuration by key provided like a object property.
+     * Get a value from configuration by key provided like a object property.
      *
      * @param string $key Configuration key
      *
@@ -51,7 +51,7 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * Sets config data
+     * Set config data
      *
      * @param mixed $data Config data
      */
@@ -61,7 +61,7 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * Returns config data
+     * Return config data
      *
      * @return &mixed Config data
      */
@@ -71,7 +71,7 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * Sets parent configuration object.
+     * Set parent configuration object.
      *
      * @param ConfigInterface|null $parent Parent config instance
      */
@@ -81,7 +81,7 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * Returns parent configuration object.
+     * Return parent configuration object.
      *
      * @return ConfigInterface|null Parent config instance or null
      */

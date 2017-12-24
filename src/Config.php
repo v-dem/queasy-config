@@ -39,14 +39,14 @@ class Config extends AbstractConfig
             }
         } else if (!is_string($data)
                 && !is_array($data)) {
-            throw InvalidArgumentException::invalidArgumentType();
+            throw InvalidArgumentException::invalidArgumentType(gettype($data));
         }
 
         parent::__construct($data, $parent);
     }
 
     /**
-     * Gets a value from configuration by key provided like a object property.
+     * Get a value from configuration by key provided like a object property.
      *
      * @param string $key Configuration key
      *
@@ -60,7 +60,7 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Checks if $key is present.
+     * Check if $key is present.
      *
      * @param string $key Config key
      *
@@ -84,12 +84,12 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Gets a value from configuration by key provided.
+     * Get a value from configuration by key provided or return default value if provided or return null.
      *
      * @param string $key Configuration key
      * @param mixed $default Value to be returned if $key is missing
      *
-     * @return mixed Value or $default if $key is missing in config
+     * @return mixed Value or $default value if $key is missing in config
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
@@ -102,6 +102,11 @@ class Config extends AbstractConfig
         return $default;
     }
 
+    /**
+     * Move array pointer to the beginning.
+     *
+     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     */
     public function rewind()
     {
         $data = &$this->data();

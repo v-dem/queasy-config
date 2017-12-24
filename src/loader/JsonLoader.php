@@ -18,7 +18,7 @@ use queasy\config\ConfigException;
 class JsonLoader extends FileSystemLoader
 {
     /**
-     * Loads and returns an array containing configuration.
+     * Load and return an array containing configuration.
      *
      * @return array Loaded configuration
      */

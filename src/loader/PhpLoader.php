@@ -18,7 +18,7 @@ use queasy\config\ConfigException;
 class PhpLoader extends FileSystemLoader
 {
     /**
-     * Loads and returns an array containing configuration.
+     * Load and return an array containing configuration.
      *
      * @return array Loaded configuration
      */
@@ -31,9 +31,9 @@ class PhpLoader extends FileSystemLoader
 
             $data = include($path);
 
-            ob_end_clean();
+            ob_end_clean(); // Stop output buffering
         } catch (\Throwable $e) {
-            ob_end_clean();
+            ob_end_clean(); // Clean possible output (to avoid displaying config as a plain text when for example there's no PHP opening tag)
 
             throw ConfigException::fileIsCorrupted($path);
         }

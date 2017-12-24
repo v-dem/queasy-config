@@ -18,13 +18,13 @@ use queasy\config\ConfigException;
 class IniLoader extends FileSystemLoader
 {
     /**
-     * Loads and returns an array containing configuration.
+     * Load and return an array containing configuration.
      *
      * @return array Loaded configuration
      */
     public function load()
     {
-        $data = @parse_ini_file($this->path(), true);
+        $data = parse_ini_file($this->path(), true);
         if (!is_array($data)) {
             throw ConfigException::fileIsCorrupted($this->path());
         }

@@ -22,23 +22,23 @@ abstract class AbstractLoader implements LoaderInterface
      */
     public function __invoke()
     {
-        $this->check();
-
-        return $this->load();
+        if ($this->check()) {
+            return $this->load();
+        }
     }
 
     /**
-     * Loads and returns an array containing configuration
+     * Load and return an array containing configuration
      *
      * @return array Loaded configuration
      */
     abstract public function load();
 
     /**
-     * Checks whether configuration are available and can be loaded
+     * Check whether configuration is available and can be loaded
      *
      * @return boolean True or false or throw exception
      */
-    abstract protected function check();
+    abstract public function check();
 }
 

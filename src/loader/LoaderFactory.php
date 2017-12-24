@@ -33,7 +33,7 @@ class LoaderFactory
     private static $loaders = array();
 
     /**
-     * Registers a custom loader.
+     * Register a custom loader.
      *
      * @param string $pattern Regexp pattern for paths to handle by this loader
      * @param string $className Loader class name
@@ -59,7 +59,7 @@ class LoaderFactory
     }
 
     /**
-     * Checks if loader for specified path is registered.
+     * Check if loader for specified path is registered.
      *
      * @param string $path Path
      *
@@ -77,7 +77,7 @@ class LoaderFactory
     }
 
     /**
-     * Creates a loader for specified path.
+     * Create a loader for specified path.
      *
      * @param string $path Path
      *
@@ -96,7 +96,7 @@ class LoaderFactory
     }
 
     /**
-     * Looks for a loader for specified path in an array given.
+     * Look for a loader for specified path in an array given.
      *
      * @param array $loaders Array of patterns and loader class names to search in
      * @param string $path Path

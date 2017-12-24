@@ -17,6 +17,11 @@ use BadMethodCallException as StandardBadMethodCallException;
  */
 class BadMethodCallException extends StandardBadMethodCallException
 {
+    /**
+     * Create exception for not implemented method call.
+     *
+     * @return BadMethodCallException Exception instance
+     */
     public static function notImplemented($method)
     {
         return new BadMethodCallException(sprintf('Method "%s" is not implemented. Config is read-only', $method));

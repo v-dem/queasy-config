@@ -17,14 +17,29 @@ use InvalidArgumentException as StandardInvalidArgumentException;
  */
 class InvalidArgumentException extends StandardInvalidArgumentException
 {
+    /**
+     * Create exception for not implemented loader interface case.
+     *
+     * @param string $className Loader class name
+     * @param string $interfaceName Interface name required to be implemeted
+     *
+     * @return InvalidArgumentException Exception instance
+     */
     public static function interfaceNotImplemented($className, $interfaceName)
     {
         return new InvalidArgumentException(sprintf('Custom config loader "%s" does not implement "%s".', $className, $interfaceName));
     }
 
-    public static function invalidArgumentType()
+    /**
+     * Create exception for invalid config path parameter type.
+     *
+     * @param string $type Path parameter type
+     *
+     * @return InvalidArgumentException Exception instance
+     */
+    public static function invalidArgumentType($type)
     {
-        return new InvalidArgumentException('Invalid argument type. Only null, string or array allowed.');
+        return new InvalidArgumentException(sprintf('Invalid argument type "%s". Only null, string or array allowed.', $type));
     }
 }
 

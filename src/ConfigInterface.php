@@ -26,7 +26,7 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     function get($key, $default = null);
 
     /**
-     * Converts all configuration structure into a regular array
+     * Convert all configuration structure into a regular array
      *
      * @return array Configuration represented as a regular array
      */

@@ -23,7 +23,7 @@ interface LoaderInterface
     function __invoke();
 
     /**
-     * Loads and returns an array containing configuration.
+     * Load and return an array containing configuration.
      *
      * @return array Loaded configuration
      */
