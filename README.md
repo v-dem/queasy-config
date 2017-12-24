@@ -71,9 +71,17 @@ Or:
 Previous samples will throw `queasy\config\ConfigException` if an option is missing.
 Tto address possibly missing options without throwing exceptions use this:
 
-    $databaseName = $config['database']->get('name'); // Will return null if 'name' option is missing
+    $databaseName = $config['database']->get('name'); // Return null if 'name' is missing
 
 Or:
 
-    $databaseName = $config['database']->get('name', 'default'); // Will return 'default' if 'name' option is missing
+    $databaseName = $config['database']->get('name', 'default'); // Return 'default' if 'name' is missing
+
+How to check if a section or an option is present in config:
+
+    $hasDatabaseName = isset($config['database']['name']);
+
+If you don't want to check each section for presence when accessing a very nested option, you can use this trick:
+
+    $databaseName = $config->get('database', [])->get('name', 'default'); // $databaseName will contain 'default'
 
