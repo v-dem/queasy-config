@@ -10,6 +10,7 @@ This package contains a set of the classes intended for reading configuration fi
 
 ### Features
 
+* Easy to use - just like nested arrays or objects. Also it's possible to use `foreach()`.
 * Support for default option values.
 * Support for multi-file configurations. You can split your config into many files as you wish without changing program code (PHP configs only).
 * Options inheritance. If an option is missing at current config level, it will look for this option on upper levels.
