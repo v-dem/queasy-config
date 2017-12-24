@@ -3,17 +3,27 @@
 ## Package `v-dem/queasy-config`
 
 This package contains a set of the classes intended for reading configuration files. Formats currently supported are:
+
 * PHP (recommended, see below)
 * INI
 * JSON
 
+### Features
+
+* Support for default option values.
+* Support for multi-file configurations. You can split your config into many files as you wish without changing program code (PHP configs only).
+* Options inheritance. If an option is missing at current config level, it will look for this option on upper levels.
+* Easy to extend with other config formats.
+
 ### Dependencies
 
 #### Production
-* PHP version 5.3 and higher
+
+* PHP version 5.3 or higher
 
 #### Development
-* PHP version 5.6 and higher (PHPUnit requirement)
+
+* PHP version 5.6 or higher (PHPUnit requirement)
 * PHPUnit 5.7
 
 ### Documentation
