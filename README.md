@@ -68,7 +68,7 @@ Or:
 
     $databaseName = $config['database']['name'];
 
-Previous samples will throw queasy\config\ConfigException if an option is missing.
+Previous samples will throw `queasy\config\ConfigException` if an option is missing.
 Tto address possibly missing options without throwing exceptions use this:
 
     $databaseName = $config['database']->get('name'); // Will return null if 'name' option is missing
