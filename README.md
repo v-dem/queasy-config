@@ -33,18 +33,25 @@ Include Composer autoloader:
 Create config instance (config file type will be detected by file name extension):
 
     $config = new queasy\config\Config('config.php');
+
 Or:
+
     $config = new queasy\config\Config('config.ini');
 
 Now you can address config sections and options these ways:
 
     $databaseName = $config->database->name;
+
 Or:
+
     $databaseName = $config['database']['name'];
 
 Previous samples will throw queasy\config\ConfigException if an option is missing.
 Tto address possibly missing options without throwing exceptions use this:
 
     $databaseName = $config['database']->get('name'); // Will return null if 'name' option is missing
+
+Or:
+
     $databaseName = $config['database']->get('name', 'default'); // Will return 'default' if 'name' option is missing
 
