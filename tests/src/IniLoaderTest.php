@@ -19,7 +19,7 @@ class IniLoaderTest extends TestCase
 {
     public function testCorrect()
     {
-        $loader = new IniLoader(__DIR__ . '/resources/correct.ini');
+        $loader = new IniLoader(__DIR__ . '/../resources/correct.ini');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -47,7 +47,7 @@ class IniLoaderTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $loader = new IniLoader(__DIR__ . '/resources/correct-empty.ini');
+        $loader = new IniLoader(__DIR__ . '/../resources/correct-empty.ini');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -57,7 +57,7 @@ class IniLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new IniLoader(__DIR__ . '/resources/missing-file.ini');
+        $loader = new IniLoader(__DIR__ . '/../resources/missing-file.ini');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -66,7 +66,7 @@ class IniLoaderTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new IniLoader(__DIR__ . '/resources/incorrect-not-empty.ini');
+        $loader = new IniLoader(__DIR__ . '/../resources/incorrect-not-empty.ini');
 
         $this->setExpectedException(ConfigException::class);
 

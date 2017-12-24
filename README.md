@@ -1,4 +1,4 @@
-# [Queasy PHP Framework](https://github.com/v-dem/queasy-app/)
+# [Queasy PHP Framework](https://github.com/v-dem/queasy-app/) - Configuration
 
 ## Package `v-dem/queasy-config`
 

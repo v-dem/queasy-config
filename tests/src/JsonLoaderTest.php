@@ -19,7 +19,7 @@ class JsonLoaderTest extends TestCase
 {
     public function testCorrect()
     {
-        $loader = new JsonLoader(__DIR__ . '/resources/correct.json');
+        $loader = new JsonLoader(__DIR__ . '/../resources/correct.json');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -47,7 +47,7 @@ class JsonLoaderTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $loader = new JsonLoader(__DIR__ . '/resources/correct-empty.json');
+        $loader = new JsonLoader(__DIR__ . '/../resources/correct-empty.json');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -57,7 +57,7 @@ class JsonLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new JsonLoader(__DIR__ . '/resources/missing-file.json');
+        $loader = new JsonLoader(__DIR__ . '/../resources/missing-file.json');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -66,7 +66,7 @@ class JsonLoaderTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new JsonLoader(__DIR__ . '/resources/incorrect-not-empty.json');
+        $loader = new JsonLoader(__DIR__ . '/../resources/incorrect-not-empty.json');
 
         $this->setExpectedException(ConfigException::class);
 

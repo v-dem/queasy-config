@@ -21,7 +21,7 @@ class ConfigTest extends TestCase
 {
     public function testCorrect()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertGreaterThan(0, count($config));
         $this->assertCount(4, $config);
@@ -45,14 +45,14 @@ class ConfigTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $config = new Config(__DIR__ . '/resources/correct-empty.php');
+        $config = new Config(__DIR__ . '/../resources/correct-empty.php');
 
         $this->assertCount(0, $config);
     }
 
     public function testCorrectCompound()
     {
-        $config = new Config(__DIR__ . '/resources/correct-compound.php');
+        $config = new Config(__DIR__ . '/../resources/correct-compound.php');
 
         $this->assertCount(2, $config);
         $this->assertArrayHasKey('include-section', $config);
@@ -65,49 +65,49 @@ class ConfigTest extends TestCase
 
     public function testGet()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertEquals('value', $config->get('key'));
     }
 
     public function testGetAsField()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertEquals('value', $config->key);
     }
 
     public function testGetMissing()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertNull($config->get('unknown'));
     }
 
     public function testGetMissingAsField()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertNull($config->unknown);
     }
 
     public function testGetDefault()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertEquals('default', $config->get('unknown', 'default'));
     }
 
     public function testGetDefaultForExistingKey()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertEquals('value', $config->get('key', 'default'));
     }
 
     public function testGetForMissingSection()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -116,28 +116,28 @@ class ConfigTest extends TestCase
 
     public function testCompoundGetInherited()
     {
-        $config = new Config(__DIR__ . '/resources/correct-compound.php');
+        $config = new Config(__DIR__ . '/../resources/correct-compound.php');
 
         $this->assertEquals('parent-value', $config['include-section']['section']['parent-key']);
     }
 
     public function testCompoundGetInheritedWithDefault()
     {
-        $config = new Config(__DIR__ . '/resources/correct-compound.php');
+        $config = new Config(__DIR__ . '/../resources/correct-compound.php');
 
         $this->assertEquals('parent-value', $config['include-section']['section']->get('parent-key', 'wrong-value'));
     }
 
     public function testRequired()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertEquals('value', $config['key']);
     }
 
     public function testRequiredMissing()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -146,7 +146,7 @@ class ConfigTest extends TestCase
 
     public function testRequiredNullExisting()
     {
-        $config = new Config(__DIR__ . '/resources/correct.php');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertArrayHasKey('nullkey', $config);
         $this->assertNull($config['nullkey']);
@@ -154,7 +154,7 @@ class ConfigTest extends TestCase
 
     public function testMissingFile()
     {
-        $config = new Config(__DIR__ . '/resources/missing-file.php');
+        $config = new Config(__DIR__ . '/../resources/missing-file.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -163,7 +163,7 @@ class ConfigTest extends TestCase
 
     public function testIncorrectNotEmpty()
     {
-        $config = new Config(__DIR__ . '/resources/incorrect-not-empty.php');
+        $config = new Config(__DIR__ . '/../resources/incorrect-not-empty.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -172,7 +172,7 @@ class ConfigTest extends TestCase
 
     public function testWrongReturnInt()
     {
-        $config = new Config(__DIR__ . '/resources/incorrect-return-int.php');
+        $config = new Config(__DIR__ . '/../resources/incorrect-return-int.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -181,7 +181,7 @@ class ConfigTest extends TestCase
 
     public function testWrongReturnString()
     {
-        $config = new Config(__DIR__ . '/resources/incorrect-return-string.php');
+        $config = new Config(__DIR__ . '/../resources/incorrect-return-string.php');
 
         $this->setExpectedException(ConfigException::class);
 
@@ -190,7 +190,7 @@ class ConfigTest extends TestCase
 
     public function testWrongReturnNothing()
     {
-        $config = new Config(__DIR__ . '/resources/incorrect-return-nothing.php');
+        $config = new Config(__DIR__ . '/../resources/incorrect-return-nothing.php');
 
         $this->setExpectedException(ConfigException::class);
 

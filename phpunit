@@ -1,8 +1,8 @@
 #! /bin/sh
 
 if [ -d vendor ]; then
-    vendor/bin/phpunit tests
+    vendor/bin/phpunit tests/src
 else
-    ../../bin/phpunit tests
+    ../../bin/phpunit tests/src
 fi
 
