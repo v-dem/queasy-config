@@ -23,16 +23,9 @@ Planned features:
 * XML format support.
 * XPath queries support (for all config formats).
 
-### Dependencies
-
-#### Production
+### Requirements
 
 * PHP version 5.3 or higher
-
-#### Development
-
-* PHP version 5.6 or higher (PHPUnit requirement)
-* PHPUnit 5.7
 
 ### Documentation
 
