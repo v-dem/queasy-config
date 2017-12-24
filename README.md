@@ -55,13 +55,13 @@ require_once('vendor/autoload.php');
 Create config instance (config file type will be detected by file name extension):
 
 ```php
-    $config = new queasy\config\Config('config.php');
+$config = new queasy\config\Config('config.php');
 ```
 
 Or:
 
 ```php
-    $config = new queasy\config\Config('config.ini');
+$config = new queasy\config\Config('config.ini');
 ```
 
 #### Accessing config options
@@ -69,37 +69,37 @@ Or:
 Now you can address config sections and options these ways:
 
 ```php
-    $databaseName = $config->database->name;
+$databaseName = $config->database->name;
 ```
 
 Or:
 
 ```php
-    $databaseName = $config['database']['name'];
+$databaseName = $config['database']['name'];
 ```
 
 Previous samples will throw `queasy\config\ConfigException` if an option is missing.
-Tto address possibly missing options without throwing exceptions use this:
+To address possibly missing options without throwing exceptions use this:
 
 ```php
-    $databaseName = $config['database']->get('name'); // Return null if 'name' is missing
+$databaseName = $config['database']->get('name'); // Return null if 'name' is missing
 ```
 
 Or:
 
 ```php
-    $databaseName = $config['database']->get('name', 'default'); // Return 'default' if 'name' is missing
+$databaseName = $config['database']->get('name', 'default'); // Return 'default' if 'name' is missing
 ```
 
 How to check if a section or an option is present in config:
 
 ```php
-    $hasDatabaseName = isset($config['database']['name']);
+$hasDatabaseName = isset($config['database']['name']);
 ```
 
 If you don't want to check each section for presence when accessing a very nested option, you can use this trick:
 
 ```php
-    $databaseName = $config->get('database', [])->get('name', 'default'); // $databaseName will contain 'default'
+$databaseName = $config->get('database', [])->get('name', 'default'); // $databaseName will contain 'default'
 ```
 
