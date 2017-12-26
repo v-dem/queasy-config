@@ -52,7 +52,7 @@ return [
 ];
 ```
 
-Or:
+Or `config.ini`:
 
 ```ini
 [database]
