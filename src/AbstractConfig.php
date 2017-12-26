@@ -39,15 +39,15 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * Get a value from configuration by key provided like a object property.
+     * Get an option value from configuration by option name provided like a object property.
      *
-     * @param string $key Configuration key
+     * @param string $name Option name
      *
-     * @return mixed Value or $default if $key is missing in config
+     * @return mixed|null Option value or null if option is missing
      */
-    public function __get($key)
+    public function __get($name)
     {
-        return $this->get($key);
+        return $this->get($name);
     }
 
     /**

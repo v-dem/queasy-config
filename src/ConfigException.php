@@ -80,13 +80,13 @@ class ConfigException extends Exception
     /**
      * Create exception for missing config key case.
      *
-     * @param string $key Config key
+     * @param string $name Config option name
      *
      * @return ConfigException Exception instance
      */
-    public static function missingKey($key)
+    public static function missingOption($name)
     {
-        return new ConfigException(sprintf('Missing config key "%s".', $key));
+        return new ConfigException(sprintf('Missing config option "%s".', $name));
     }
 }
 

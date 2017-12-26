@@ -46,57 +46,59 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Get a value from configuration by key provided like a object property.
+     * Get an option value from configuration by option name provided like a object property.
      *
-     * @param string $key Configuration key
+     * @param string $name Config option name
      *
-     * @return mixed Value or $default if $key is missing in config
+     * @return mixed|null Option value or null if $name is missing in config
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    public function __get($key)
+    public function __get($name)
     {
-        return $this->get($key);
+        return $this->get($name);
     }
 
     /**
-     * Check if $key is present.
+     * Check if $name option is present.
      *
-     * @param string $key Config key
+     * @param string $name Config option name
      *
      * @return boolean True if present, false if not
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    public function __isset($key)
+    public function __isset($name)
     {
-        return $this->offsetExists($key);
+        return $this->offsetExists($name);
     }
 
     /**
      * Not implemented.
      *
+     * @param string $name Config option name
+     *
      * @throws BadMethodCallException
      */
-    public function __unset($key)
+    public function __unset($name)
     {
         throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
-     * Get a value from configuration by key provided or return default value if provided or return null.
+     * Get an option value from configuration by option name or return default value if provided or return null.
      *
-     * @param string $key Configuration key
-     * @param mixed $default Value to be returned if $key is missing
+     * @param string $name Config option name
+     * @param mixed $default Value to be returned if $name option is missing
      *
-     * @return mixed Value or $default value if $key is missing in config
+     * @return mixed Option value or $default if $name option is missing in config
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    public function get($key, $default = null)
+    public function get($name, $default = null)
     {
-        if (isset($this[$key])) {
-            return $this[$key];
+        if (isset($this[$name])) {
+            return $this[$name];
         }
 
         return $default;
@@ -178,60 +180,63 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Check if $key is present.
+     * Check if $name option is present.
      *
-     * @param string $key Config key
+     * @param string $name Config option name
      *
      * @return boolean True if present, false if not
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    public function offsetExists($key)
+    public function offsetExists($name)
     {
         $data = &$this->data();
         $parent = $this->parent();
 
-        if (array_key_exists($key, $data)) {
+        if (array_key_exists($name, $data)) {
             return true;
         } elseif (is_null($parent)) {
             return false;
         } else {
-            return $parent->offsetExists($key);
+            return $parent->offsetExists($name);
         }
     }
 
     /**
-     * Get a value from config by $key or throw ConfigException if key is missing.
+     * Get an option value from config by option $name or throw ConfigException if option is missing.
      *
-     * @param string $key Config key
+     * @param string $name Config option name
      *
-     * @return mixed|null Config value or null if $key is missing
+     * @return mixed Config option value
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
-     *                          or when $key is missing in config (and in its parent configs)
+     *                          or when $name option is missing in config (and in its parent configs)
      */
-    public function offsetGet($key)
+    public function offsetGet($name)
     {
-        if ($this->offsetExists($key)) {
+        if ($this->offsetExists($name)) {
             $data = &$this->data();
-            if (array_key_exists($key, $data)) {
-                return $this->item($data[$key]);
+            if (array_key_exists($name, $data)) {
+                return $this->item($data[$name]);
             } else {
                 $parent = $this->parent();
 
-                return is_null($parent)? null: $parent[$key];
+                return is_null($parent)? null: $parent[$name];
             }
         } else {
-            throw ConfigException::missingKey($key);
+            throw ConfigException::missingOption($name);
         }
     }
 
     /**
      * Not implemented.
      *
+     * @param string $name Config option name
+     * @param mixed $value Config option value
+     *
      * @throws BadMethodCallException
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($name, $value)
     {
         throw BadMethodCallException::notImplemented(__METHOD__);
     }
@@ -239,9 +244,11 @@ class Config extends AbstractConfig
     /**
      * Not implemented.
      *
+     * @param string $name Config option name
+     *
      * @throws BadMethodCallException
      */
-    public function offsetUnset($key)
+    public function offsetUnset($name)
     {
         throw BadMethodCallException::notImplemented(__METHOD__);
     }
@@ -291,11 +298,11 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Check if $item is an array and if yes returns Config object that encapsulates this array, in other way returns $item as is.
+     * Check if $item is an array and if yes returns ConfigInterface instance that encapsulates this array, in other way returns $item as is.
      *
      * @param mixed $item An item to check
      *
-     * @return ConfigInterface|mixed Config instance if $item was an array or $item as is
+     * @return ConfigInterface|mixed ConfigInterface instance if $item was an array or $item as is
      */
     protected function item($item)
     {

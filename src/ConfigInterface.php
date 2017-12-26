@@ -16,14 +16,14 @@ namespace queasy\config;
 interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
 {
     /**
-     * Get a value from configuration by key provided or return $default value or null if $default not set
+     * Get an option value from configuration by name provided or return $default value or null if $default not set
      *
-     * @param string $key Configuration key
-     * @param mixed $default Value to be returned if $key is missing
+     * @param string $name Config option name
+     * @param mixed $default Value to be returned if option $name is missing
      *
-     * @return mixed Value or $default if $key is missing in config
+     * @return mixed|null Option value or $default if $name option is missing
      */
-    function get($key, $default = null);
+    function get($name, $default = null);
 
     /**
      * Convert all configuration structure into a regular array
