@@ -63,6 +63,20 @@ user = root
 password = secret
 ```
 
+Or `config.json`:
+
+```json
+{
+    "database": {
+        "driver": "mysql",
+        "host": "localhost",
+        "name": "test",
+        "user": "root",
+        "password": "secret"
+    }
+}
+```
+
 #### Creating config instance
 
 Include Composer autoloader:
@@ -74,7 +88,7 @@ require_once('vendor/autoload.php');
 Create config instance (config file type will be detected by file name extension):
 
 ```php
-$config = new queasy\config\Config('config.php');
+$config = new queasy\config\Config('config.php'); // Or `.ini`, or '.json'
 ```
 
 Or:
