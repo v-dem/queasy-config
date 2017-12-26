@@ -37,7 +37,7 @@ See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 
 ### Usage
 
-Let's imagine we have this `config.php`:
+Let's imagine we have following `config.php`:
 
 ```php
 <?php
@@ -50,6 +50,17 @@ return [
         'password' => 'secret'
     ]
 ];
+```
+
+Or:
+
+```ini
+[database]
+driver = mysql
+host = localhost
+name = test
+user = root
+password = secret
 ```
 
 #### Creating config instance
