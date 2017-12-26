@@ -20,7 +20,7 @@ This package contains a set of the classes intended for reading configuration fi
 #### Planned features:
 
 * Ability to change configs at runtime (without save funcitonality meanwhile).
-* YAML format support.
+* YAML format support.4
 * XML format support.
 * XPath queries support (for all config formats).
 
@@ -89,13 +89,7 @@ require_once('vendor/autoload.php');
 Create config instance (config file type will be detected by file name extension):
 
 ```php
-$config = new queasy\config\Config('config.php'); // Or `.ini`, or '.json'
-```
-
-Or:
-
-```php
-$config = new queasy\config\Config('config.ini');
+$config = new queasy\config\Config('config.php'); // Or `config.ini`, or 'config.json'
 ```
 
 #### Accessing config instance
