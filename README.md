@@ -37,6 +37,21 @@ See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 
 ### Usage
 
+Let's imagine we have this `config.php`:
+
+```php
+<?php
+return [
+    'database' => [
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'name' => 'test',
+        'user' => 'root',
+        'password' => 'secret'
+    ]
+];
+```
+
 #### Creating config instance
 
 Include Composer autoloader:
