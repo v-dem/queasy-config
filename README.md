@@ -5,8 +5,12 @@
 This package contains a set of the classes intended for reading configuration files. Formats currently supported are:
 
 * PHP (recommended, see below)
-* INI
+* INI (not recommended but very easy)
 * JSON
+
+> PHP config format supports multi-file configs, also it's possible to use PHP constants and expressions there.
+
+> INI format doesn't support nested configs.
 
 ### Features
 
