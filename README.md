@@ -89,7 +89,7 @@ require_once('vendor/autoload.php');
 Create config instance (config file type will be detected by file name extension):
 
 ```php
-$config = new queasy\config\Config('config.php'); // Or `config.ini`, or 'config.json'
+$config = new queasy\config\Config('config.php'); // Or 'config.ini', or 'config.json'
 ```
 
 #### Accessing config instance
