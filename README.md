@@ -17,7 +17,7 @@ This package contains a set of the classes intended for reading configuration fi
 * Unified config interface. You can switch between config formats without changing your code.
 * Easy to extend with other config formats.
 
-Planned features:
+#### Planned features:
 
 * Ability to change configs at runtime (without save funcitonality meanwhile).
 * XML format support.
