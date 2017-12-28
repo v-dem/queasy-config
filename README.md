@@ -135,3 +135,5 @@ If you don't want to check each section for presence when accessing a very neste
 $databaseName = $config->get('database', [])->get('name', 'default'); // $databaseName will contain 'default'
 ```
 
+`$databaseName` will contain an empty array if 'database' section is missing, or 'default' if 'name' option is missing in 'database' section.
+
