@@ -10,8 +10,6 @@
 
 namespace queasy\config;
 
-use BadMethodCallException;
-
 use queasy\config\loader\LoaderFactory;
 
 /**

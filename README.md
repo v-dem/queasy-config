@@ -42,7 +42,7 @@ See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 
 ### Usage
 
-Let's imagine we have following `config.php`:
+Let's imagine we have the following `config.php`:
 
 ```php
 <?php
