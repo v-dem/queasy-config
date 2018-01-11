@@ -1,0 +1,23 @@
+<?php
+
+return (object)[
+    'rootNamespace' => 'queasy\config',
+    'destDirectory' => 'queasy-config.wiki',
+    'format' => 'github',
+    'classes' => [
+        '\queasy\config\loader\LoaderInterface',
+        '\queasy\config\loader\AbstractLoader',
+        '\queasy\config\loader\FileSystemLoader',
+        '\queasy\config\loader\IniLoader',
+        '\queasy\config\loader\JsonLoader',
+        '\queasy\config\loader\PhpLoader',
+        '\queasy\config\loader\LoaderFactory',
+        '\queasy\config\ConfigInterface',
+        '\queasy\config\AbstractConfig',
+        '\queasy\config\Config',
+        '\queasy\config\ConfigException',
+        '\queasy\config\BadMethodCallException',
+        '\queasy\config\InvalidArgumentException'
+    ],
+];
+
