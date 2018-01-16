@@ -80,7 +80,11 @@ class Config extends AbstractConfig
      */
     public function __unset($name)
     {
-        throw BadMethodCallException::notImplemented(__METHOD__);
+        $data = $this->data();
+
+        unset($data[$name]);
+
+        // throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
@@ -189,6 +193,7 @@ class Config extends AbstractConfig
     public function offsetExists($name)
     {
         $data = &$this->data();
+
         $parent = $this->parent();
 
         if (array_key_exists($name, $data)) {
@@ -224,31 +229,6 @@ class Config extends AbstractConfig
         } else {
             throw ConfigException::missingOption($name);
         }
-    }
-
-    /**
-     * Not implemented.
-     *
-     * @param string $name Config option name
-     * @param mixed $value Config option value
-     *
-     * @throws BadMethodCallException
-     */
-    public function offsetSet($name, $value)
-    {
-        throw BadMethodCallException::notImplemented(__METHOD__);
-    }
-
-    /**
-     * Not implemented.
-     *
-     * @param string $name Config option name
-     *
-     * @throws BadMethodCallException
-     */
-    public function offsetUnset($name)
-    {
-        throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
