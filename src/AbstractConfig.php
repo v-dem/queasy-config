@@ -59,7 +59,9 @@ abstract class AbstractConfig implements ConfigInterface
      */
     public function offsetIsset($name)
     {
-        return isset($this[$name]);
+        $data = &$this->data();
+
+        return isset($data[$name]);
     }
 
     /**
@@ -69,7 +71,9 @@ abstract class AbstractConfig implements ConfigInterface
      */
     public function offsetUnset($name)
     {
-        unset($this->data[$name]);
+        $data = &$this->data();
+
+        unset($data[$name]);
     }
 
     /**
@@ -80,7 +84,9 @@ abstract class AbstractConfig implements ConfigInterface
      */
     public function offsetSet($name, $value)
     {
-        $this->data[$name] = $value;
+        $data = &$this->data();
+
+        $data[$name] = $value;
     }
 
     /**
