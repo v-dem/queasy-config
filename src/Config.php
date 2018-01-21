@@ -196,7 +196,7 @@ class Config extends AbstractConfig
 
         $parent = $this->parent();
 
-        if (array_key_exists($name, $data)) {
+        if (isset($data[$name]) || array_key_exists($name, $data)) {
             return true;
         } elseif (is_null($parent)) {
             return false;

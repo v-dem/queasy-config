@@ -61,7 +61,7 @@ abstract class AbstractConfig implements ConfigInterface
     {
         $data = &$this->data();
 
-        return isset($data[$name]);
+        return isset($data[$name]) || array_key_exists($name, $data);
     }
 
     /**

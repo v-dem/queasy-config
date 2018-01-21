@@ -111,6 +111,18 @@ class ConfigTest extends TestCase
         $this->assertEquals('new-value', $config->offsetGet('new-key'));
     }
 
+    public function testSetNull()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $this->assertFalse($config->offsetIsset('new-key'));
+
+        $config->offsetSet('new-key', null);
+
+        $this->assertTrue($config->offsetIsset('new-key'));
+        $this->assertNull($config->offsetGet('new-key'));
+    }
+
     public function testSetAsArray()
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
