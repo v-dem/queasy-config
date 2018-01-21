@@ -80,11 +80,9 @@ class Config extends AbstractConfig
      */
     public function __unset($name)
     {
-        $data = $this->data();
+        $data = &$this->data();
 
         unset($data[$name]);
-
-        // throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
@@ -229,6 +227,31 @@ class Config extends AbstractConfig
         } else {
             throw ConfigException::missingOption($name);
         }
+    }
+
+    /**
+     * Remove an option from a current config level.
+     *
+     * @param string $name Option name
+     */
+    public function offsetUnset($name)
+    {
+        $data = &$this->data();
+
+        unset($data[$name]);
+    }
+
+    /**
+     * Set $name config option using $value.
+     *
+     * @param string $name Config option name
+     * @param mixed $value Config option value
+     */
+    public function offsetSet($name, $value)
+    {
+        $data = &$this->data();
+
+        $data[$name] = $value;
     }
 
     /**

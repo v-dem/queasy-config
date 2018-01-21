@@ -51,45 +51,6 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * Check if an option exists at current config level.
-     *
-     * @param string $name Option name
-     *
-     * @return bool True if $name option exists, false otherwise.
-     */
-    public function offsetIsset($name)
-    {
-        $data = &$this->data();
-
-        return isset($data[$name]) || array_key_exists($name, $data);
-    }
-
-    /**
-     * Remove an option from a current config level.
-     *
-     * @param string $name Option name
-     */
-    public function offsetUnset($name)
-    {
-        $data = &$this->data();
-
-        unset($data[$name]);
-    }
-
-    /**
-     * Set $name config option using $value.
-     *
-     * @param string $name Config option name
-     * @param mixed $value Config option value
-     */
-    public function offsetSet($name, $value)
-    {
-        $data = &$this->data();
-
-        $data[$name] = $value;
-    }
-
-    /**
      * Set config data
      *
      * @param mixed $data Config data
