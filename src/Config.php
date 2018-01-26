@@ -222,7 +222,7 @@ class Config extends AbstractConfig
      */
     public function offsetUnset($name)
     {
-        throw new BadMethodCallException(__METHOD__);
+        throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**
@@ -232,7 +232,30 @@ class Config extends AbstractConfig
      */
     public function offsetSet($name, $value)
     {
-        throw new BadMethodCallException(__METHOD__);
+        throw BadMethodCallException::notImplemented(__METHOD__);
+    }
+
+    /**
+     * Search for config keys using regular expression.
+     *
+     * @param string $regex Regular expression
+     *
+     * @return ConfigInterface Config instance containing key/option pairs found.
+     */
+    public function regex($regex)
+    {
+        $data = &$this->data();
+
+        $options = array();
+        foreach ($data as $key => $value) {
+            if (preg_match($regex, $key)) {
+                $options[$key] = $value;
+            }
+        }
+
+        $className = get_class($this);
+
+        return new $className($options);
     }
 
     /**

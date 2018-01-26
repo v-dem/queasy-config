@@ -44,6 +44,15 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     function __isset($name);
 
     /**
+     * Search for config keys using regular expression.
+     *
+     * @param string $regex Regular expression
+     *
+     * @return ConfigInterface Config instance containing key/option pairs found.
+     */
+    public function regex($regex)
+
+    /**
      * Convert all configuration structure into a regular array.
      *
      * @return array Configuration represented as a regular array

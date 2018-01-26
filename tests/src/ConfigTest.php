@@ -180,6 +180,21 @@ class ConfigTest extends TestCase
         $this->assertNull($config['nullkey']);
     }
 
+    public function testRegex()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $options = $config->regex('/^sec/');
+
+        $this->assertCount(2, $options);
+
+        $options = $config->regex('/key/');
+
+        $this->assertCount(2, $options);
+        $this->assertArrayHasKey('key', $options);
+        $this->assertArrayHasKey('nullkey', $options);
+    }
+
     public function testMissingFile()
     {
         $config = new Config(__DIR__ . '/../resources/missing-file.php');
