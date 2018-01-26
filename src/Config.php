@@ -72,20 +72,6 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Not implemented.
-     *
-     * @param string $name Config option name
-     *
-     * @throws BadMethodCallException
-     */
-    public function __unset($name)
-    {
-        $data = &$this->data();
-
-        unset($data[$name]);
-    }
-
-    /**
      * Get an option value from configuration by option name or return default value if provided or return null.
      *
      * @param string $name Config option name
@@ -230,28 +216,23 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Remove an option from a current config level.
+     * Not implemented.
      *
-     * @param string $name Option name
+     * @throws BadMethodCallException
      */
     public function offsetUnset($name)
     {
-        $data = &$this->data();
-
-        unset($data[$name]);
+        throw new BadMethodCallException(__METHOD__);
     }
 
     /**
-     * Set $name config option using $value.
+     * Not implemeted.
      *
-     * @param string $name Config option name
-     * @param mixed $value Config option value
+     * @throws BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
-        $data = &$this->data();
-
-        $data[$name] = $value;
+        throw new BadMethodCallException(__METHOD__);
     }
 
     /**

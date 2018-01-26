@@ -23,7 +23,6 @@ This package contains a set of the classes intended for reading configuration fi
 
 #### Planned features:
 
-* Ability to change configs at runtime (without save funcitonality meanwhile).
 * YAML format support.
 * XML format support.
 * XPath queries support (for all config formats).

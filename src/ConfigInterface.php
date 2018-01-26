@@ -44,13 +44,6 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     function __isset($name);
 
     /**
-     * Remove an option from config.
-     *
-     * @param string $name Option name
-     */
-    function __unset($name);
-
-    /**
      * Convert all configuration structure into a regular array.
      *
      * @return array Configuration represented as a regular array

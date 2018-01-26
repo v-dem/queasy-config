@@ -91,63 +91,6 @@ class ConfigTest extends TestCase
         $this->assertFalse(isset($config['unknown']));
     }
 
-    public function testUnset()
-    {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
-        unset($config->key);
-
-        $this->assertFalse(isset($config->key));
-    }
-
-    public function testUnsetArray()
-    {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
-        unset($config['key']);
-
-        $this->assertFalse(isset($config['key']));
-    }
-
-    public function testSet()
-    {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
-        $this->assertFalse(isset($config['new-key']));
-
-        $config['new-key'] = 'new-value';
-
-        $this->assertTrue(isset($config['new-key']));
-        $this->assertEquals('new-value', $config['new-key']);
-    }
-
-    public function testSetNull()
-    {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
-        $this->assertFalse(isset($config['new-key']));
-
-        $config['new-key'] = null;
-
-        $this->assertTrue(isset($config['new-key']));
-        $this->assertNull($config['new-key']);
-    }
-
-    public function testArraySet()
-    {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
-        $this->assertFalse(isset($config['new-key']));
-
-        $config['new-key'] = array('a' => 1, 'b' => 2);
-
-        $this->assertCount(2, $config['new-key']);
-        $this->assertArrayHasKey('a', $config['new-key']);
-        $this->assertArrayHasKey('b', $config['new-key']);
-        $this->assertEquals(1, $config['new-key']['a']);
-        $this->assertEquals(2, $config['new-key']->b);
-    }
-
     public function testGet()
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
