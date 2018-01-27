@@ -7,6 +7,7 @@ This package contains a set of the classes intended for reading configuration fi
 * PHP (recommended, see below)
 * INI (not recommended but very easy)
 * JSON
+* XML
 
 > PHP config format supports multi-file configs, also it's possible to use PHP constants and expressions there.
 
@@ -20,11 +21,11 @@ This package contains a set of the classes intended for reading configuration fi
 * Options inheritance. If an option is missing at current config level, it will look for this option on upper levels.
 * Unified config interface. You can switch between config formats without changing your code.
 * Easy to extend with other config formats.
+* Regular expressions support (it's possible to get config options by regular expression).
 
 #### Planned features:
 
 * YAML format support.
-* XML format support.
 * XPath queries support (for all config formats).
 
 ### Requirements
@@ -46,7 +47,7 @@ Let's imagine we have the following `config.php`:
 ```php
 <?php
 return [
-    'database' => [
+    'connection' => [
         'driver' => 'mysql',
         'host' => 'localhost',
         'name' => 'test',
@@ -59,7 +60,7 @@ return [
 Or `config.ini`:
 
 ```ini
-[database]
+[connection]
 driver = mysql
 host = localhost
 name = test
@@ -71,7 +72,7 @@ Or `config.json`:
 
 ```json
 {
-    "database": {
+    "connection": {
         "driver": "mysql",
         "host": "localhost",
         "name": "test",
@@ -80,6 +81,22 @@ Or `config.json`:
     }
 }
 ```
+
+Or `config.xml`:
+
+```xml
+<?xml version="1.0">
+<config>
+    <connection
+        driver="mysql"
+        host="localhost"
+        name="test"
+        user="root"
+        password="secret" />
+</config>
+```
+
+> You can mix different config types, for example top-level config of PHP type can refer to config files of other types.
 
 #### Creating config instance
 
