@@ -109,7 +109,7 @@ require_once('vendor/autoload.php');
 Create config instance (config file type will be detected by file name extension):
 
 ```php
-$config = new queasy\config\Config('config.php'); // Or 'config.ini', or 'config.json'
+$config = new queasy\config\Config('config.php'); // Can be also '.ini', '.json' or '.xml'
 ```
 
 #### Accessing config instance
@@ -152,4 +152,34 @@ $databaseName = $config->get('database', [])->get('name', 'default'); // $databa
 ```
 
 `$databaseName` will contain an empty array if 'database' section is missing, or 'default' if 'name' option is missing in 'database' section.
+
+#### Multi-file configs
+
+`config.php`:
+```php
+<?php
+return [
+    'connection' => [
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'name' => 'test',
+        'user' => 'root',
+        'password' => 'secret'
+    ],
+    'queries' => new queasy\config\Config('queries.php') // Can be config of another type (INI, JSON etc)
+];
+```
+
+`queries.php`:
+```php
+return [
+    'selectActiveUsers' => 'SELECT * FROM `users` WHERE `is_active` = 1'
+];
+```
+
+Accessing:
+```php
+$config = new queasy\config\Config('config.php');
+$query = $config['queries']['selectActiveUsers'];
+```
 
