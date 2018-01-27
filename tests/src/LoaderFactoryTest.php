@@ -26,6 +26,7 @@ class LoaderFactoryTest extends TestCase
         $this->assertEquals('queasy\config\loader\IniLoader', LoaderFactory::registered('test.ini'));
         $this->assertEquals('queasy\config\loader\JsonLoader', LoaderFactory::registered('test.json'));
         $this->assertEquals('queasy\config\loader\PhpLoader', LoaderFactory::registered('test.php'));
+        $this->assertEquals('queasy\config\loader\XmlLoader', LoaderFactory::registered('test.xml'));
     }
 
     public function testNotRegisteredLoader()

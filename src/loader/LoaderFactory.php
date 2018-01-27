@@ -24,7 +24,8 @@ class LoaderFactory
     private static $defaultLoaders = array(
         '/\.php$/i' => 'queasy\config\loader\PhpLoader',
         '/\.json$/i' => 'queasy\config\loader\JsonLoader',
-        '/\.ini$/i' => 'queasy\config\loader\IniLoader'
+        '/\.ini$/i' => 'queasy\config\loader\IniLoader',
+        '/\.xml$/i' => 'queasy\config\loader\XmlLoader'
     );
 
     /**
