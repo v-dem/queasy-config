@@ -108,7 +108,8 @@ require_once('vendor/autoload.php');
 Create config instance (config file type will be detected by file name extension):
 
 ```php
-$config = new queasy\config\Config('config.php'); // Can be also '.ini', '.json' or '.xml'
+// Can be also '.ini', '.json' or '.xml'
+$config = new queasy\config\Config('config.php');
 ```
 
 #### Accessing config instance
@@ -125,18 +126,18 @@ Or:
 $databaseName = $config['database']['name'];
 ```
 
-Previous sample will return `null` even if `database` section is missing, no need to check it for null to address `name`.
-
 It's possible to use a default value if an option is missing:
 
 ```php
-$databaseHost = $config['database']->get('host', 'localhost'); // If 'host' is missing in config, 'localhost' will be used by default
+// If 'host' is missing in config, 'localhost' will be used by default
+$databaseHost = $config['database']->get('host', 'localhost');
 ```
 
 It's also possible to point that an option is required, and to throw `ConfigException` if this option is missing:
 
 ```php
-$databaseName = $config['database']->need('name'); // Throw ConfigException if 'name' is missing
+// Throw ConfigException if 'name' is missing
+$databaseName = $config['database']->need('name');
 ```
 
 How to check if a section or an option is present in config:
@@ -148,7 +149,8 @@ $hasDatabaseName = isset($config['database']['name']);
 If you don't want to check each section for presence when accessing a very nested option, you can use this trick:
 
 ```php
-$databaseName = $config->get('database', [])->get('name', 'default'); // $databaseName will contain 'default'
+// $databaseName will contain 'default'
+$databaseName = $config->get('database', [])->get('name', 'default');
 ```
 
 `$databaseName` will contain an empty array if 'database' section is missing, or 'default' if 'name' option is missing in 'database' section.
