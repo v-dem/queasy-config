@@ -26,7 +26,6 @@ This package contains a set of the classes intended for reading configuration fi
 #### Planned features:
 
 * YAML format support.
-* XPath queries support (for all config formats).
 
 ### Requirements
 
