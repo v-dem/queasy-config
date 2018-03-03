@@ -125,17 +125,18 @@ Or:
 $databaseName = $config['database']['name'];
 ```
 
-Previous samples will throw `queasy\config\ConfigException` if an option is missing.
-To address possibly missing options without throwing exceptions use this:
+Previous sample will return `null` even if `database` section is missing, no need to check it for null to address `name`.
+
+It's possible to use a default value if an option is missing:
 
 ```php
-$databaseName = $config['database']->get('name'); // Return null if 'name' is missing
+$databaseHost = $config['database']->get('host', 'localhost'); // If 'host' is missing in config, 'localhost' will be used by default
 ```
 
-Or:
+It's also possible to point that an option is required, and to throw `ConfigException` if this option is missing:
 
 ```php
-$databaseName = $config['database']->get('name', 'default'); // Return 'default' if 'name' is missing
+$databaseName = $config['database']->need('name'); // Throw ConfigException if 'name' is missing
 ```
 
 How to check if a section or an option is present in config:
