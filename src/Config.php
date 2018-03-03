@@ -91,6 +91,25 @@ class Config extends AbstractConfig
     }
 
     /**
+     * Get an option value from configuration by option name.
+     *
+     * @param string $name Config option name
+     *
+     * @return mixed Option value
+     *
+     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     *                          or when $name option is missing
+     */
+    public function need($name)
+    {
+        if (isset($this[$name])) {
+            return $this[$name];
+        } else {
+            throw ConfigException::missingOption($name);
+        }
+    }
+
+    /**
      * Move config array pointer to the beginning.
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
@@ -197,7 +216,6 @@ class Config extends AbstractConfig
      * @return mixed Config option value
      *
      * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
-     *                          or when $name option is missing in config (and in its parent configs)
      */
     public function offsetGet($name)
     {
@@ -211,7 +229,7 @@ class Config extends AbstractConfig
                 return is_null($parent)? null: $parent[$name];
             }
         } else {
-            throw ConfigException::missingOption($name);
+            return null;
         }
     }
 

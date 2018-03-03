@@ -137,9 +137,16 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
 
+        $this->assertNull($config['section3']['key31']);
+    }
+
+    public function testGetForMissingRequiredSection()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
         $this->setExpectedException(ConfigException::class);
 
-        $this->assertNull($config['section3']['key31']);
+        $this->assertNull($config->need('section3')['key31']);
     }
 
     public function testCompoundGetInherited()
@@ -160,7 +167,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
 
-        $this->assertEquals('value', $config['key']);
+        $this->assertEquals('value', $config->need('key'));
     }
 
     public function testRequiredMissing()
@@ -169,7 +176,7 @@ class ConfigTest extends TestCase
 
         $this->setExpectedException(ConfigException::class);
 
-        $value = $config['unknown'];
+        $value = $config->need('unknown');
     }
 
     public function testRequiredNullExisting()
@@ -177,7 +184,7 @@ class ConfigTest extends TestCase
         $config = new Config(__DIR__ . '/../resources/correct.php');
 
         $this->assertArrayHasKey('nullkey', $config);
-        $this->assertNull($config['nullkey']);
+        $this->assertNull($config->need('nullkey'));
     }
 
     public function testRegex()

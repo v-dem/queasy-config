@@ -19,11 +19,22 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
      * Get an option value from configuration by name provided or return $default value or null if $default not set.
      *
      * @param string $name Config option name
-     * @param mixed $default Value to be returned if option $name is missing
+     * @param mixed|null $default Value to be returned if option $name is missing
      *
-     * @return mixed|null Option value or $default if $name option is missing
+     * @return mixed Option value
      */
     function get($name, $default = null);
+
+    /**
+     * Get an option value from configuration by name provided.
+     *
+     * @param string $name Config option name
+     *
+     * @return mixed Option value or $default if $name option is missing
+     *
+     * @throws ConfigException When $name option is missing
+     */
+    function need($name);
 
     /**
      * Get an option value from configuration by option name provided like a object property.
