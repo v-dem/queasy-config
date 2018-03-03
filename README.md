@@ -149,11 +149,9 @@ $hasDatabaseName = isset($config['database']['name']);
 If you don't want to check each section for presence when accessing a very nested option, you can use this trick:
 
 ```php
-// $databaseName will contain 'default'
+// $databaseName will contain 'default' if 'name' and/or 'database' options are missing
 $databaseName = $config->get('database', [])->get('name', 'default');
 ```
-
-`$databaseName` will contain an empty array if 'database' section is missing, or 'default' if 'name' option is missing in 'database' section.
 
 #### Multi-file configs
 
