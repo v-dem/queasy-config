@@ -86,11 +86,9 @@ class Config extends AbstractConfig
         if (isset($this[$name])) {
             return $this[$name];
         } elseif (is_array($default)) {
-            $data = &$this->data();
+            $className = get_class($this);
 
-            $data[$name] = $default;
-
-            return $this->get($name); // Recursion
+            return new $className($default, $this);
         }
 
         return $default;
