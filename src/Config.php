@@ -225,7 +225,7 @@ class Config extends AbstractConfig
     {
         if ($this->offsetExists($name)) {
             $data = &$this->data();
-            if (array_key_exists($name, $data)) {
+            if (isset($data[$name]) || array_key_exists($name, $data)) {
                 return $this->item($data[$name]);
             } else {
                 $parent = $this->parent();
