@@ -209,6 +209,19 @@ class ConfigTest extends TestCase
         $this->assertArrayHasKey('nullkey', $options);
     }
 
+    public function testForeachKeys()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $keys = array();
+        foreach ($config as $key => $value) {
+            $keys[] = $key;
+        }
+
+        $this->assertCount(4, $keys);
+        $this->assertEquals(array('section1', 'section2', 'key', 'nullkey'), $keys);
+    }
+
     public function testMissingFile()
     {
         $config = new Config(__DIR__ . '/../resources/missing-file.php');
