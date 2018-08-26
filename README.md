@@ -1,5 +1,7 @@
 # [Queasy PHP Framework](https://github.com/v-dem/queasy-app/) - Configuration
 
+[![Software License][ico-license]][link-license]
+
 ## Package `v-dem/queasy-config`
 
 This package contains a set of the classes intended for reading configuration files. Formats currently supported are:
