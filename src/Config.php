@@ -58,6 +58,16 @@ class Config extends AbstractConfig
     }
 
     /**
+     * Not implemented.
+     *
+     * @throws BadMethodCallException
+     */
+    public function __set($name, $value)
+    {
+        throw BadMethodCallException::notImplemented(__METHOD__);
+    }
+
+    /**
      * Check if $name option is present.
      *
      * @param string $name Config option name
@@ -69,6 +79,16 @@ class Config extends AbstractConfig
     public function __isset($name)
     {
         return $this->offsetExists($name);
+    }
+
+    /**
+     * Not implemented.
+     *
+     * @throws BadMethodCallException
+     */
+    public function __unset($name)
+    {
+        throw BadMethodCallException::notImplemented(__METHOD__);
     }
 
     /**

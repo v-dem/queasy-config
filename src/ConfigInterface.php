@@ -46,6 +46,14 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     function __get($name);
 
     /**
+     * Set an option value.
+     *
+     * @param string $name Option name
+     * @param string $name Option value
+     */
+    function __set($name, $value);
+
+    /**
      * Check if an option exists in config.
      *
      * @param string $name Option name
@@ -53,6 +61,13 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
      * @return bool True if an option exists, false otherwise
      */
     function __isset($name);
+
+    /**
+     * Unset option in config.
+     *
+     * @param string $name Option name
+     */
+    function __unset($name);
 
     /**
      * Search for config keys using regular expression.

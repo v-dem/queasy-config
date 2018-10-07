@@ -43,6 +43,8 @@ class LoaderFactoryTest extends TestCase
 
     public function testRegisterCustomLoader()
     {
+        require_once('CustomLoader.php');
+
         LoaderFactory::register('/\.abcd$/i', 'queasy\config\tests\CustomLoader');
 
         $this->assertEquals('queasy\config\tests\CustomLoader', LoaderFactory::registered('test.abcd'));
@@ -50,6 +52,8 @@ class LoaderFactoryTest extends TestCase
 
     public function testRegisterWrongCustomLoader()
     {
+        require_once('WrongCustomLoader.php');
+
         $this->setExpectedException(InvalidArgumentException::class);
 
         LoaderFactory::register('/\.abcde$/i', 'queasy\config\tests\WrongCustomLoader');
@@ -57,6 +61,8 @@ class LoaderFactoryTest extends TestCase
 
     public function testRegisterCustomLoaderTwice()
     {
+        require_once('CustomLoader.php');
+
         LoaderFactory::register('/\.abcd2$/i', 'queasy\config\tests\CustomLoader');
 
         $this->setExpectedException(ConfigException::class);
@@ -66,6 +72,8 @@ class LoaderFactoryTest extends TestCase
 
     public function testRegisterCustomLoaderTwiceIgnore()
     {
+        require_once('CustomLoader.php');
+
         LoaderFactory::register('/\.abcd3$/i', 'queasy\config\tests\CustomLoader');
         LoaderFactory::register('/\.abcd3$/i', 'queasy\config\tests\CustomLoader', true);
     }
