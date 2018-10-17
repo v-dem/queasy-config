@@ -153,6 +153,13 @@ If you don't want to check each section for presence when accessing a very neste
 $databaseName = $config->get('database', [])->get('name', 'default');
 ```
 
+You can also use `Config` class instance invokation this way:
+
+```php
+// $databaseName will contain 'default' if 'name' and/or 'database' options are missing
+$databaseName = $config('database', [])('name', 'default');
+```
+
 #### Multi-file configs
 
 `config.php`:

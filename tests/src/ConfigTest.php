@@ -77,6 +77,13 @@ class ConfigTest extends TestCase
         $this->assertEquals('default', $config('section1')('key13', 'default'));
     }
 
+    public function testInvokeDefault2()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $this->assertEquals('default', $config('section3', array())('key13', 'default'));
+    }
+
     public function testIsset()
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
