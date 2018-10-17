@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Queasy PHP Framework - Configuration
+ * Queasy PHP Framework - Configuration - Tests
  *
  * (c) Vitaly Demyanenko <vitaly_demyanenko@yahoo.com>
  *

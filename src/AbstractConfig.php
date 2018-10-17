@@ -51,6 +51,23 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
+     * Call class instance as a function.
+     *
+     * @param string $name Option name
+     * @param string $default Default option value (optional)
+     *
+     * @return mixed Option value or $default if $name option is missing
+     */
+    function __invoke($name, $default = null)
+    {
+        if (1 === func_num_args()) {
+            return $this->need($name);
+        } else {
+            return $this->get($name, $default);
+        }
+    }
+
+    /**
      * Set config data
      *
      * @param mixed $data Config data

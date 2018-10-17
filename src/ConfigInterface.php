@@ -70,6 +70,16 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     function __unset($name);
 
     /**
+     * Call class instance as a function.
+     *
+     * @param string $name Option name
+     * @param string $default Default option value (optional)
+     *
+     * @return mixed Option value or $default if $name option is missing
+     */
+    function __invoke($name, $default = null);
+
+    /**
      * Search for config keys using regular expression.
      *
      * @param string $regex Regular expression

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Queasy PHP Framework - Configuration
+ * Queasy PHP Framework - Configuration - Tests
  *
  * (c) Vitaly Demyanenko <vitaly_demyanenko@yahoo.com>
  *
@@ -61,6 +61,20 @@ class ConfigTest extends TestCase
         $this->assertCount(1, $config['include-section']['section']);
         $this->assertArrayHasKey('key', $config['include-section']['section']);
         $this->assertEquals('value', $config['include-section']['section']['key']);
+    }
+
+    public function testInvoke()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $this->assertEquals('value11', $config('section1')('key11'));
+    }
+
+    public function testInvokeDefault()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $this->assertEquals('default', $config('section1')('key13', 'default'));
     }
 
     public function testIsset()
