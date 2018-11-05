@@ -30,11 +30,9 @@ class Config extends AbstractConfig
     public function __construct($data = null, ConfigInterface $parent = null)
     {
         if (is_null($data)) {
-            if (defined('QUEASY_CONFIG_PATH')) {
-                $data = QUEASY_CONFIG_PATH;
-            } else {
-                $data = static::DEFAULT_PATH;
-            }
+            $data = (defined('QUEASY_CONFIG_PATH'))
+                ? QUEASY_CONFIG_PATH
+                : static::DEFAULT_PATH;
         } else if (!is_string($data)
                 && !is_array($data)) {
             throw InvalidArgumentException::invalidArgumentType(gettype($data));
@@ -312,12 +310,10 @@ class Config extends AbstractConfig
         $result = array();
         foreach ($this->data() as $key => $item) {
             $item = $this->item($item);
-            if (is_object($item)
-                    && ($item instanceof ConfigInterface)) {
-                $result[$key] = $item->toArray();
-            } else {
-                $result[$key] = $item;
-            }
+
+            $result[$key] = (is_object($item) && ($item instanceof ConfigInterface))
+                ? $item->toArray()
+                : $result[$key] = $item;
         }
 
         return $result;

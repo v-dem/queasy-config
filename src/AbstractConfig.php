@@ -60,11 +60,9 @@ abstract class AbstractConfig implements ConfigInterface
      */
     function __invoke($name, $default = null)
     {
-        if (1 === func_num_args()) {
-            return $this->need($name);
-        } else {
-            return $this->get($name, $default);
-        }
+        return (1 === func_num_args())
+            ? $this->need($name)
+            : $this->get($name, $default);
     }
 
     /**
