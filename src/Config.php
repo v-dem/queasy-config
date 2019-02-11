@@ -33,6 +33,10 @@ class Config extends AbstractConfig
             $data = (defined('QUEASY_CONFIG_PATH'))
                 ? QUEASY_CONFIG_PATH
                 : static::DEFAULT_PATH;
+
+            if (!file_exists($data)) {
+                $data = array();
+            }
         } else if (!is_string($data)
                 && !is_array($data)) {
             throw InvalidArgumentException::invalidArgumentType(gettype($data));

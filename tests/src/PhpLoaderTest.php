@@ -108,13 +108,6 @@ class PhpLoaderTest extends TestCase
         $result = $loader();
     }
 
-    public function testNoConstructorArgs()
-    {
-        $this->setExpectedException(\PHPUnit_Framework_Error::class);
-
-        $loader = new PhpLoader();
-    }
-
     public function testNotAStringAsPath()
     {
         $loader = new PhpLoader(array(123));
