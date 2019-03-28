@@ -172,7 +172,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $this->assertNull($config->need('section3')['key31']);
     }
@@ -202,7 +202,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $value = $config->need('unknown');
     }
@@ -247,7 +247,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/missing-file.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $test = $config['a'];
     }
@@ -256,7 +256,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-not-empty.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $test = $config['a'];
     }
@@ -265,7 +265,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-return-int.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $test = $config['a'];
     }
@@ -274,7 +274,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-return-string.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $test = $config['a'];
     }
@@ -283,14 +283,14 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-return-nothing.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $test = $config['a'];
     }
 
     public function testNotAStringOrArrayAsParameter()
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         new Config(true);
     }

@@ -59,7 +59,7 @@ class JsonLoaderTest extends TestCase
     {
         $loader = new JsonLoader(__DIR__ . '/../resources/missing-file.json');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -68,7 +68,7 @@ class JsonLoaderTest extends TestCase
     {
         $loader = new JsonLoader(__DIR__ . '/../resources/incorrect-not-empty.json');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }

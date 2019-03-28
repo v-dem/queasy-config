@@ -60,7 +60,7 @@ class XmlLoaderTest extends TestCase
     {
         $loader = new XmlLoader(__DIR__ . '/../resources/missing-file.xml');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -69,7 +69,7 @@ class XmlLoaderTest extends TestCase
     {
         $loader = new XmlLoader(__DIR__ . '/../resources/incorrect-not-empty.xml');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }

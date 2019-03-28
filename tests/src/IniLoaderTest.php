@@ -59,7 +59,7 @@ class IniLoaderTest extends TestCase
     {
         $loader = new IniLoader(__DIR__ . '/../resources/missing-file.ini');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -68,7 +68,7 @@ class IniLoaderTest extends TestCase
     {
         $loader = new IniLoader(__DIR__ . '/../resources/incorrect-not-empty.ini');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }

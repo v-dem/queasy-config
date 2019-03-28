@@ -10,6 +10,7 @@
 
 namespace queasy\config\tests;
 
+use PHPUnit\Framework\Error\Error;
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\PhpLoader;
@@ -58,7 +59,7 @@ class PhpLoaderTest extends TestCase
     {
         $loader = new PhpLoader(__DIR__ . '/../resources/missing-file.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -67,7 +68,7 @@ class PhpLoaderTest extends TestCase
     {
         $loader = new PhpLoader(__DIR__ . '/../resources/incorrect-not-empty.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -76,7 +77,7 @@ class PhpLoaderTest extends TestCase
     {
         $loader = new PhpLoader(__DIR__ . '/../resources/incorrect-not-empty2.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -85,7 +86,7 @@ class PhpLoaderTest extends TestCase
     {
         $loader = new PhpLoader(__DIR__ . '/../resources/wrong-return-int.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -94,7 +95,7 @@ class PhpLoaderTest extends TestCase
     {
         $loader = new PhpLoader(__DIR__ . '/../resources/wrong-return-string.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -103,7 +104,7 @@ class PhpLoaderTest extends TestCase
     {
         $loader = new PhpLoader(__DIR__ . '/../resources/wrong-return-nothing.php');
 
-        $this->setExpectedException(ConfigException::class);
+        $this->expectException(ConfigException::class);
 
         $result = $loader();
     }
@@ -112,7 +113,7 @@ class PhpLoaderTest extends TestCase
     {
         $loader = new PhpLoader(array(123));
 
-        $this->setExpectedException(\PHPUnit_Framework_Error::class);
+        $this->expectException(Error::class);
 
         $result = $loader();
     }
