@@ -12,6 +12,9 @@
             "email": "vitaly_demyanenko@yahoo.com"
         }
     ],
+    "config": {
+        "preferred-install": "dist"
+    },
     "require": {
         "php": ">=5.3.0|>=7.0.0"
     },
