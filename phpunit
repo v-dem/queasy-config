@@ -1,8 +1,0 @@
-#! /bin/sh
-
-if [ -d vendor ]; then
-    vendor/bin/phpunit tests/src
-else
-    ../../bin/phpunit tests/src
-fi
-
