@@ -1,7 +1,4 @@
 language: php
-env:
-  - CODECOV_TOKEN="3c2c572a-aed7-42c3-97f0-bdf141c59b88"
-
 php:
   - 5.4
   - 5.5
