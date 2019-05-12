@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/v-dem/queasy-config.svg?branch=master)](https://travis-ci.org/v-dem/queasy-config)
+[![Build Status](https://travis-ci.com/v-dem/queasy-config.svg?branch=master)](https://travis-ci.com/v-dem/queasy-config)
 
 # [Queasy PHP Framework](https://github.com/v-dem/queasy-app/) - Configuration
 
