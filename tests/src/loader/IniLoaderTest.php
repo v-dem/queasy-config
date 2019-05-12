@@ -8,18 +8,19 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config\tests;
+namespace queasy\config\tests\loader;
 
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\IniLoader;
-use queasy\config\ConfigException;
+use queasy\config\loader\NotFoundException;
+use queasy\config\loader\CorruptedException;
 
 class IniLoaderTest extends TestCase
 {
     public function testCorrect()
     {
-        $loader = new IniLoader(__DIR__ . '/../resources/correct.ini');
+        $loader = new IniLoader(__DIR__ . '/../../resources/correct.ini');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -47,7 +48,7 @@ class IniLoaderTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $loader = new IniLoader(__DIR__ . '/../resources/correct-empty.ini');
+        $loader = new IniLoader(__DIR__ . '/../../resources/correct-empty.ini');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -57,18 +58,18 @@ class IniLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new IniLoader(__DIR__ . '/../resources/missing-file.ini');
+        $loader = new IniLoader(__DIR__ . '/../../resources/missing-file.ini');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(NotFoundException::class);
 
         $result = $loader();
     }
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new IniLoader(__DIR__ . '/../resources/incorrect-not-empty.ini');
+        $loader = new IniLoader(__DIR__ . '/../../resources/incorrect-not-empty.ini');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(CorruptedException::class);
 
         $result = $loader();
     }

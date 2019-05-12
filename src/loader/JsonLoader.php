@@ -10,8 +10,6 @@
 
 namespace queasy\config\loader;
 
-use queasy\config\ConfigException;
-
 /**
  * JSON configuration loader class
  */
@@ -21,6 +19,8 @@ class JsonLoader extends FileSystemLoader
      * Load and return an array containing configuration.
      *
      * @return array Loaded configuration
+     *
+     * @throws ConfigLoaderException When file is corrupted
      */
     public function load()
     {
@@ -28,7 +28,7 @@ class JsonLoader extends FileSystemLoader
 
         $data = json_decode(file_get_contents($path), true);
         if (!is_array($data)) {
-            throw ConfigException::fileIsCorrupted($this->path());
+            throw new CorruptedException($this->path());
         }
 
         return $data;

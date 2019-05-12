@@ -8,19 +8,20 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config\tests;
+namespace queasy\config\tests\loader;
 
 use PHPUnit\Framework\Error\Error;
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\PhpLoader;
-use queasy\config\ConfigException;
+use queasy\config\loader\NotFoundException;
+use queasy\config\loader\CorruptedException;
 
 class PhpLoaderTest extends TestCase
 {
     public function testCorrect()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/correct.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/correct.php');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -48,7 +49,7 @@ class PhpLoaderTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/correct-empty.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/correct-empty.php');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -57,54 +58,54 @@ class PhpLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/missing-file.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/missing-file.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(NotFoundException::class);
 
         $result = $loader();
     }
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/incorrect-not-empty.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(CorruptedException::class);
 
         $result = $loader();
     }
 
     public function testIncorrectNotEmpty2()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/incorrect-not-empty2.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty2.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(CorruptedException::class);
 
         $result = $loader();
     }
 
     public function testWrongReturnInt()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/wrong-return-int.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-return-int.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(CorruptedException::class);
 
         $result = $loader();
     }
 
     public function testWrongReturnString()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/wrong-return-string.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-return-string.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(CorruptedException::class);
 
         $result = $loader();
     }
 
     public function testWrongReturnNothing()
     {
-        $loader = new PhpLoader(__DIR__ . '/../resources/wrong-return-nothing.php');
+        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-return-nothing.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(CorruptedException::class);
 
         $result = $loader();
     }

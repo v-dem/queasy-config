@@ -13,8 +13,6 @@ namespace queasy\config\loader;
 use Exception;
 use SimpleXMLElement;
 
-use queasy\config\ConfigException;
-
 /**
  * XML configuration loader class
  */
@@ -24,6 +22,8 @@ class XmlLoader extends FileSystemLoader
      * Load and return an array containing configuration.
      *
      * @return array Loaded configuration
+     *
+     * @throws ConfigLoaderException When file is corrupted
      */
     public function load()
     {
@@ -34,7 +34,7 @@ class XmlLoader extends FileSystemLoader
 
             return $this->buildFromXml($xml);
         } catch (Exception $e) {
-            throw ConfigException::fileIsCorrupted($this->path());
+            throw new CorruptedException($this->path());
         }
     }
 

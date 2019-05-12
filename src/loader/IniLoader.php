@@ -10,8 +10,6 @@
 
 namespace queasy\config\loader;
 
-use queasy\config\ConfigException;
-
 /**
  * INI file configuration loader class
  */
@@ -26,7 +24,7 @@ class IniLoader extends FileSystemLoader
     {
         $data = @parse_ini_file($this->path(), true);
         if (!is_array($data)) {
-            throw ConfigException::fileIsCorrupted($this->path());
+            throw new CorruptedException($this->path());
         }
 
         return $data;

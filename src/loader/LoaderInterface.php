@@ -28,5 +28,12 @@ interface LoaderInterface
      * @return array Loaded configuration
      */
     function load();
+
+    /**
+     * Check whether configuration is available and can be loaded
+     *
+     * @return boolean True or false or throw exception
+     */
+    function check();
 }
 

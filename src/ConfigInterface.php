@@ -16,7 +16,7 @@ namespace queasy\config;
 interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
 {
     /**
-     * Get an option value from configuration by name provided or return $default value or null if $default not set.
+     * Get an option value from configuration by name provided, or return $default, or null if $default not set.
      *
      * @param string $name Config option name
      * @param mixed|null $default Value to be returned if option $name is missing
@@ -49,7 +49,7 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
      * Set an option value.
      *
      * @param string $name Option name
-     * @param string $name Option value
+     * @param mixed $value Option value
      */
     function __set($name, $value);
 

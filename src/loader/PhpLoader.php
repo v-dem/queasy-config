@@ -10,8 +10,6 @@
 
 namespace queasy\config\loader;
 
-use queasy\config\ConfigException;
-
 /**
  * Standard (PHP-based) configuration loader class
  */
@@ -21,6 +19,8 @@ class PhpLoader extends FileSystemLoader
      * Load and return an array containing configuration.
      *
      * @return array Loaded configuration
+     *
+     * @throws ConfigLoaderException When file is corrupted
      */
     public function load()
     {
@@ -35,11 +35,11 @@ class PhpLoader extends FileSystemLoader
         } catch (\Throwable $e) {
             ob_end_clean(); // Clean possible output (to avoid displaying config as a plain text when for example there's no PHP opening tag)
 
-            throw ConfigException::fileIsCorrupted($path);
+            throw new CorruptedException($path);
         }
 
         if (!is_array($data)) {
-            throw ConfigException::fileIsCorrupted($path);
+            throw new CorruptedException($path);
         }
 
         return $data;

@@ -8,11 +8,9 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config\tests;
+namespace queasy\config\tests\loader;
 
-use queasy\config\loader\LoaderInterface;
-
-class CustomLoader implements LoaderInterface
+class WrongCustomLoader
 {
     public function load()
     {

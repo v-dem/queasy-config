@@ -10,7 +10,6 @@
 
 namespace queasy\config\loader;
 
-use queasy\config\ConfigException;
 use queasy\config\InvalidArgumentException;
 
 /**
@@ -36,33 +35,52 @@ class LoaderFactory
     /**
      * Register a custom loader.
      *
-     * @param string $pattern Regexp pattern for paths to handle by this loader
+     * @param string $pattern Regexp pattern for resource paths to handle by this loader
      * @param string $className Loader class name
      * @param bool $ignoreIfRegistered If true, do not throw exception if $pattern is already registered in custom loaders
      *
-     * @throws ConfigException When $pattern is already registered and $ignoreIfRegistered is false
+     * @throws ConfigLoaderException When $pattern is already registered and $ignoreIfRegistered is false
      * @throws InvalidArgumentException When $className does not implement LoaderInterface
      */
     public static function register($pattern, $className, $ignoreIfRegistered = false)
     {
         if (isset(self::$loaders[$pattern])
                 && !$ignoreIfRegistered) {
-            throw ConfigException::loaderAlreadyRegistered($pattern);
+            throw new AlreadyRegisteredException($pattern);
         }
 
         $interfaceName = 'queasy\config\loader\LoaderInterface';
         $interfaces = class_implements($className);
         if (!$interfaces || !isset($interfaces[$interfaceName])) {
-            throw InvalidArgumentException::interfaceNotImplemented($className, $interfaceName);
+            throw new NotImplementedException($className);
         }
 
         self::$loaders[$pattern] = $className;
     }
 
     /**
+     * Create a loader for specified path.
+     *
+     * @param string $path Path to resource
+     *
+     * @returns queasy\config\loader\LoaderInterface Loader instance
+     *
+     * @throws ConfigLoaderException When no loader found for $path
+     */
+    public static function create($path)
+    {
+        $className = self::registered($path);
+        if (!$className) {
+            throw new NotFoundException($path);
+        }
+
+        return new $className($path);
+    }
+
+    /**
      * Check if loader for specified path is registered.
      *
-     * @param string $path Path
+     * @param string $path Path to resource
      *
      * @returns bool|string Loader class name or false if not found
      */
@@ -78,31 +96,12 @@ class LoaderFactory
     }
 
     /**
-     * Create a loader for specified path.
-     *
-     * @param string $path Path
-     *
-     * @returns queasy\config\loader\LoaderInterface Loader instance
-     *
-     * @throws ConfigException When no loader found for $path
-     */
-    public static function create($path)
-    {
-        $className = self::registered($path);
-        if (!$className) {
-            throw ConfigException::loaderNotFound($path);
-        }
-
-        return new $className($path);
-    }
-
-    /**
      * Look for a loader for specified path in an array given.
      *
      * @param array $loaders Array of patterns and loader class names to search in
-     * @param string $path Path
+     * @param string $path Path to resource
      *
-     * @returns null|string Loader class name or null if not found
+     * @returns bool|string Loader class name or false if not found
      */
     private static function find(array $loaders, $path)
     {

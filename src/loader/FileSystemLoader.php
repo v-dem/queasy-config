@@ -10,8 +10,6 @@
 
 namespace queasy\config\loader;
 
-use queasy\config\ConfigException;
-
 /**
  * File system configuration loader class
  */
@@ -36,15 +34,19 @@ abstract class FileSystemLoader extends AbstractLoader
      * Check if config file exists and is accessible.
      *
      * @param string Path to config file
+     *
+     * @return bool True if config file can be accessed
+     *
+     * @throws ConfigLoaderException On error (file not found or can't be read)
      */
     public function check()
     {
         if (!file_exists($this->path())) {
-            throw ConfigException::fileNotFound($this->path());
+            throw new NotFoundException($this->path());
         }
 
         if (!is_readable($this->path())) {
-            throw ConfigException::fileNotReadable($this->path());
+            throw new NotReadableException($this->path());
         }
 
         return true;

@@ -10,6 +10,7 @@
 
 namespace queasy\config;
 
+use queasy\config\loader\ConfigLoaderException;
 use queasy\config\loader\LoaderFactory;
 
 /**
@@ -25,7 +26,7 @@ class Config extends AbstractConfig
      * @param string|array|null $data Array with configuration data, or path to a config file, or null to load config from path
      *      specified by QUEASY_CONFIG_PATH constant if present, or from default path
      *
-     * @throws InvalidArgumentException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws InvalidPathException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function __construct($data = null, ConfigInterface $parent = null)
     {
@@ -39,7 +40,7 @@ class Config extends AbstractConfig
             }
         } else if (!is_string($data)
                 && !is_array($data)) {
-            throw InvalidArgumentException::invalidArgumentType(gettype($data));
+            throw new InvalidPathException(gettype($data));
         }
 
         parent::__construct($data, $parent);
@@ -52,7 +53,7 @@ class Config extends AbstractConfig
      *
      * @return mixed|null Option value or null if $name is missing in config
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function __get($name)
     {
@@ -66,7 +67,7 @@ class Config extends AbstractConfig
      */
     public function __set($name, $value)
     {
-        throw BadMethodCallException::notImplemented(__METHOD__);
+        throw new ReadOnlyException(__METHOD__);
     }
 
     /**
@@ -76,7 +77,7 @@ class Config extends AbstractConfig
      *
      * @return boolean True if present, false if not
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function __isset($name)
     {
@@ -90,7 +91,7 @@ class Config extends AbstractConfig
      */
     public function __unset($name)
     {
-        throw BadMethodCallException::notImplemented(__METHOD__);
+        throw new ReadOnlyException(__METHOD__);
     }
 
     /**
@@ -101,7 +102,7 @@ class Config extends AbstractConfig
      *
      * @return mixed Option value or $default if $name option is missing in config
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function get($name, $default = null)
     {
@@ -123,22 +124,22 @@ class Config extends AbstractConfig
      *
      * @return mixed Option value
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
-     *                          or when $name option is missing
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws MissingOptionException When $name option is missing
      */
     public function need($name)
     {
         if (isset($this[$name])) {
             return $this[$name];
         } else {
-            throw ConfigException::missingOption($name);
+            throw new MissingOptionException($name);
         }
     }
 
     /**
      * Move config array pointer to the beginning.
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function rewind()
     {
@@ -150,7 +151,7 @@ class Config extends AbstractConfig
     /**
      * Get current config array item.
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function current()
     {
@@ -162,7 +163,7 @@ class Config extends AbstractConfig
     /**
      * Move to the next config array item and return it.
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function next()
     {
@@ -174,7 +175,7 @@ class Config extends AbstractConfig
     /**
      * Return current config array key.
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function key()
     {
@@ -186,7 +187,7 @@ class Config extends AbstractConfig
     /**
      * Validate current config array key.
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function valid()
     {
@@ -203,7 +204,7 @@ class Config extends AbstractConfig
      *
      * @return int Number of items
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function count()
     {
@@ -217,7 +218,7 @@ class Config extends AbstractConfig
      *
      * @return boolean True if present, false if not
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function offsetExists($name)
     {
@@ -241,7 +242,7 @@ class Config extends AbstractConfig
      *
      * @return mixed Config option value
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
     public function offsetGet($name)
     {
@@ -266,7 +267,7 @@ class Config extends AbstractConfig
      */
     public function offsetUnset($name)
     {
-        throw BadMethodCallException::notImplemented(__METHOD__);
+        throw new ReadOnlyException(__METHOD__);
     }
 
     /**
@@ -276,7 +277,7 @@ class Config extends AbstractConfig
      */
     public function offsetSet($name, $value)
     {
-        throw BadMethodCallException::notImplemented(__METHOD__);
+        throw new ReadOnlyException(__METHOD__);
     }
 
     /**
@@ -307,7 +308,7 @@ class Config extends AbstractConfig
      *
      * @return array Configuration represented as a regular array
      *
-     * @throws ConfigException When any of included configuration files are missing or corrupted (doesn't return an array)
+     * @throws ConfigLoaderException When any of included configuration files are missing or corrupted (doesn't return an array)
      */
     public function toArray()
     {
@@ -326,9 +327,10 @@ class Config extends AbstractConfig
     /**
      * Check if data is loaded, and try to load it using loader if not.
      *
-     * @return &array An array containing config
+     * @return &array A reference to array containing config
      *
-     * @throws ConfigException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
+     * @throws ConfigLoaderException When configuration load attempt fails,
+     *          in case of missing or corrupted (doesn't returning an array) file
      */
     protected function &data()
     {
@@ -349,7 +351,7 @@ class Config extends AbstractConfig
      *
      * @param mixed $item An item to check
      *
-     * @return ConfigInterface|mixed ConfigInterface instance if $item was an array or $item as is
+     * @return ConfigInterface|mixed ConfigInterface instance if $item was an array, or $item as is
      */
     protected function item($item)
     {

@@ -8,19 +8,20 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config\tests;
+namespace queasy\config\tests\loader;
 
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\XmlLoader;
-use queasy\config\ConfigException;
+use queasy\config\loader\NotFoundException;
+use queasy\config\loader\CorruptedException;
 
 class XmlLoaderTest extends TestCase
 {
 
     public function testCorrect()
     {
-        $loader = new XmlLoader(__DIR__ . '/../resources/correct.xml');
+        $loader = new XmlLoader(__DIR__ . '/../../resources/correct.xml');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -48,7 +49,7 @@ class XmlLoaderTest extends TestCase
 
     public function testCorrectEmpty()
     {
-        $loader = new XmlLoader(__DIR__ . '/../resources/correct-empty.xml');
+        $loader = new XmlLoader(__DIR__ . '/../../resources/correct-empty.xml');
         $result = $loader();
 
         $this->assertTrue(is_array($result));
@@ -58,18 +59,18 @@ class XmlLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new XmlLoader(__DIR__ . '/../resources/missing-file.xml');
+        $loader = new XmlLoader(__DIR__ . '/../../resources/missing-file.xml');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(NotFoundException::class);
 
         $result = $loader();
     }
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new XmlLoader(__DIR__ . '/../resources/incorrect-not-empty.xml');
+        $loader = new XmlLoader(__DIR__ . '/../../resources/incorrect-not-empty.xml');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(CorruptedException::class);
 
         $result = $loader();
     }

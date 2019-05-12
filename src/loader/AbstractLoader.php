@@ -18,7 +18,7 @@ abstract class AbstractLoader implements LoaderInterface
     /**
      * Class invokation method representing load()
      *
-     * @return array Loaded configuration
+     * @return null|array Loaded configuration, null otherwise
      */
     public function __invoke()
     {
@@ -37,7 +37,7 @@ abstract class AbstractLoader implements LoaderInterface
     /**
      * Check whether configuration is available and can be loaded
      *
-     * @return boolean True or false or throw exception
+     * @return boolean True if file can be read
      */
     abstract public function check();
 }

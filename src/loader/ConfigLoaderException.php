@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace queasy\config;
+namespace queasy\config\loader;
 
-use Exception;
+use queasy\config\ConfigException;
 
 /**
- * Configuration exception class
+ * Configuration loader exception class
  */
-class ConfigException extends Exception
+class ConfigLoaderException extends ConfigException
 {
 }
 

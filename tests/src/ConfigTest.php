@@ -15,7 +15,9 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\Config;
-use queasy\config\ConfigException;
+use queasy\config\loader\ConfigLoaderException;
+use queasy\config\InvalidPathException;
+use queasy\config\MissingOptionException;
 
 class ConfigTest extends TestCase
 {
@@ -172,7 +174,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(MissingOptionException::class);
 
         $this->assertNull($config->need('section3')['key31']);
     }
@@ -202,7 +204,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/correct.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(MissingOptionException::class);
 
         $value = $config->need('unknown');
     }
@@ -247,7 +249,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/missing-file.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(ConfigLoaderException::class);
 
         $test = $config['a'];
     }
@@ -256,7 +258,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-not-empty.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(ConfigLoaderException::class);
 
         $test = $config['a'];
     }
@@ -265,7 +267,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-return-int.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(ConfigLoaderException::class);
 
         $test = $config['a'];
     }
@@ -274,7 +276,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-return-string.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(ConfigLoaderException::class);
 
         $test = $config['a'];
     }
@@ -283,14 +285,14 @@ class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . '/../resources/incorrect-return-nothing.php');
 
-        $this->expectException(ConfigException::class);
+        $this->expectException(ConfigLoaderException::class);
 
         $test = $config['a'];
     }
 
     public function testNotAStringOrArrayAsParameter()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidPathException::class);
 
         new Config(true);
     }
