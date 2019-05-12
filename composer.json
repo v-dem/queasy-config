@@ -2,7 +2,7 @@
     "name": "v-dem/queasy-config",
     "description": "Configuration classes (currently supports PHP, INI, XML and JSON configs), part of Queasy PHP Framework",
     "homepage": "https://github.com/v-dem/queasy-config/",
-    "keywords": ["php", "config", "configuration", "ini", "json", "xml", "queasy"],
+    "keywords": ["php", "config", "configuration", "ini", "json", "xml", "queasy", "framework"],
     "license": "LGPL-3.0-only",
     "minimum-stability": "dev",
     "version": "1.0.0",
