@@ -110,8 +110,7 @@ require_once('vendor/autoload.php');
 Create config instance (config file type will be detected by file name extension):
 
 ```php
-// Can be also '.ini', '.json' or '.xml'
-$config = new queasy\config\Config('config.php');
+$config = new queasy\config\Config('config.php'); // Can be also '.ini', '.json' or '.xml'
 ```
 
 #### Accessing config instance
@@ -191,4 +190,10 @@ Accessing:
 $config = new queasy\config\Config('config.php');
 $query = $config['queries']['selectActiveUsers'];
 ```
+
+### Testing
+
+Tests can be run with miminum PHP 7.2 version due to PHPUnit requirements. To run them use
+
+    composer test
 
