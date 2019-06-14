@@ -14,12 +14,12 @@ class WrongCustomLoader
 {
     public function load()
     {
-        // Do nothing
+        //return $this->markTestIncomplete();
     }
 
     public function __invoke()
     {
-        // Do nothing
+        //return $this->markTestIncomplete();
     }
 }
 

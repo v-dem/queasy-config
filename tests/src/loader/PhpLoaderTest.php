@@ -58,65 +58,50 @@ class PhpLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new PhpLoader(__DIR__ . '/../../resources/missing-file.php');
-
         $this->expectException(NotFoundException::class);
 
-        $result = $loader();
+        return (new PhpLoader(__DIR__ . '/../../resources/missing-file.php'))();
     }
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty.php');
-
         $this->expectException(CorruptedException::class);
 
-        $result = $loader();
+        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty.php'))();
     }
 
     public function testIncorrectNotEmpty2()
     {
-        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty2.php');
-
         $this->expectException(CorruptedException::class);
 
-        $result = $loader();
+        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty2.php'))();
     }
 
     public function testWrongReturnInt()
     {
-        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-return-int.php');
-
         $this->expectException(CorruptedException::class);
 
-        $result = $loader();
+        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-int.php'))();
     }
 
     public function testWrongReturnString()
     {
-        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-return-string.php');
-
         $this->expectException(CorruptedException::class);
 
-        $result = $loader();
+        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-string.php'))();
     }
 
     public function testWrongReturnNothing()
     {
-        $loader = new PhpLoader(__DIR__ . '/../../resources/incorrect-return-nothing.php');
-
         $this->expectException(CorruptedException::class);
 
-        $result = $loader();
+        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-nothing.php'))();
     }
 
     public function testNotAStringAsPath()
     {
-        $loader = new PhpLoader(array(123));
-
         $this->expectException(Error::class);
 
-        $result = $loader();
+        return (new PhpLoader(array(123)))();
     }
 }
-

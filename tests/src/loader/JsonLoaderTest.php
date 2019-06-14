@@ -58,20 +58,16 @@ class JsonLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new JsonLoader(__DIR__ . '/../../resources/missing-file.json');
-
         $this->expectException(NotFoundException::class);
 
-        $result = $loader();
+        return (new JsonLoader(__DIR__ . '/../../resources/missing-file.json'))();
     }
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new JsonLoader(__DIR__ . '/../../resources/incorrect-not-empty.json');
-
         $this->expectException(CorruptedException::class);
 
-        $result = $loader();
+        return (new JsonLoader(__DIR__ . '/../../resources/incorrect-not-empty.json'))();
     }
 }
 

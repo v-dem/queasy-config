@@ -16,16 +16,17 @@ class CustomLoader implements LoaderInterface
 {
     public function load()
     {
-        // Do nothing
+        //$this->markTestIncomplete();
     }
 
     public function check()
     {
+        //$this->markTestIncomplete();
     }
 
     public function __invoke()
     {
-        // Do nothing
+        //$this->markTestIncomplete();
     }
 }
 

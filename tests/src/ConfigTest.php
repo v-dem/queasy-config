@@ -10,8 +10,6 @@
 
 namespace queasy\config\tests;
 
-use InvalidArgumentException;
-
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\Config;
@@ -172,11 +170,11 @@ class ConfigTest extends TestCase
 
     public function testGetForMissingRequiredSection()
     {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
         $this->expectException(MissingOptionException::class);
 
-        $this->assertNull($config->need('section3')['key31']);
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        return $this->assertNull($config->need('section3')['key31']);
     }
 
     public function testCompoundGetInherited()
@@ -202,11 +200,11 @@ class ConfigTest extends TestCase
 
     public function testRequiredMissing()
     {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
         $this->expectException(MissingOptionException::class);
 
-        $value = $config->need('unknown');
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        return $config->need('unknown');
     }
 
     public function testRequiredNullExisting()
@@ -247,54 +245,45 @@ class ConfigTest extends TestCase
 
     public function testMissingFile()
     {
-        $config = new Config(__DIR__ . '/../resources/missing-file.php');
-
         $this->expectException(ConfigLoaderException::class);
 
-        $test = $config['a'];
+        return (new Config(__DIR__ . '/../resources/missing-file.php'))['a'];
     }
 
     public function testIncorrectNotEmpty()
     {
-        $config = new Config(__DIR__ . '/../resources/incorrect-not-empty.php');
-
         $this->expectException(ConfigLoaderException::class);
 
-        $test = $config['a'];
+        return (new Config(__DIR__ . '/../resources/incorrect-not-empty.php'))['a'];
     }
 
     public function testWrongReturnInt()
     {
-        $config = new Config(__DIR__ . '/../resources/incorrect-return-int.php');
-
         $this->expectException(ConfigLoaderException::class);
 
-        $test = $config['a'];
+        return (new Config(__DIR__ . '/../resources/incorrect-return-int.php'))['a'];
     }
 
     public function testWrongReturnString()
     {
-        $config = new Config(__DIR__ . '/../resources/incorrect-return-string.php');
-
         $this->expectException(ConfigLoaderException::class);
 
-        $test = $config['a'];
+        return (new Config(__DIR__ . '/../resources/incorrect-return-string.php'))['a'];
+
     }
 
     public function testWrongReturnNothing()
     {
-        $config = new Config(__DIR__ . '/../resources/incorrect-return-nothing.php');
-
         $this->expectException(ConfigLoaderException::class);
 
-        $test = $config['a'];
+        return (new Config(__DIR__ . '/../resources/incorrect-return-nothing.php'))['a'];
     }
 
     public function testNotAStringOrArrayAsParameter()
     {
         $this->expectException(InvalidPathException::class);
 
-        new Config(true);
+        return new Config(true);
     }
 }
 

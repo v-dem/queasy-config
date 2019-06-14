@@ -11,23 +11,19 @@
 namespace queasy\config\tests\loader;
 
 use PHPUnit\Framework\TestCase;
-
 use queasy\config\loader\XmlLoader;
 use queasy\config\loader\NotFoundException;
 use queasy\config\loader\CorruptedException;
 
 class XmlLoaderTest extends TestCase
 {
-
     public function testCorrect()
     {
         $loader = new XmlLoader(__DIR__ . '/../../resources/correct.xml');
         $result = $loader();
-
         $this->assertTrue(is_array($result));
         $this->assertGreaterThan(0, count($result));
         $this->assertCount(2, $result);
-
         $this->assertArrayHasKey('section1', $result);
         $this->assertTrue(is_array($result['section1']));
         $this->assertGreaterThan(0, count($result['section1']));
@@ -36,7 +32,6 @@ class XmlLoaderTest extends TestCase
         $this->assertEquals('value11', $result['section1']['key11']);
         $this->assertArrayHasKey('key12', $result['section1']);
         $this->assertEquals('value12', $result['section1']['key12']);
-
         $this->assertArrayHasKey('section2', $result);
         $this->assertTrue(is_array($result['section2']));
         $this->assertGreaterThan(0, count($result['section2']));
@@ -51,7 +46,6 @@ class XmlLoaderTest extends TestCase
     {
         $loader = new XmlLoader(__DIR__ . '/../../resources/correct-empty.xml');
         $result = $loader();
-
         $this->assertTrue(is_array($result));
         $this->assertCount(0, $result);
         $this->assertEmpty($result);
@@ -59,20 +53,14 @@ class XmlLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new XmlLoader(__DIR__ . '/../../resources/missing-file.xml');
-
         $this->expectException(NotFoundException::class);
+        return (new XmlLoader(__DIR__ . '/../../resources/missing-file.xml'))();
 
-        $result = $loader();
     }
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new XmlLoader(__DIR__ . '/../../resources/incorrect-not-empty.xml');
-
         $this->expectException(CorruptedException::class);
-
-        $result = $loader();
+        return (new XmlLoader(__DIR__ . '/../../resources/incorrect-not-empty.xml'))();
     }
 }
-

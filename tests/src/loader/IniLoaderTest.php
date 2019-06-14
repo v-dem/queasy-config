@@ -58,20 +58,16 @@ class IniLoaderTest extends TestCase
 
     public function testMissingFile()
     {
-        $loader = new IniLoader(__DIR__ . '/../../resources/missing-file.ini');
-
         $this->expectException(NotFoundException::class);
 
-        $result = $loader();
+        return (new IniLoader(__DIR__ . '/../../resources/missing-file.ini'))();
     }
 
     public function testIncorrectNotEmpty()
     {
-        $loader = new IniLoader(__DIR__ . '/../../resources/incorrect-not-empty.ini');
-
         $this->expectException(CorruptedException::class);
 
-        $result = $loader();
+        return (new IniLoader(__DIR__ . '/../../resources/incorrect-not-empty.ini'))();
     }
 }
 
