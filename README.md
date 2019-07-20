@@ -11,7 +11,7 @@ This package contains a set of the classes intended for reading configuration fi
 * JSON
 * XML
 
-> PHP config format supports multi-file configs, also it's possible to use PHP constants and expressions there.
+> PHP config format supports multi-file configs, also it's possible to use PHP constants and expressions there (UPDATE: this feature will be implemented for other config formats in near future).
 
 > INI format doesn't support nested configs.
 
