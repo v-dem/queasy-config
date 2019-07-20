@@ -10,6 +10,8 @@
 
 namespace queasy\config;
 
+use queasy\helper\Strings;
+
 use queasy\config\loader\ConfigLoaderException;
 use queasy\config\loader\LoaderFactory;
 
@@ -19,6 +21,8 @@ use queasy\config\loader\LoaderFactory;
 class Config extends AbstractConfig
 {
     const DEFAULT_PATH = 'queasy-config.php';
+
+    const QUEASY_MARKER = '@queasy:';
 
     /**
      * Constructor.
@@ -347,7 +351,8 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Check if $item is an array and if yes returns ConfigInterface instance that encapsulates this array, in other way returns $item as is.
+     * Check if $item is an array and if yes return ConfigInterface instance that encapsulates this array,
+     * if $item is instance of AbstractConfig, set $this as his parent, in other way return $item as is.
      *
      * @param mixed $item An item to check
      *
@@ -358,9 +363,11 @@ class Config extends AbstractConfig
         if (is_array($item)) {
             $className = get_class($this);
 
-            return new $className($item, $this);
-        } elseif ($item instanceof AbstractConfig) {
+            $item = new $className($item, $this);
+        } elseif ($item instanceof ConfigInterface) {
             $item->setParent($this);
+        } elseif (is_string($item) && Strings::startsWith($item, self::QUEASY_MARKER)) {
+            $item = eval('return ' . substr($item, strlen(self::QUEASY_MARKER)));
         }
 
         return $item;
