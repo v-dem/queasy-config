@@ -366,8 +366,8 @@ class Config extends AbstractConfig
             $item = new $className($item, $this);
         } elseif ($item instanceof ConfigInterface) {
             $item->setParent($this);
-        } elseif (is_string($item) && Strings::startsWith($item, self::QUEASY_MARKER)) {
-            $item = eval('return ' . substr($item, strlen(self::QUEASY_MARKER)));
+        } elseif (is_string($item) && Strings::startsWith($tritem = trim($item), self::QUEASY_MARKER)) { // TODO: Update method description
+            $item = eval('return ' . substr($tritem, strlen(self::QUEASY_MARKER)) . (Strings::endsWith($tritem, ';')? '': ';'));
         }
 
         return $item;
