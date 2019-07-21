@@ -6,20 +6,16 @@
 
 This package contains a set of the classes intended for reading configuration files. Formats currently supported are:
 
-* PHP (recommended, see below)
-* INI (not recommended but very easy)
+* PHP
+* INI
 * JSON
 * XML
-
-> PHP config format supports multi-file configs, also it's possible to use PHP constants and expressions there (UPDATE: this feature will be implemented for other config formats in near future).
-
-> INI format doesn't support nested configs.
 
 ### Features
 
 * Easy to use - just like nested arrays or objects. Also it's possible to use `foreach()` with config instances.
 * Support for default option values.
-* Support for multi-file configurations. You can split your config into many files as you wish without changing program code (PHP configs only).
+* Support for multi-file configurations. You can split your config into many files as you wish without changing program code.
 * Options inheritance. If an option is missing at current config level, it will look for this option on upper levels.
 * Unified config interface. You can switch between config formats without changing your code.
 * Easy to extend with other config formats.
@@ -27,7 +23,7 @@ This package contains a set of the classes intended for reading configuration fi
 
 #### Planned features:
 
-* YAML format support.
+* YAML support.
 
 ### Requirements
 
@@ -190,6 +186,23 @@ Accessing:
 $config = new queasy\config\Config('config.php');
 $query = $config['queries']['selectActiveUsers'];
 ```
+
+Almost the same for other config formats:
+
+`config.ini`:
+```php
+[connection]
+driver = mysql
+host = localhost
+name = test
+user = root
+password = secret
+queries = "@queasy:new queasy\config\Config('queries.ini')"
+```
+
+> There can be any PHP code after `@queasy:` so it's possible to use PHP constants etc. Be careful, `eval()` function is used to execute this expression.
+
+> Different config formats can be mixed this way.
 
 ### Testing
 
