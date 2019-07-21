@@ -50,9 +50,22 @@ class ConfigTest extends TestCase
         $this->assertCount(0, $config);
     }
 
-    public function testCorrectCompound()
+    public function testCorrectCompoundPhp()
     {
         $config = new Config(__DIR__ . '/../resources/correct-compound.php');
+
+        $this->assertCount(2, $config);
+        $this->assertArrayHasKey('include-section', $config);
+        $this->assertCount(1, $config['include-section']);
+        $this->assertArrayHasKey('section', $config['include-section']);
+        $this->assertCount(1, $config['include-section']['section']);
+        $this->assertArrayHasKey('key', $config['include-section']['section']);
+        $this->assertEquals('value', $config['include-section']['section']['key']);
+    }
+
+    public function testCorrectCompoundIni()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct-compound.ini');
 
         $this->assertCount(2, $config);
         $this->assertArrayHasKey('include-section', $config);
