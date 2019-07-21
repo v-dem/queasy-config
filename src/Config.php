@@ -352,7 +352,9 @@ class Config extends AbstractConfig
 
     /**
      * Check if $item is an array and if yes return ConfigInterface instance that encapsulates this array,
-     * if $item is instance of AbstractConfig, set $this as his parent, in other way return $item as is.
+     * if $item is instance of ConfigInterface, set $this as his parent, in other way return $item as is.
+     * If $item starts with "@queasy:" then run eval() for the rest of the string (to support multi-file configs
+     * for formats other than PHP)
      *
      * @param mixed $item An item to check
      *
@@ -366,7 +368,7 @@ class Config extends AbstractConfig
             $item = new $className($item, $this);
         } elseif ($item instanceof ConfigInterface) {
             $item->setParent($this);
-        } elseif (is_string($item) && Strings::startsWith($tritem = trim($item), self::QUEASY_MARKER)) { // TODO: Update method description
+        } elseif (is_string($item) && Strings::startsWith($tritem = trim($item), self::QUEASY_MARKER)) {
             $item = eval('return ' . substr($tritem, strlen(self::QUEASY_MARKER)) . (Strings::endsWith($tritem, ';')? '': ';'));
         }
 
