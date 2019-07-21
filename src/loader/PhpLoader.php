@@ -26,16 +26,20 @@ class PhpLoader extends FileSystemLoader
     {
         $path = $this->path();
 
-        try {
-            ob_start();
+        if (interface_exists('Throwable')) {
+            try {
+                ob_start();
 
+                $data = include($path);
+
+                ob_end_clean(); // Stop output buffering
+            } catch (\Throwable $e) {
+                ob_end_clean(); // Clean possible output (to avoid displaying config as a plain text when for example there's no PHP opening tag)
+
+                throw new CorruptedException($path);
+            }
+        } else {
             $data = include($path);
-
-            ob_end_clean(); // Stop output buffering
-        } catch (\Throwable $e) {
-            ob_end_clean(); // Clean possible output (to avoid displaying config as a plain text when for example there's no PHP opening tag)
-
-            throw new CorruptedException($path);
         }
 
         if (!is_array($data)) {
