@@ -70,7 +70,7 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     function __unset($name);
 
     /**
-     * Call class instance as a function.
+     * Call class instance as a get() function.
      *
      * @param string $name Option name
      * @param string $default Default option value (optional)

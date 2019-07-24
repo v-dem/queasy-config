@@ -67,7 +67,7 @@ class Config extends AbstractConfig
     /**
      * Not implemented.
      *
-     * @throws BadMethodCallException
+     * @throws ReadOnlyException
      */
     public function __set($name, $value)
     {
@@ -91,7 +91,7 @@ class Config extends AbstractConfig
     /**
      * Not implemented.
      *
-     * @throws BadMethodCallException
+     * @throws ReadOnlyException
      */
     public function __unset($name)
     {
