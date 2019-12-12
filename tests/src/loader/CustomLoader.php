@@ -12,21 +12,21 @@ namespace queasy\config\tests\loader;
 
 use queasy\config\loader\LoaderInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CustomLoader implements LoaderInterface
 {
     public function load()
     {
-        //$this->markTestIncomplete();
     }
 
     public function check()
     {
-        //$this->markTestIncomplete();
     }
 
     public function __invoke()
     {
-        //$this->markTestIncomplete();
     }
 }
 

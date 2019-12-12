@@ -10,16 +10,17 @@
 
 namespace queasy\config\tests\loader;
 
+/**
+ * @codeCoverageIgnore
+ */
 class WrongCustomLoader
 {
     public function load()
     {
-        //return $this->markTestIncomplete();
     }
 
     public function __invoke()
     {
-        //return $this->markTestIncomplete();
     }
 }
 
