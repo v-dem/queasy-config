@@ -130,6 +130,13 @@ It's possible to use a default value if an option is missing:
 $databaseHost = $config['database']->get('host', 'localhost');
 ```
 
+A bit shorter way:
+
+```php
+// If 'host' is missing in config, 'localhost' will be used by default
+$databaseHost = $config['database']('host', 'localhost');
+```
+
 It's also possible to point that an option is required, and to throw `ConfigException` if this option is missing:
 
 ```php
@@ -150,7 +157,7 @@ If you don't want to check each section for presence when accessing a very neste
 $databaseName = $config->get('database', [])->get('name', 'default');
 ```
 
-You can also use `Config` class instance invokation this way:
+A bit shorter way:
 
 ```php
 // $databaseName will contain 'default' if 'name' and/or 'database' options are missing
