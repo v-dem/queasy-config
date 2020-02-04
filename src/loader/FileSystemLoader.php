@@ -41,7 +41,7 @@ abstract class FileSystemLoader extends AbstractLoader
      */
     public function check()
     {
-        if (!file_exists($this->path())) {
+        if (!is_file($this->path()) && !is_link($this->path())) {
             throw new NotFoundException($this->path());
         }
 

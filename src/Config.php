@@ -39,7 +39,7 @@ class Config extends AbstractConfig
                 ? QUEASY_CONFIG_PATH
                 : static::DEFAULT_PATH;
 
-            if (!file_exists($data)) {
+            if (!is_file($data) && !is_link($data)) {
                 $data = array();
             }
         } else if (!is_string($data)
