@@ -6,28 +6,28 @@
 
 This package contains a set of the classes intended for reading configuration files. Formats currently supported are:
 
-* PHP
-* INI
-* JSON
-* XML
+  * PHP
+  * INI
+  * JSON
+  * XML
 
 ### Features
 
-* Easy to use - just like nested arrays or objects. Also it's possible to use `foreach()` with config instances.
-* Support for default option values.
-* Support for multi-file configurations. You can split your config into many files as you wish without changing program code.
-* Options inheritance. If an option is missing at current config level, it will look for this option on upper levels.
-* Unified config interface. You can switch between config formats without changing your code.
-* Easy to extend with other config formats.
-* Regular expressions support (it's possible to get config options by regular expression).
+  * Easy to use - just like nested arrays or objects. Also it's possible to use `foreach()` with config instances.
+  * Support for default option values.
+  * Support for multi-file configurations. You can split your config into many files as you wish without changing program code.
+  * Options inheritance. If an option is missing at current config level, it will look for this option on upper levels.
+  * Unified config interface. You can switch between config formats without changing your code.
+  * Easy to extend with other config formats.
+  * Regular expressions support (it's possible to get config options by regular expression).
 
 #### Planned features:
 
-* YAML support.
+  * YAML support.
 
 ### Requirements
 
-* PHP version 5.3 or higher
+  * PHP version 5.3 or higher
 
 ### Documentation
 

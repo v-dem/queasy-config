@@ -34,7 +34,7 @@ class Config extends AbstractConfig
      */
     public function __construct($data = null, ConfigInterface $parent = null)
     {
-        if (is_null($data)) {
+        if (null === $data) {
             $data = (defined('QUEASY_CONFIG_PATH'))
                 ? QUEASY_CONFIG_PATH
                 : static::DEFAULT_PATH;
@@ -232,7 +232,7 @@ class Config extends AbstractConfig
 
         if (isset($data[$name]) || array_key_exists($name, $data)) {
             return true;
-        } elseif (is_null($parent)) {
+        } elseif (null !== $parent) {
             return false;
         } else {
             return $parent->offsetExists($name);
@@ -257,7 +257,7 @@ class Config extends AbstractConfig
             } else {
                 $parent = $this->parent();
 
-                return is_null($parent)? null: $parent[$name];
+                return (null === $parent)? null: $parent[$name];
             }
         } else {
             return null;
