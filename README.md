@@ -57,14 +57,14 @@ return [
 
 Or `config.ini`:
 
-    ```ini
+```ini
     [connection]
     driver = mysql
     host = localhost
     name = test
     user = root
     password = secret
-    ```
+```
 
 Or `config.json`:
 
