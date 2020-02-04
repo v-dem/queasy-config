@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/82d85625b3154e54af088394d285d6c5)](https://app.codacy.com/manual/v-dem/queasy-config?utm_source=github.com&utm_medium=referral&utm_content=v-dem/queasy-config&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/v-dem/queasy-config.svg?branch=master)](https://travis-ci.com/v-dem/queasy-config) [![codecov](https://codecov.io/gh/v-dem/queasy-config/branch/master/graph/badge.svg)](https://codecov.io/gh/v-dem/queasy-config)
 
 # [Queasy PHP Framework](https://github.com/v-dem/queasy-app/) - Configuration
