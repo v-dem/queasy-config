@@ -22,7 +22,7 @@ This package contains a set of the classes intended for reading configuration fi
 *   Easy to extend with other config formats.
 *   Regular expressions support (it's possible to get config options by regular expression).
 
-#### Planned features:
+#### Planned features
 
 *   YAML support.
 
@@ -57,14 +57,14 @@ return [
 
 Or `config.ini`:
 
-```ini
-[connection]
-driver = mysql
-host = localhost
-name = test
-user = root
-password = secret
-```
+    ```ini
+    [connection]
+    driver = mysql
+    host = localhost
+    name = test
+    user = root
+    password = secret
+    ```
 
 Or `config.json`:
 
