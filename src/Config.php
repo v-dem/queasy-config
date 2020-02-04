@@ -232,7 +232,7 @@ class Config extends AbstractConfig
 
         if (isset($data[$name]) || array_key_exists($name, $data)) {
             return true;
-        } elseif (null !== $parent) {
+        } elseif (null === $parent) {
             return false;
         } else {
             return $parent->offsetExists($name);
