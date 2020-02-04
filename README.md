@@ -7,10 +7,10 @@
 
 This package contains a set of the classes intended for reading configuration files. Formats currently supported are:
 
-  * PHP
-  * INI
-  * JSON
-  * XML
+* PHP
+* INI
+* JSON
+* XML
 
 ### Features
 
