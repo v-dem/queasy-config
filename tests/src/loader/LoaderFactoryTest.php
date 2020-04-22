@@ -11,22 +11,24 @@
 namespace queasy\config\tests\loader;
 
 use PHPUnit\Framework\TestCase;
+
 use queasy\config\loader\NotFoundException;
 use queasy\config\loader\NotImplementedException;
 use queasy\config\loader\AlreadyRegisteredException;
 use queasy\config\loader\LoaderFactory;
-
-// use queasy\config\tests\loader\CustomLoader;
-// use queasy\config\tests\loader\WrongCustomLoader;
+use queasy\config\loader\IniLoader;
+use queasy\config\loader\JsonLoader;
+use queasy\config\loader\PhpLoader;
+use queasy\config\loader\XmlLoader;
 
 class LoaderFactoryTest extends TestCase
 {
     public function testCheckRegisteredLoaders()
     {
-        $this->assertEquals(\queasy\config\loader\IniLoader::class, LoaderFactory::registered('test.ini'));
-        $this->assertEquals(\queasy\config\loader\JsonLoader::class, LoaderFactory::registered('test.json'));
-        $this->assertEquals(\queasy\config\loader\PhpLoader::class, LoaderFactory::registered('test.php'));
-        $this->assertEquals(\queasy\config\loader\XmlLoader::class, LoaderFactory::registered('test.xml'));
+        $this->assertEquals(IniLoader::class, LoaderFactory::registered('test.ini'));
+        $this->assertEquals(JsonLoader::class, LoaderFactory::registered('test.json'));
+        $this->assertEquals(PhpLoader::class, LoaderFactory::registered('test.php'));
+        $this->assertEquals(XmlLoader::class, LoaderFactory::registered('test.xml'));
     }
 
     public function testCreateNotRegisteredLoader()
