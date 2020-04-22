@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Queasy PHP Framework - Configuration
  *
  * (c) Vitaly Demyanenko <vitaly_demyanenko@yahoo.com>
