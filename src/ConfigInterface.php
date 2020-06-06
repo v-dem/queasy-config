@@ -89,6 +89,13 @@ interface ConfigInterface extends \Iterator, \ArrayAccess, \Countable
     public function regex($regex);
 
     /**
+     * Search for config keys using regular expression.
+     *
+     * @param array|ArrayAccess|Iterator $array Array to merge with
+     */
+    public function merge($array);
+
+    /**
      * Convert all configuration structure into a regular array.
      *
      * @return array Configuration represented as a regular array

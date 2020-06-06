@@ -307,6 +307,14 @@ class Config extends AbstractConfig
         return new $className($options);
     }
 
+    public function merge($array)
+    {
+        $data = &$this->data();
+        foreach ($array as $key => $item) {
+            $data[$key] = $item;
+        }
+    }
+
     /**
      * Convert all configuration structure into a regular array.
      *
