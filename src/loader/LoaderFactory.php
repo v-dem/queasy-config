@@ -24,7 +24,8 @@ class LoaderFactory
         '/\.php$/i' => 'queasy\config\loader\PhpLoader',
         '/\.json$/i' => 'queasy\config\loader\JsonLoader',
         '/\.ini$/i' => 'queasy\config\loader\IniLoader',
-        '/\.xml$/i' => 'queasy\config\loader\XmlLoader'
+        '/\.xml$/i' => 'queasy\config\loader\XmlLoader',
+        '/\.cli$/i' => 'queasy\config\loader\CliLoader'
     );
 
     /**
