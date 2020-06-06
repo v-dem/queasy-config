@@ -105,3 +105,4 @@ class PhpLoaderTest extends TestCase
         return (new PhpLoader(array(123)))();
     }
 }
+

@@ -64,3 +64,4 @@ class XmlLoaderTest extends TestCase
         return (new XmlLoader(__DIR__ . '/../../resources/incorrect-not-empty.xml'))();
     }
 }
+

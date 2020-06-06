@@ -75,3 +75,4 @@ class LoaderFactoryTest extends TestCase
         return LoaderFactory::register('/\.abcd2$/i', CustomLoader::class);
     }
 }
+
