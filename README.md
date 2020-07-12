@@ -14,6 +14,7 @@ This package contains a set of the classes intended for reading configuration fi
 *   INI
 *   JSON
 *   XML
+*   CLI (command-line)
 
 ### Features
 
@@ -215,6 +216,30 @@ queries = "@queasy:new queasy\config\Config('queries.ini')"
 > There can be any PHP code after `@queasy:` so it's possible to use PHP constants etc. Be careful, `eval()` function is used to execute this expression.
 
 > Different config formats can be mixed this way.
+
+#### Merging configs
+
+You can use `Config`'s `merge()` method to merge two configs. For example, you can have a default configuration and allow users to add or override some options:
+
+```php
+$defaultConfig = new queasy\config\Config('defaults.php');
+$optionalConfig = new queasy\config\Config($arrayWithOptionsToAddOrOverride);
+$defaultConfig->merge($optionalConfig);
+```
+
+#### Using CLI config type
+
+As an addition it's possible to use command-line arguments as config options source for CLI scripts (just use `.cli` extension, it will create appropriate loader):
+
+```php
+$config = new queasy\config\Config('.cli');
+```
+
+Options should be passed this way (unfortunately only this is supported currently):
+
+    php test.php option1=123 option2="some text"
+
+I think it's useful to utilize `merge()` method there - default config file and optional arguments from command line.
 
 ### Testing
 
