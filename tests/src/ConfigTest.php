@@ -174,13 +174,6 @@ class ConfigTest extends TestCase
         $this->assertEquals('default', $config->get('section3', [])->get('key31', 'default'));
     }
 
-    public function testGetForMissingSection()
-    {
-        $config = new Config(__DIR__ . '/../resources/correct.php');
-
-        $this->assertNull($config['section3']['key31']);
-    }
-
     public function testGetForMissingRequiredSection()
     {
         $this->expectException(MissingOptionException::class);
