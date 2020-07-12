@@ -249,6 +249,34 @@ class ConfigTest extends TestCase
         $this->assertEquals(array('section1', 'section2', 'key', 'nullkey'), $keys);
     }
 
+    public function testMerge()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+        $mergeConfig = new Config([
+            'key2' => 123
+        ]);
+
+        $config->merge($mergeConfig);
+
+        $this->assertCount(5, $config);
+        $this->assertNotNull($config['key2']);
+        $this->assertEquals(123, $config['key2']);
+    }
+
+    public function testMergeOverwrite()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+        $mergeConfig = new Config([
+            'key' => 123
+        ]);
+
+        $config->merge($mergeConfig);
+
+        $this->assertCount(4, $config);
+        $this->assertNotNull($config['key']);
+        $this->assertEquals(123, $config['key']);
+    }
+
     public function testMissingFile()
     {
         $this->expectException(ConfigLoaderException::class);
