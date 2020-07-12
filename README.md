@@ -151,6 +151,7 @@ $databaseName = $config['database']->need('name');
 How to check if a section or an option is present in config:
 
 ```php
+$hasDatabaseName = isset($config['database']);
 $hasDatabaseName = isset($config['database']['name']);
 ```
 
