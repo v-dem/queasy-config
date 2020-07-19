@@ -37,9 +37,30 @@ class CliLoader extends AbstractLoader
             $argParts = explode('=', $arg);
 
             $argName = array_shift($argParts);
-            $argValue = array_shift($argParts);
 
-            $result[$argName] = trim(trim($argValue, '"'));
+            $argValue = trim(array_shift($argParts), '"');
+            $argValue = $argValue
+                ? $argValue
+                : true;
+
+            $argNameArray = explode('.', $argName);
+            if (1 === count($argNameArray)) {
+                $result[$argNameArray[0]] = $argValue;
+            } else {
+                $i = 0;
+                $prevItem = &$result;
+                do {
+                    if ($i === count($argNameArray) - 1) {
+                        $prevItem[$argNameArray[$i]] = $argValue;
+                    } else {
+                        if (!isset($prevItem[$argNameArray[$i]])) {
+                            $prevItem[$argNameArray[$i]] = array();
+                        }
+
+                        $prevItem = &$prevItem[$argNameArray[$i]];
+                    }
+                } while ($i++ < count($argNameArray) - 1);
+            }
         }
 
         return $result;

@@ -10,6 +10,7 @@
 
 namespace queasy\config;
 
+use queasy\helper\Arrays;
 use queasy\helper\Strings;
 
 use queasy\config\loader\ConfigLoaderException;
@@ -309,10 +310,9 @@ class Config extends AbstractConfig
 
     public function merge($array)
     {
-        $data = &$this->data();
-        foreach ($array as $key => $item) {
-            $data[$key] = $item;
-        }
+        $data = Arrays::merge($this->data(), $array);
+
+        $this->setData($data);
     }
 
     /**

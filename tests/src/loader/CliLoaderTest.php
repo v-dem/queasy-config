@@ -39,7 +39,7 @@ class CliLoaderTest extends TestCase
         $this->assertArrayHasKey('key2', $result);
         $this->assertEquals('value2', $result['key2']);
         $this->assertArrayHasKey('key3', $result);
-        $this->assertEquals('', $result['key3']);
+        $this->assertEquals(true, $result['key3']);
     }
 }
 
