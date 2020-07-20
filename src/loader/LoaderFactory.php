@@ -66,13 +66,13 @@ class LoaderFactory
      *
      * @returns queasy\config\loader\LoaderInterface Loader instance
      *
-     * @throws ConfigLoaderException When no loader found for $path
+     * @throws LoaderNotFoundException When no loader found for $path
      */
     public static function create($path)
     {
         $className = self::registered($path);
         if (!$className) {
-            throw new NotFoundException($path);
+            throw new LoaderNotFoundException($path);
         }
 
         return new $className($path);

@@ -14,8 +14,10 @@ use PHPUnit\Framework\TestCase;
 
 use queasy\config\Config;
 use queasy\config\loader\ConfigLoaderException;
+use queasy\config\loader\LoaderNotFoundException;
 use queasy\config\InvalidPathException;
 use queasy\config\MissingOptionException;
+use queasy\config\ReadOnlyException;
 
 class ConfigTest extends TestCase
 {
@@ -318,6 +320,31 @@ class ConfigTest extends TestCase
         $this->expectException(InvalidPathException::class);
 
         return new Config(true);
+    }
+
+    public function testMissingLoader()
+    {
+        $this->expectException(LoaderNotFoundException::class);
+
+        return (new Config(__DIR__ . '/../resources/missing-loader.cfg'))['a'];
+    }
+
+    public function testSetOption()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $this->expectException(ReadOnlyException::class);
+
+        $config['a'] = 123;
+    }
+
+    public function testUnsetOption()
+    {
+        $config = new Config(__DIR__ . '/../resources/correct.php');
+
+        $this->expectException(ReadOnlyException::class);
+
+        unset($config['a']);
     }
 }
 

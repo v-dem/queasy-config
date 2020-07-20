@@ -13,6 +13,7 @@ namespace queasy\config\tests\loader;
 use PHPUnit\Framework\TestCase;
 
 use queasy\config\loader\NotFoundException;
+use queasy\config\loader\LoaderNotFoundException;
 use queasy\config\loader\NotImplementedException;
 use queasy\config\loader\AlreadyRegisteredException;
 use queasy\config\loader\LoaderFactory;
@@ -33,7 +34,7 @@ class LoaderFactoryTest extends TestCase
 
     public function testCreateNotRegisteredLoader()
     {
-        $this->expectException(NotFoundException::class);
+        $this->expectException(LoaderNotFoundException::class);
 
         return LoaderFactory::create('test.abcd');
     }
