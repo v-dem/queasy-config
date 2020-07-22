@@ -30,7 +30,7 @@ class PhpLoader extends FileSystemLoader
             try {
                 ob_start();
 
-                $data = include($path);
+                $data = include $path;
 
                 ob_end_clean(); // Stop output buffering
             } catch (\Throwable $e) {
@@ -39,7 +39,7 @@ class PhpLoader extends FileSystemLoader
                 throw new CorruptedException($path);
             }
         } else {
-            $data = include($path);
+            $data = include $path;
         }
 
         if (!is_array($data)) {
