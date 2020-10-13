@@ -1,6 +1,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/82d85625b3154e54af088394d285d6c5)](https://app.codacy.com/manual/v-dem/queasy-config?utm_source=github.com&utm_medium=referral&utm_content=v-dem/queasy-config&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/v-dem/queasy-config.svg?branch=master)](https://travis-ci.com/v-dem/queasy-config)
 [![codecov](https://codecov.io/gh/v-dem/queasy-config/branch/master/graph/badge.svg)](https://codecov.io/gh/v-dem/queasy-config)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fv-dem%2Fqueasy-config%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/v-dem/queasy-config/master)
 [![Total Downloads](https://poser.pugx.org/v-dem/queasy-config/downloads)](https://packagist.org/packages/v-dem/queasy-config)
 [![License](https://poser.pugx.org/v-dem/queasy-config/license)](https://packagist.org/packages/v-dem/queasy-config)
 
