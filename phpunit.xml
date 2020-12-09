@@ -9,7 +9,9 @@
          processIsolation="false"
          stopOnFailure="false"
          beStrictAboutTestsThatDoNotTestAnything="true"
-         beStrictAboutOutputDuringTests="true">
+         beStrictAboutOutputDuringTests="true"
+         executionOrder="random"
+         resolveDependencies="true">
     <testsuites>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/src/</directory>

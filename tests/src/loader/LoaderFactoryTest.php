@@ -36,12 +36,12 @@ class LoaderFactoryTest extends TestCase
     {
         $this->expectException(LoaderNotFoundException::class);
 
-        return LoaderFactory::create('test.abcd');
+        return LoaderFactory::create('test.abcdef');
     }
 
     public function testNotRegisteredLoader()
     {
-        $this->assertFalse(LoaderFactory::registered('test.abcd'));
+        $this->assertFalse(LoaderFactory::registered('test.abcdef'));
     }
 
     public function testRegisterCustomLoader()
