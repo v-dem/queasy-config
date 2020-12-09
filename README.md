@@ -41,14 +41,13 @@ See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 
 ### Installation
 
-    composer require v-dem/queasy-config:master-dev
+    > composer require v-dem/queasy-config:master-dev
 
 ### Usage
 
 Let's imagine we have the following `config.php`:
 
 ```php
-<?php
 return [
     'connection' => [
         'driver' => 'mysql',
@@ -63,12 +62,12 @@ return [
 Or `config.ini`:
 
 ```ini
-    [connection]
-    driver = mysql
-    host = localhost
-    name = test
-    user = root
-    password = secret
+[connection]
+driver = mysql
+host = localhost
+name = test
+user = root
+password = secret
 ```
 
 Or `config.json`:
