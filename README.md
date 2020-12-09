@@ -174,7 +174,6 @@ $databaseName = $config('database', [])('name', 'default');
 
 `config.php`:
 ```php
-<?php
 return [
     'connection' => [
         'driver' => 'mysql',
@@ -237,7 +236,7 @@ $config = new queasy\config\Config('.cli');
 
 Options should be passed this way (unfortunately only this is supported currently):
 
-    php test.php option1=123 option2="some text"
+    > php test.php option1=123 option2="some text"
 
 I think it's useful to utilize `merge()` method there - default config file and optional arguments from command line.
 
@@ -245,5 +244,5 @@ I think it's useful to utilize `merge()` method there - default config file and 
 
 Tests can be run with miminum PHP 7.2 version due to PHPUnit requirements. To run them use
 
-    composer test
+    > composer test
 
