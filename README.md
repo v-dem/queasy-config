@@ -245,4 +245,3 @@ I think it's useful to utilize `merge()` method there - default config file and 
 Tests can be run with miminum PHP 7.2 version due to PHPUnit requirements. To run them use
 
     > composer test
-
