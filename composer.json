@@ -22,7 +22,8 @@
     "require-dev": {
         "php": ">=7.2.0",
         "phpunit/phpunit": "~7",
-        "ext-xdebug": "^2.6.0"
+        "ext-xdebug": "^2.6.0",
+        "victorjonsson/markdowndocs": "dev-master"
     },
     "autoload":{
         "psr-4":{
@@ -35,7 +36,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit --coverage-clover coverage.xml"
+        "test": "phpunit --coverage-clover coverage.xml",
+        "phpdoc": "vendor/bin/phpdoc-md generate src >queasy-config.wiki/Home.md"
     }
 }
-

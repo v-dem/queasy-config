@@ -35,9 +35,9 @@ This package contains a set of the classes intended for reading configuration fi
 
 *   PHP version 5.3 or higher
 
-### Documentation
+### Reference
 
-See our [Wiki page](https://github.com/v-dem/queasy-config/wiki).
+See [Wiki page](https://github.com/v-dem/queasy-config/wiki).
 
 ### Installation
 
