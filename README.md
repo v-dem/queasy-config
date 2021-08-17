@@ -5,7 +5,7 @@
 [![Total Downloads](https://poser.pugx.org/v-dem/queasy-config/downloads)](https://packagist.org/packages/v-dem/queasy-config)
 [![License](https://poser.pugx.org/v-dem/queasy-config/license)](https://packagist.org/packages/v-dem/queasy-config)
 
-# [Queasy PHP Framework](https://github.com/v-dem/queasy-app/) - Configuration
+# [QuEasy PHP Framework](https://github.com/v-dem/queasy-framework/) - Configuration
 
 ## Package `v-dem/queasy-config`
 
