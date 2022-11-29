@@ -43,7 +43,7 @@ class Config extends AbstractConfig
             if (!is_file($data) && !is_link($data)) {
                 $data = array();
             }
-        } else if (!is_string($data)
+        } elseif (!is_string($data)
                 && !is_array($data)) {
             throw new InvalidPathException(gettype($data));
         }
@@ -113,7 +113,9 @@ class Config extends AbstractConfig
     {
         if (isset($this[$name])) {
             return $this[$name];
-        } elseif (is_array($default)) {
+        }
+
+        if (is_array($default)) {
             $className = get_class($this);
 
             return new $className($default, $this);
@@ -136,9 +138,9 @@ class Config extends AbstractConfig
     {
         if (isset($this[$name])) {
             return $this[$name];
-        } else {
-            throw new MissingOptionException($name);
         }
+
+        throw new MissingOptionException($name);
     }
 
     /**
@@ -233,11 +235,13 @@ class Config extends AbstractConfig
 
         if (isset($data[$name]) || array_key_exists($name, $data)) {
             return true;
-        } elseif (null === $parent) {
-            return false;
-        } else {
-            return $parent->offsetExists($name);
         }
+
+        if (null === $parent) {
+            return false;
+        }
+
+        return $parent->offsetExists($name);
     }
 
     /**
@@ -255,14 +259,14 @@ class Config extends AbstractConfig
             $data = &$this->data();
             if (isset($data[$name]) || array_key_exists($name, $data)) {
                 return $this->item($data[$name]);
-            } else {
-                $parent = $this->parent();
-
-                return (null === $parent)? null: $parent[$name];
             }
-        } else {
-            return null;
+
+            $parent = $this->parent();
+
+            return (null === $parent)? null: $parent[$name];
         }
+
+        return null;
     }
 
     /**

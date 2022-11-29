@@ -91,9 +91,9 @@ class LoaderFactory
 
         if ($className) {
             return $className;
-        } else {
-            return self::find(self::$defaultLoaders, $path);
         }
+
+        return self::find(self::$defaultLoaders, $path);
     }
 
     /**
