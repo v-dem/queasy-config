@@ -27,10 +27,6 @@ This package contains a set of the classes intended for reading configuration fi
 *   Easy to extend with other config formats.
 *   Regular expressions support (it's possible to get config options by regular expression).
 
-#### Planned features
-
-*   YAML support.
-
 ### Requirements
 
 *   PHP version 5.3 or higher
