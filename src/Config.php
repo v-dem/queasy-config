@@ -60,6 +60,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function __get($name)
     {
         return $this->get($name);
@@ -70,6 +71,7 @@ class Config extends AbstractConfig
      *
      * @throws ReadOnlyException
      */
+    #[\ReturnTypeWillChange]
     public function __set($name, $value)
     {
         throw new ReadOnlyException(__METHOD__);
@@ -84,6 +86,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function __isset($name)
     {
         return $this->offsetExists($name);
@@ -94,6 +97,7 @@ class Config extends AbstractConfig
      *
      * @throws ReadOnlyException
      */
+    #[\ReturnTypeWillChange]
     public function __unset($name)
     {
         throw new ReadOnlyException(__METHOD__);
@@ -148,6 +152,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $data = &$this->data();
@@ -160,6 +165,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $data = &$this->data();
@@ -172,6 +178,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $data = &$this->data();
@@ -184,6 +191,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         $data = &$this->data();
@@ -196,6 +204,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         $data = &$this->data();
