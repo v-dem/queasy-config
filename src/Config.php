@@ -228,6 +228,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($name)
     {
         $data = &$this->data();
@@ -254,6 +255,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($name)
     {
         if ($this->offsetExists($name)) {
@@ -286,6 +288,7 @@ class Config extends AbstractConfig
      *
      * @throws BadMethodCallException
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($name, $value)
     {
         throw new ReadOnlyException(__METHOD__);
