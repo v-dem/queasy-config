@@ -213,6 +213,7 @@ class Config extends AbstractConfig
      *
      * @throws ConfigLoaderException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->data());
