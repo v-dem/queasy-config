@@ -275,6 +275,7 @@ class Config extends AbstractConfig
      *
      * @throws BadMethodCallException
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($name)
     {
         throw new ReadOnlyException(__METHOD__);
