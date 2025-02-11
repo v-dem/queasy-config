@@ -5,7 +5,7 @@
     "keywords": ["php", "config", "configuration", "ini", "json", "xml", "queasy", "framework"],
     "license": "LGPL-3.0-only",
     "minimum-stability": "dev",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "authors": [
         {
             "name": "Vitaly Demyanenko",
@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=5.3.0|>=7.0.0",
-        "v-dem/queasy-helper": "dev-master"
+        "v-dem/queasy-helper": "1.*"
     },
     "require-dev": {
         "php": ">=7.2.0",
