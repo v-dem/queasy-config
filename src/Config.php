@@ -33,7 +33,7 @@ class Config extends AbstractConfig
      *
      * @throws InvalidPathException When configuration load attempt fails, in case of missing or corrupted (doesn't returning an array) file
      */
-    public function __construct($data = null, ConfigInterface $parent = null)
+    public function __construct($data = null, ConfigInterface $parent = null, $isLoadImmediately = false)
     {
         if (null === $data) {
             $data = (defined('QUEASY_CONFIG_PATH'))
@@ -49,6 +49,10 @@ class Config extends AbstractConfig
         }
 
         parent::__construct($data, $parent);
+
+        if ($isLoadImmediately) {
+            $this->data();
+        }
     }
 
     /**
