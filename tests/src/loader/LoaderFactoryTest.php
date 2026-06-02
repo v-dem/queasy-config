@@ -36,7 +36,7 @@ class LoaderFactoryTest extends TestCase
     {
         $this->expectException(LoaderNotFoundException::class);
 
-        return LoaderFactory::create('test.abcdef');
+        LoaderFactory::create('test.abcdef');
     }
 
     public function testNotRegisteredLoader()
@@ -64,7 +64,7 @@ class LoaderFactoryTest extends TestCase
     {
         $this->expectException(NotImplementedException::class);
 
-        return LoaderFactory::register('/\.abcde$/i', WrongCustomLoader::class);
+        LoaderFactory::register('/\.abcde$/i', WrongCustomLoader::class);
     }
 
     public function testRegisterCustomLoaderTwice()
@@ -73,7 +73,7 @@ class LoaderFactoryTest extends TestCase
 
         LoaderFactory::register('/\.abcd2$/i', CustomLoader::class);
 
-        return LoaderFactory::register('/\.abcd2$/i', CustomLoader::class);
+        LoaderFactory::register('/\.abcd2$/i', CustomLoader::class);
     }
 }
 

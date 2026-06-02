@@ -60,14 +60,14 @@ class IniLoaderTest extends TestCase
     {
         $this->expectException(NotFoundException::class);
 
-        return (new IniLoader(__DIR__ . '/../../resources/missing-file.ini'))();
+        (new IniLoader(__DIR__ . '/../../resources/missing-file.ini'))();
     }
 
     public function testIncorrectNotEmpty()
     {
         $this->expectException(CorruptedException::class);
 
-        return (new IniLoader(__DIR__ . '/../../resources/incorrect-not-empty.ini'))();
+        (new IniLoader(__DIR__ . '/../../resources/incorrect-not-empty.ini'))();
     }
 }
 

@@ -38,7 +38,8 @@ class CliLoader extends AbstractLoader
 
             $argName = array_shift($argParts);
 
-            $argValue = trim(array_shift($argParts), '"');
+            $firstArg = array_shift($argParts);
+            $argValue = trim($firstArg ? $firstArg : '', '"');
             $argValue = $argValue
                 ? $argValue
                 : true;

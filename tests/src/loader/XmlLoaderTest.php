@@ -54,14 +54,17 @@ class XmlLoaderTest extends TestCase
     public function testMissingFile()
     {
         $this->expectException(NotFoundException::class);
-        return (new XmlLoader(__DIR__ . '/../../resources/missing-file.xml'))();
+
+        (new XmlLoader(__DIR__ . '/../../resources/missing-file.xml'))();
 
     }
 
+    #[WithoutErrorHandler]
     public function testIncorrectNotEmpty()
     {
         $this->expectException(CorruptedException::class);
-        return (new XmlLoader(__DIR__ . '/../../resources/incorrect-not-empty.xml'))();
+
+        (new XmlLoader(__DIR__ . '/../../resources/incorrect-not-empty.xml'))();
     }
 }
 

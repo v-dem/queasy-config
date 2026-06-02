@@ -60,49 +60,56 @@ class PhpLoaderTest extends TestCase
     {
         $this->expectException(NotFoundException::class);
 
-        return (new PhpLoader(__DIR__ . '/../../resources/missing-file.php'))();
+        (new PhpLoader(__DIR__ . '/../../resources/missing-file.php'))();
     }
 
     public function testIncorrectNotEmpty()
     {
         $this->expectException(CorruptedException::class);
 
-        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty.php'))();
+        (new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty.php'))();
     }
 
     public function testIncorrectNotEmpty2()
     {
         $this->expectException(CorruptedException::class);
 
-        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty2.php'))();
+        (new PhpLoader(__DIR__ . '/../../resources/incorrect-not-empty2.php'))();
     }
 
     public function testWrongReturnInt()
     {
         $this->expectException(CorruptedException::class);
 
-        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-int.php'))();
+        (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-int.php'))();
     }
 
     public function testWrongReturnString()
     {
         $this->expectException(CorruptedException::class);
 
-        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-string.php'))();
+        (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-string.php'))();
     }
 
     public function testWrongReturnNothing()
     {
         $this->expectException(CorruptedException::class);
 
-        return (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-nothing.php'))();
+        (new PhpLoader(__DIR__ . '/../../resources/incorrect-return-nothing.php'))();
     }
 
+    #[WithoutErrorHandler]
+    #[DoesNotPerformAssertions]
     public function testNotAStringAsPath()
     {
-        $this->expectException(Error::class);
+        $this->expectNotToPerformAssertions();
 
-        return (new PhpLoader(array(123)))();
+        try {
+            (new PhpLoader(array(123)))();
+
+            $this->fail();
+        } catch (\Error $e) {
+        }
     }
 }
 
